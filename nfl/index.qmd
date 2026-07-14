@@ -10,6 +10,18 @@ Each report below is a self-contained R/Quarto template — open the `.qmd` sour
 - [Team Grade Report](grade-team.html) — defaults to the Kansas City Chiefs, 2024
 - [Player Grade Report](grade-player.html) — defaults to Patrick Mahomes, 2024
 
+## Team Reports
+
+<div class="team-grid">
+
+  <a class="team-card" data-name="kansas city chiefs" href="kansas-city-chiefs/index.html">
+    <div class="team-badge" style="background:#E31837; color:#ffffff;">KC</div>
+    <span class="team-name">Kansas City Chiefs</span>
+    <span class="team-meta">AFC West</span>
+  </a>
+
+</div>
+
 ## Data Ingestion
 
 Team and player season data is pulled via the `nflreadr` package:

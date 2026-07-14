@@ -1,0 +1,9 @@
+---
+title: "Kansas City Chiefs"
+subtitle: "2024 NFL Season"
+---
+
+## Featured Reports
+
+- [Chiefs 2024: A Season Built on Close Wins](2024-season-recap.html)
+- [Team Grade Report](../grade-team.html) — defaults to the Kansas City Chiefs, 2024

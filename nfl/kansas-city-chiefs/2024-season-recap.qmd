@@ -1,0 +1,111 @@
+---
+title: "Chiefs 2024: A Season Built on Close Wins"
+subtitle: "How Kansas City turned one-score games into a 15-2 record"
+date: today
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-summary: "Show Code"
+execute:
+  message: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+
+kc <- read_csv("../../pipeline/nfl/data/nfl_team_KC_2024.csv", show_col_types = FALSE) |>
+  mutate(
+    margin     = team_score - opp_score,
+    result     = if_else(won, "Win", "Loss"),
+    close_game = abs(margin) <= 3
+  ) |>
+  arrange(week)
+
+games       <- nrow(kc)
+wins        <- sum(kc$won)
+losses      <- games - wins
+win_pct     <- wins / games * 100
+close_wins  <- sum(kc$close_game & kc$won)
+close_games <- sum(kc$close_game)
+
+best_win  <- kc |> filter(won)  |> slice_max(margin, n = 1)
+worst_loss <- kc |> filter(!won) |> slice_min(margin, n = 1)
+
+home_record <- kc |> filter(home_away == "Home") |> summarise(w = sum(won), n = n())
+away_record <- kc |> filter(home_away == "Away") |> summarise(w = sum(won), n = n())
+```
+
+The 2024 Kansas City Chiefs didn't blow teams off the field — they beat them late, over and over. Across `r games` games, Kansas City went **`r wins`-`r losses`** (`r sprintf("%.1f", win_pct)`% win rate), and the story of that record is written in the margins: `r close_wins` of their `r wins` wins came by three points or fewer.
+
+## Week-by-Week Scoring
+
+```{r}
+#| label: scoring-trend
+
+ggplot(kc, aes(x = week)) +
+  geom_line(aes(y = team_score), color = "#E31837", linewidth = 1) +
+  geom_line(aes(y = opp_score), color = "#666666", linewidth = 1, linetype = "dashed") +
+  geom_point(aes(y = team_score, color = result), size = 3) +
+  scale_color_manual(values = c("Win" = "#E31837", "Loss" = "#1a1a1a"), name = "Result") +
+  labs(
+    title    = "Kansas City Chiefs — Points Scored by Week (2024)",
+    subtitle = "Red = points scored | Gray dashed = points allowed",
+    x = "Week", y = "Points"
+  ) +
+  theme_minimal(base_size = 13)
+```
+
+Nothing about that chart looks dominant. The Chiefs rarely pulled away — their average scoring margin for the season was just `r sprintf("%+.1f", mean(kc$margin))` points per game, thin for a team that finished 15-2.
+
+## Living on the Margin
+
+```{r}
+#| label: margin-chart
+
+ggplot(kc, aes(x = factor(week), y = margin, fill = close_game)) +
+  geom_col() +
+  geom_hline(yintercept = 0, color = "black", linewidth = 0.4) +
+  scale_fill_manual(values = c("TRUE" = "#FFB81C", "FALSE" = "#E31837"),
+                     labels = c("TRUE" = "Decided by ≤ 3", "FALSE" = "Other"),
+                     name = NULL) +
+  labs(
+    title = "Margin of Victory / Defeat by Week",
+    x = "Week", y = "Point Margin (Team − Opponent)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "top")
+```
+
+Five of Kansas City's wins were decided by three points or fewer — a Week 2 escape against Cincinnati (26-25), a two-point win over Denver in Week 10, a three-point win over Carolina, and two-point wins over Las Vegas and the Chargers in consecutive weeks (13 and 14). That's a full quarter of the season's wins coming down to the final possession.
+
+## Home vs. Away
+
+```{r}
+#| label: home-away-table
+
+home_away_tbl <- tibble(
+  Split   = c("Home", "Away"),
+  Record  = c(
+    paste0(home_record$w, "-", home_record$n - home_record$w),
+    paste0(away_record$w, "-", away_record$n - away_record$w)
+  ),
+  Games   = c(home_record$n, away_record$n)
+)
+
+knitr::kable(home_away_tbl, align = c("l", "c", "c"))
+```
+
+Kansas City played it close no matter where the game was — the road record held up nearly as well as the record at home, a sign of a team that didn't lean on a friendly building to win football games.
+
+## The Best and Worst of It
+
+The best result of the year came against **`r best_win$opponent`** in Week `r best_win$week`, a `r best_win$team_score`-`r best_win$opp_score` win (+`r best_win$margin`). The worst came in **Week `r worst_loss$week`** against **`r worst_loss$opponent`**, a `r worst_loss$team_score`-`r worst_loss$opp_score` blowout loss — a Week 18 finale that looks far more like a team resting starters with the top seed already locked up than a real measuring stick.
+
+## Takeaway
+
+Strip out that meaningless Week 18 finale and Kansas City finished the meaningful part of its schedule 15-1, and did it the hard way — five wins by a field goal or less, a road record nearly as good as its home record, and no game all season that looked like a laugher in their favor. Teams that win close games all year either have something real (a quarterback who doesn't blink, a defense that gets one stop when it has to) or they're due for regression. The 2024 Chiefs bet on the former, and for one more year, it held up.

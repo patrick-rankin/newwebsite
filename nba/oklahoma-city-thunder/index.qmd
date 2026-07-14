@@ -31,6 +31,10 @@ win_color      <- team_primary
 loss_color     <- "#c0392b"
 ```
 
+## Featured Reports
+
+- [Shai Gilgeous-Alexander \u2014 2025 Season Stats](shai%20gilgeous%20alexander.html)
+
 ## Season Overview
 
 The **Oklahoma City Thunder** had an eventful 2025\u201326 NBA season. Below is a data-driven breakdown of their performance across key statistical categories.

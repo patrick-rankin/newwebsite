@@ -1,15 +1,6 @@
 ---
-title: "Michigan state basketball"
-listing:
-  contents: posts
-  feed: true
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
-page-layout: full
-title-block-banner: true
+title: "Michigan State: Win Prediction Model"
+subtitle: "Field goal percentage, turnovers, and the odds of winning"
 execute:
   warning: false
   message: false
@@ -18,10 +9,6 @@ execute:
 ![](https://a.espncdn.com/i/teamlogos/ncaa/500/127.png){width="120px" fig-align="center"}
 
 ![Michigan State vs. Michigan men's basketball, in-game action. Photo by Michael Barera, CC BY-SA 4.0.](https://upload.wikimedia.org/wikipedia/commons/4/4e/Michigan_State_vs._Michigan_men%27s_basketball_2013_13_%28in-game_action%29.jpg){width="400px" fig-align="center"}
-
-## Featured Reports
-
-- [Win Prediction Model: Field Goal % and Turnovers](michiganstate.html)
 
 ```{r}
 library(tidyverse)
