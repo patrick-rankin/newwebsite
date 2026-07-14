@@ -1,0 +1,18 @@
+---
+title: "NFL"
+subtitle: "Football data ingestion and grade reports"
+---
+
+## Season Grade Reports
+
+Each report below is a self-contained R/Quarto template — open the `.qmd` source, change the team/player/season in the settings block at the top, and re-render to generate a new report.
+
+- [Team Grade Report](grade-team.html) — defaults to the Kansas City Chiefs, 2024
+- [Player Grade Report](grade-player.html) — defaults to Patrick Mahomes, 2024
+
+## Data Ingestion
+
+Team and player season data is pulled via the `nflreadr` package:
+
+- `pipeline/nfl/01_ingest_team.R`
+- `pipeline/nfl/02_ingest_player.R`

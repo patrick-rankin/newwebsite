@@ -1,0 +1,44 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "**/*.qmd"
+    - "!pipeline/"
+
+
+website:
+  title: "Classroom to Court"
+  site-url: https://patrick-rankin.github.io/sports.github.io/
+  favicon: "https://a.espncdn.com/i/teamlogos/ncaa/500/150.png"
+  navbar:
+    background: "#0a1628"
+    foreground: "#ffffff"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: ncaa/index.qmd
+        text: NCAA
+      - href: nba/index.qmd
+        text: NBA
+      - href: mlb/index.qmd
+        text: MLB
+      - href: nfl/index.qmd
+        text: NFL
+      - href: nhl/index.qmd
+        text: NHL
+      - href: matchups.qmd
+        text: Matchups
+      - href: about.qmd
+        text: About
+  page-footer:
+    center: "© 2026 Classroom to Court · Built with [Quarto](https://quarto.org)"
+    background: "#0a1628"
+
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true

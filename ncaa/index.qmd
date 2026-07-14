@@ -1,0 +1,138 @@
+---
+title: "NCAA Teams"
+subtitle: "Browse every college team covered on Classroom to Court — basketball, football, hockey, and baseball"
+---
+
+```{=html}
+<div class="teams-toolbar">
+  <input type="text" class="teams-search" id="teamSearch" placeholder="Search all NCAA teams…" aria-label="Search NCAA teams">
+</div>
+
+<div class="sport-tabs" role="tablist" aria-label="Filter by sport">
+  <button class="sport-tab active" data-sport="all">All Sports</button>
+  <button class="sport-tab" data-sport="basketball">🏀 Basketball</button>
+  <button class="sport-tab" data-sport="football">🏈 Football</button>
+  <button class="sport-tab" data-sport="hockey">🏒 Hockey</button>
+  <button class="sport-tab" data-sport="baseball">⚾ Baseball</button>
+</div>
+
+<section class="sport-section" data-sport="basketball">
+<h2 class="division-heading">🏀 Basketball</h2>
+
+<p>Self-contained R/Quarto templates — open the <code>.qmd</code> source, change the team/player/season in the settings block at the top, and re-render to generate a new report.</p>
+<ul>
+  <li><a href="basketball/grade-team.html">Team Grade Report</a></li>
+  <li><a href="basketball/grade-player.html">Player Grade Report</a></li>
+</ul>
+
+<div class="team-grid">
+
+  <a class="team-card" data-name="duke blue devils" href="basketball/duke-blue-devils/index.html">
+    <div class="team-badge" style="background:#00539B; color:#ffffff;">DUKE</div>
+    <span class="team-name">Duke Blue Devils</span>
+    <span class="team-meta">ACC</span>
+  </a>
+
+  <a class="team-card" data-name="ucla bruins" href="basketball/ucla/index.html">
+    <div class="team-badge" style="background:#2D68C4; color:#FFD100;">UCLA</div>
+    <span class="team-name">UCLA Bruins</span>
+    <span class="team-meta">Big Ten</span>
+  </a>
+
+  <a class="team-card" data-name="unc tar heels north carolina" href="basketball/unc-tar-heels/index.html">
+    <div class="team-badge" style="background:#7BAFD4; color:#13294B;">UNC</div>
+    <span class="team-name">UNC Tar Heels</span>
+    <span class="team-meta">ACC</span>
+  </a>
+
+  <a class="team-card" data-name="michigan state spartans" href="basketball/michigan-state/index.html">
+    <div class="team-badge" style="background:#18453B; color:#ffffff;">MSU</div>
+    <span class="team-name">Michigan State Spartans</span>
+    <span class="team-meta">Big Ten</span>
+  </a>
+
+</div>
+</section>
+
+<section class="sport-section" data-sport="football">
+<h2 class="division-heading">🏈 Football</h2>
+<div class="team-grid"></div>
+<p class="sport-empty">No NCAA football teams added yet — check back soon.</p>
+</section>
+
+<section class="sport-section" data-sport="hockey">
+<h2 class="division-heading">🏒 Hockey</h2>
+<div class="team-grid"></div>
+<p class="sport-empty">No NCAA hockey teams added yet — check back soon.</p>
+</section>
+
+<section class="sport-section" data-sport="baseball">
+<h2 class="division-heading">⚾ Baseball</h2>
+<div class="team-grid"></div>
+<p class="sport-empty">No NCAA baseball teams added yet — check back soon.</p>
+</section>
+
+<p class="teams-empty" id="teamsEmpty">No teams match your search.</p>
+
+<script>
+(function () {
+  const search   = document.getElementById('teamSearch');
+  const tabs     = Array.from(document.querySelectorAll('.sport-tab'));
+  const sections = Array.from(document.querySelectorAll('.sport-section'));
+  const empty    = document.getElementById('teamsEmpty');
+
+  let activeSport = 'all';
+
+  function applyFilters() {
+    const query = search.value.trim().toLowerCase();
+    let anyVisibleOverall = false;
+
+    sections.forEach(function (section) {
+      const sportMatches = activeSport === 'all' || section.dataset.sport === activeSport;
+      section.style.display = sportMatches ? '' : 'none';
+      if (!sportMatches) return;
+
+      const cards = Array.from(section.querySelectorAll('.team-card'));
+      const heading     = section.querySelector('.division-heading');
+      const grid        = section.querySelector('.team-grid');
+      const placeholder = section.querySelector('.sport-empty');
+
+      if (cards.length === 0) {
+        // Sport with no teams yet — always show the "coming soon" note,
+        // but hide it (and the heading) while an active search is narrowing results.
+        const showEmptySection = query === '';
+        if (heading) heading.style.display = showEmptySection ? '' : 'none';
+        if (grid) grid.style.display = 'none';
+        if (placeholder) placeholder.style.display = showEmptySection ? '' : 'none';
+        if (showEmptySection) anyVisibleOverall = true;
+        return;
+      }
+
+      let anyVisibleInSection = false;
+      cards.forEach(function (card) {
+        const visible = query === '' || card.dataset.name.includes(query);
+        card.style.display = visible ? '' : 'none';
+        if (visible) { anyVisibleInSection = true; anyVisibleOverall = true; }
+      });
+
+      if (heading) heading.style.display = anyVisibleInSection ? '' : 'none';
+      if (grid) grid.style.display = anyVisibleInSection ? '' : 'none';
+    });
+
+    empty.style.display = anyVisibleOverall ? 'none' : 'block';
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      activeSport = tab.dataset.sport;
+      applyFilters();
+    });
+  });
+
+  search.addEventListener('input', applyFilters);
+  applyFilters();
+})();
+</script>
+```

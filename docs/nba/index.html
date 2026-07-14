@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>NBA Teams – Classroom to Court</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../https://a.espncdn.com/i/teamlogos/ncaa/500/150.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-aa2d97935a7c22b1af52770c5588149c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Classroom to Court</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../ncaa/index.html"> 
+<span class="menu-text">NCAA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../nba/index.html" aria-current="page"> 
+<span class="menu-text">NBA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../mlb/index.html"> 
+<span class="menu-text">MLB</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../nfl/index.html"> 
+<span class="menu-text">NFL</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../nhl/index.html"> 
+<span class="menu-text">NHL</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../matchups.html"> 
+<span class="menu-text">Matchups</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">NBA Teams</h1>
+<p class="subtitle lead">Browse every NBA team covered on Classroom to Court</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="teams-toolbar">
+  <input type="text" class="teams-search" id="teamSearch" placeholder="Search NBA teams…" aria-label="Search NBA teams">
+</div>
+
+<p><a href="stats.html">See NBA Stats &amp; Win % →</a></p>
+
+<h2 class="division-heading anchored">Season Grade Reports</h2>
+<p>Self-contained R/Quarto templates — open the <code>.qmd</code> source, change the team/player/season in the settings block at the top, and re-render to generate a new report.</p>
+<ul>
+  <li><a href="grade-team.html">Team Grade Report</a></li>
+  <li><a href="grade-player.html">Player Grade Report</a></li>
+</ul>
+
+<h2 class="division-heading anchored">Eastern Conference · Atlantic</h2>
+<div class="team-grid">
+
+  <a class="team-card" data-name="boston celtics" href="boston-celtics/index.html">
+    <div class="team-badge" style="background:#007A33; color:#ffffff;">BOS</div>
+    <span class="team-name">Boston Celtics</span>
+    <span class="team-meta">Atlantic</span>
+  </a>
+
+  <a class="team-card" data-name="brooklyn nets" href="brooklyn-nets/index.html">
+    <div class="team-badge" style="background:#000000; color:#ffffff;">BKN</div>
+    <span class="team-name">Brooklyn Nets</span>
+    <span class="team-meta">Atlantic</span>
+  </a>
+
+  <a class="team-card" data-name="new york knicks" href="new-york-knicks/index.html">
+    <div class="team-badge" style="background:#006BB6; color:#ffffff;">NYK</div>
+    <span class="team-name">New York Knicks</span>
+    <span class="team-meta">Atlantic</span>
+  </a>
+
+  <a class="team-card" data-name="philadelphia 76ers sixers" href="philadelphia-76ers/index.html">
+    <div class="team-badge" style="background:#006BB6; color:#ffffff;">PHI</div>
+    <span class="team-name">Philadelphia 76ers</span>
+    <span class="team-meta">Atlantic</span>
+  </a>
+
+  <a class="team-card" data-name="toronto raptors" href="toronto-raptors/index.html">
+    <div class="team-badge" style="background:#CE1141; color:#ffffff;">TOR</div>
+    <span class="team-name">Toronto Raptors</span>
+    <span class="team-meta">Atlantic</span>
+  </a>
+
+</div>
+
+<h2 class="division-heading anchored">Eastern Conference · Central</h2>
+<div class="team-grid">
+
+  <a class="team-card" data-name="chicago bulls" href="chicago-bulls/index.html">
+    <div class="team-badge" style="background:#CE1141; color:#ffffff;">CHI</div>
+    <span class="team-name">Chicago Bulls</span>
+    <span class="team-meta">Central</span>
+  </a>
+
+  <a class="team-card" data-name="cleveland cavaliers" href="cleveland-cavaliers/index.html">
+    <div class="team-badge" style="background:#860038; color:#ffffff;">CLE</div>
+    <span class="team-name">Cleveland Cavaliers</span>
+    <span class="team-meta">Central</span>
+  </a>
+
+  <a class="team-card" data-name="detroit pistons" href="detroit-pistons/index.html">
+    <div class="team-badge" style="background:#C8102E; color:#ffffff;">DET</div>
+    <span class="team-name">Detroit Pistons</span>
+    <span class="team-meta">Central</span>
+  </a>
+
+  <a class="team-card" data-name="indiana pacers" href="indiana-pacers/index.html">
+    <div class="team-badge" style="background:#002D62; color:#ffffff;">IND</div>
+    <span class="team-name">Indiana Pacers</span>
+    <span class="team-meta">Central</span>
+  </a>
+
+  <a class="team-card" data-name="milwaukee bucks" href="milwaukee-bucks/index.html">
+    <div class="team-badge" style="background:#00471B; color:#ffffff;">MIL</div>
+    <span class="team-name">Milwaukee Bucks</span>
+    <span class="team-meta">Central</span>
+  </a>
+
+</div>
+
+<h2 class="division-heading anchored">Eastern Conference · Southeast</h2>
+<div class="team-grid">
+
+  <a class="team-card" data-name="atlanta hawks" href="atlanta-hawks/index.html">
+    <div class="team-badge" style="background:#C1D32F; color:#000000;">ATL</div>
+    <span class="team-name">Atlanta Hawks</span>
+    <span class="team-meta">Southeast</span>
+  </a>
+
+  <a class="team-card" data-name="charlotte hornets" href="charlotte-hornets/index.html">
+    <div class="team-badge" style="background:#1D1160; color:#ffffff;">CHA</div>
+    <span class="team-name">Charlotte Hornets</span>
+    <span class="team-meta">Southeast</span>
+  </a>
+
+  <a class="team-card" data-name="miami heat" href="miami-heat/index.html">
+    <div class="team-badge" style="background:#98002E; color:#ffffff;">MIA</div>
+    <span class="team-name">Miami Heat</span>
+    <span class="team-meta">Southeast</span>
+  </a>
+
+  <a class="team-card" data-name="orlando magic" href="orlando-magic/index.html">
+    <div class="team-badge" style="background:#0077C0; color:#ffffff;">ORL</div>
+    <span class="team-name">Orlando Magic</span>
+    <span class="team-meta">Southeast</span>
+  </a>
+
+  <a class="team-card" data-name="washington wizards" href="washington-wizards/index.html">
+    <div class="team-badge" style="background:#002B5C; color:#ffffff;">WAS</div>
+    <span class="team-name">Washington Wizards</span>
+    <span class="team-meta">Southeast</span>
+  </a>
+
+</div>
+
+<h2 class="division-heading anchored">Western Conference · Northwest</h2>
+<div class="team-grid">
+
+  <a class="team-card" data-name="denver nuggets" href="denver-nuggets/index.html">
+    <div class="team-badge" style="background:#0E2240; color:#FEC524;">DEN</div>
+    <span class="team-name">Denver Nuggets</span>
+    <span class="team-meta">Northwest</span>
+  </a>
+
+  <a class="team-card" data-name="minnesota timberwolves" href="minnesota-timberwolves/index.html">
+    <div class="team-badge" style="background:#0C2340; color:#ffffff;">MIN</div>
+    <span class="team-name">Minnesota Timberwolves</span>
+    <span class="team-meta">Northwest</span>
+  </a>
+
+  <a class="team-card" data-name="oklahoma city thunder" href="oklahoma-city-thunder/index.html">
+    <div class="team-badge" style="background:#007AC1; color:#ffffff;">OKC</div>
+    <span class="team-name">Oklahoma City Thunder</span>
+    <span class="team-meta">Northwest</span>
+  </a>
+
+  <a class="team-card" data-name="portland trail blazers" href="portland-trail-blazers/index.html">
+    <div class="team-badge" style="background:#E03A3E; color:#ffffff;">POR</div>
+    <span class="team-name">Portland Trail Blazers</span>
+    <span class="team-meta">Northwest</span>
+  </a>
+
+  <a class="team-card" data-name="utah jazz" href="utah-jazz/index.html">
+    <div class="team-badge" style="background:#002B5C; color:#ffffff;">UTA</div>
+    <span class="team-name">Utah Jazz</span>
+    <span class="team-meta">Northwest</span>
+  </a>
+
+</div>
+
+<h2 class="division-heading anchored">Western Conference · Pacific</h2>
+<div class="team-grid">
+
+  <a class="team-card" data-name="golden state warriors" href="golden-state-warriors/index.html">
+    <div class="team-badge" style="background:#1D428A; color:#FFC72C;">GSW</div>
+    <span class="team-name">Golden State Warriors</span>
+    <span class="team-meta">Pacific</span>
+  </a>
+
+  <a class="team-card" data-name="la clippers los angeles" href="la-clippers/index.html">
+    <div class="team-badge" style="background:#C8102E; color:#ffffff;">LAC</div>
+    <span class="team-name">LA Clippers</span>
+    <span class="team-meta">Pacific</span>
+  </a>
+
+  <a class="team-card" data-name="los angeles lakers" href="los-angeles-lakers/index.html">
+    <div class="team-badge" style="background:#552583; color:#FDB927;">LAL</div>
+    <span class="team-name">Los Angeles Lakers</span>
+    <span class="team-meta">Pacific</span>
+  </a>
+
+  <a class="team-card" data-name="phoenix suns" href="phoenix-suns/index.html">
+    <div class="team-badge" style="background:#1D1160; color:#E56020;">PHX</div>
+    <span class="team-name">Phoenix Suns</span>
+    <span class="team-meta">Pacific</span>
+  </a>
+
+  <a class="team-card" data-name="sacramento kings" href="sacramento-kings/index.html">
+    <div class="team-badge" style="background:#5A2D81; color:#ffffff;">SAC</div>
+    <span class="team-name">Sacramento Kings</span>
+    <span class="team-meta">Pacific</span>
+  </a>
+
+</div>
+
+<h2 class="division-heading anchored">Western Conference · Southwest</h2>
+<div class="team-grid">
+
+  <a class="team-card" data-name="dallas mavericks" href="dallas-mavericks/index.html">
+    <div class="team-badge" style="background:#0053BC; color:#ffffff;">DAL</div>
+    <span class="team-name">Dallas Mavericks</span>
+    <span class="team-meta">Southwest</span>
+  </a>
+
+  <a class="team-card" data-name="houston rockets" href="houston-rockets/index.html">
+    <div class="team-badge" style="background:#CE1141; color:#ffffff;">HOU</div>
+    <span class="team-name">Houston Rockets</span>
+    <span class="team-meta">Southwest</span>
+  </a>
+
+  <a class="team-card" data-name="memphis grizzlies" href="memphis-grizzlies/index.html">
+    <div class="team-badge" style="background:#5D76A9; color:#ffffff;">MEM</div>
+    <span class="team-name">Memphis Grizzlies</span>
+    <span class="team-meta">Southwest</span>
+  </a>
+
+  <a class="team-card" data-name="new orleans pelicans" href="new-orleans-pelicans/index.html">
+    <div class="team-badge" style="background:#0C2340; color:#ffffff;">NOP</div>
+    <span class="team-name">New Orleans Pelicans</span>
+    <span class="team-meta">Southwest</span>
+  </a>
+
+  <a class="team-card" data-name="san antonio spurs" href="san-antonio-spurs/index.html">
+    <div class="team-badge" style="background:#000000; color:#C4CED4;">SAS</div>
+    <span class="team-name">San Antonio Spurs</span>
+    <span class="team-meta">Southwest</span>
+  </a>
+
+</div>
+
+<p class="teams-empty" id="teamsEmpty">No teams match your search.</p>
+
+<script>
+(function () {
+  const search   = document.getElementById('teamSearch');
+  const cards    = Array.from(document.querySelectorAll('.team-card'));
+  const headings = Array.from(document.querySelectorAll('.division-heading'));
+  const empty    = document.getElementById('teamsEmpty');
+
+  search.addEventListener('input', function () {
+    const query = search.value.trim().toLowerCase();
+    let anyVisible = false;
+
+    cards.forEach(function (card) {
+      const visible = query === '' || card.dataset.name.includes(query);
+      card.style.display = visible ? '' : 'none';
+      if (visible) anyVisible = true;
+    });
+
+    headings.forEach(function (heading) {
+      const grid = heading.nextElementSibling;
+      const sectionHasVisibleCard = grid && Array.from(grid.querySelectorAll('.team-card'))
+        .some(function (c) { return c.style.display !== 'none'; });
+      heading.style.display = sectionHasVisibleCard ? '' : 'none';
+      if (grid) grid.style.display = sectionHasVisibleCard ? '' : 'none';
+    });
+
+    empty.style.display = anyVisible ? 'none' : 'block';
+  });
+})();
+</script>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/patrick-rankin\.github\.io\/sports\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Classroom to Court · Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

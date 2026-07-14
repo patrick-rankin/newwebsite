@@ -1,0 +1,457 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This site is a personal data journalism project focused on college and\n      professional basketball. Every post is built from raw game-by-game data —\n      no box-score summaries, no recycled narratives. Just the data, visualized\n      and interpreted.\n    \n    \n      A basketball fan who believes the best stories in sports are hiding in the\n      data. Built this site to share those stories publicly."
+  },
+  {
+    "objectID": "about.html#the-stack",
+    "href": "about.html#the-stack",
+    "title": "About",
+    "section": "The Stack",
+    "text": "The Stack\n\n\n\n\n\n\n\nTool\nPurpose\n\n\n\n\nR\nData ingestion, wrangling, and visualization (tidyverse, ggplot2)\n\n\nQuarto\nRendering and publishing\n\n\nGitHub Pages\nHosting\n\n\nESPN API\nGame-by-game data source\n\n\n\n\n\nQuestions, feedback, or data requests? Reach out on GitHub."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Classroom to Court",
+    "section": "",
+    "text": "Basketball has always been more than a game — it’s a laboratory of strategy, athleticism, and storytelling. Classroom to Court bridges the gap between the academic study of sport and the hardwood itself, turning raw statistics into narratives that every fan can appreciate.\nWhether you follow the high-stakes drama of March Madness or track every NBA standings shift across an 82-game season, this site gives you something most coverage doesn’t: the numbers behind the moments. Every chart, every breakdown, and every post here is built from real game-by-game data — no filler, no recycled takes, just basketball and the statistics that explain it."
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Classroom to Court",
+    "section": "",
+    "text": "Basketball has always been more than a game — it’s a laboratory of strategy, athleticism, and storytelling. Classroom to Court bridges the gap between the academic study of sport and the hardwood itself, turning raw statistics into narratives that every fan can appreciate.\nWhether you follow the high-stakes drama of March Madness or track every NBA standings shift across an 82-game season, this site gives you something most coverage doesn’t: the numbers behind the moments. Every chart, every breakdown, and every post here is built from real game-by-game data — no filler, no recycled takes, just basketball and the statistics that explain it."
+  },
+  {
+    "objectID": "index.html#explore-the-content",
+    "href": "index.html#explore-the-content",
+    "title": "Classroom to Court",
+    "section": "Explore the Content",
+    "text": "Explore the Content\n\n\n  \n    🏀 NCAA\n    Dive into college basketball with game-by-game breakdowns, team efficiency reports, and player spotlights.\n    \n      Duke Blue Devils 2025–26 →\n    \n  \n\n  \n    🏆 NBA\n    Explore how team statistics translate into wins across the NBA, with visualizations that reveal what the box score misses.\n    \n      NBA Stats & Win % →"
+  },
+  {
+    "objectID": "index.html#connect",
+    "href": "index.html#connect",
+    "title": "Classroom to Court",
+    "section": "Connect",
+    "text": "Connect\nStay up to date and connect with the community:\n\n\n  \n    \n      \n    \n    Follow on LinkedIn"
+  },
+  {
+    "objectID": "index.html#latest-basketball-news",
+    "href": "index.html#latest-basketball-news",
+    "title": "Classroom to Court",
+    "section": "Latest Basketball News",
+    "text": "Latest Basketball News\nStay current with live posts from the top basketball accounts on X:\n\n\n  \n  \n    \n      🏆 @ESPNNBA\n    \n    \n      Tweets by ESPNNBA\n    \n  \n\n  \n  \n    \n      🏀 @ESPN_CBB\n    \n    \n      Tweets by ESPN_CBB"
+  },
+  {
+    "objectID": "matchups.html",
+    "href": "matchups.html",
+    "title": "Matchups",
+    "section": "",
+    "text": "These reports compare two teams or two players side by side — works across NBA, NCAA, NFL, NHL, and MLB. Open the .qmd source, set both sides of the matchup in the settings block at the top, and re-render.\n\nTeam Matchup Report\nPlayer Matchup Report"
+  },
+  {
+    "objectID": "matchups/player.html",
+    "href": "matchups/player.html",
+    "title": "Player Matchup Report",
+    "section": "",
+    "text": "# install.packages(\"nflreadr\")\n# install.packages(\"baseballr\")\n# pak::pak(\"sportsdataverse/hoopR\")\n# pak::pak(\"sportsdataverse/hockeyR\")\n# install.packages(\"dplyr\")\n# install.packages(\"ggplot2\")\n# install.packages(\"tidyr\")\n\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(tidyr)"
+  },
+  {
+    "objectID": "matchups/player.html#your-settings-change-these-before-rendering",
+    "href": "matchups/player.html#your-settings-change-these-before-rendering",
+    "title": "Player Matchup Report",
+    "section": "⚙️ Your Settings — Change These Before Rendering",
+    "text": "⚙️ Your Settings — Change These Before Rendering\n\n# ============================================================\n#  FILL IN YOUR INFO BELOW — this is the only section\n#  you need to change each time you run this report.\n# ============================================================\n\n# Which sport?\n# Choose ONE of: \"NBA\"  |  \"NCAA\"  |  \"NFL\"  |  \"NHL\"  |  \"MLB\"\nmy_sport &lt;- \"NBA\"\n\n# Player 1 full name (exactly as the data source lists it)\nplayer_1 &lt;- \"LeBron James\"\n\n# Player 2 full name\nplayer_2 &lt;- \"Stephen Curry\"\n\n# Position / type — used to compare the right stats.\n# NBA/NCAA: \"Guard\"  |  \"Wing/Forward\"  |  \"Big/Center\"\n# NFL:      \"QB\"     |  \"RB\"            |  \"WR\"          | \"TE\"\n# NHL:      \"Skater\" |  \"Goalie\"\n# MLB:      \"Batter\" |  \"Pitcher\"\nplayer_type &lt;- \"Wing/Forward\"\n\n# Which season?\n# NBA/NCAA: year season ENDS  (2025-26 = 2026)\n# NFL: year season STARTS     (2024-25 = 2024)\n# NHL: full string            (\"20242025\")\n# MLB: calendar year          (2024)\nseason_year &lt;- 2026\n\n# Season label for display only\nseason_label &lt;- \"2025-26\"\n\n# ============================================================\n#  THAT'S IT — scroll down to render and read your report.\n# ============================================================"
+  },
+  {
+    "objectID": "matchups/player.html#lebron-james-vs.-stephen-curry-nba-2025-26",
+    "href": "matchups/player.html#lebron-james-vs.-stephen-curry-nba-2025-26",
+    "title": "Player Matchup Report",
+    "section": "LeBron James vs. Stephen Curry — NBA | 2025-26",
+    "text": "LeBron James vs. Stephen Curry — NBA | 2025-26\nPosition / Type: Wing/Forward | Games — LeBron James: 73 | Stephen Curry: 45"
+  },
+  {
+    "objectID": "matchups/player.html#head-to-head-stats",
+    "href": "matchups/player.html#head-to-head-stats",
+    "title": "Player Matchup Report",
+    "section": "Head-to-Head Stats",
+    "text": "Head-to-Head Stats\n\nknitr::kable(comparison_tbl, align = c(\"l\",\"r\",\"r\",\"c\"))\n\n\n\n\nStatistic\nLeBron James\nStephen Curry\nEdge\n\n\n\n\nPoints/G\n20.6\n26.5\nStephen Curry\n\n\nRebounds/G\n6.0\n3.5\nLeBron James\n\n\nAssists/G\n7.0\n4.7\nLeBron James\n\n\nSteals/G\n1.2\n1.2\nLeBron James\n\n\nBlocks/G\n0.5\n0.4\nLeBron James\n\n\nTurnovers/G\n3.0\n2.8\nStephen Curry\n\n\nFG%\n50.3%\n45.0%\nLeBron James\n\n\n3-Point%\n31.6%\n37.9%\nStephen Curry\n\n\nFT%\n73.6%\n92.5%\nStephen Curry\n\n\nMinutes/G\n32.8\n31.2\nLeBron James\n\n\n\n\n\nCategory advantages: LeBron James 6 | Stephen Curry 4"
+  },
+  {
+    "objectID": "matchups/player.html#side-by-side-chart",
+    "href": "matchups/player.html#side-by-side-chart",
+    "title": "Player Matchup Report",
+    "section": "Side-by-Side Chart",
+    "text": "Side-by-Side Chart\n\nggplot(chart_df, aes(x = Stat, y = Value, fill = Player)) +\n  geom_col(position = \"dodge\", width = 0.65) +\n  scale_fill_manual(values = c(\"#3498db\",\"#e74c3c\")) +\n  labs(\n    title    = paste(player_1, \"vs.\", player_2),\n    subtitle = paste(my_sport, season_label, \"|\", player_type),\n    x        = NULL, y = \"Value\", fill = NULL\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"top\",\n        axis.text.x = element_text(angle = 30, hjust = 1))\n\n\n\n\n\n\n\n\n\nadv_df &lt;- data.frame(\n  Stat       = stat_names,\n  Advantage  = advantage\n) %&gt;%\n  filter(Advantage != \"N/A\") %&gt;%\n  mutate(\n    Winner = factor(Advantage, levels = c(player_1, \"Even\", player_2))\n  )\n\nggplot(adv_df, aes(x = Stat, fill = Winner)) +\n  geom_bar(width = 0.6) +\n  scale_fill_manual(values = setNames(c(\"#3498db\",\"#95a5a6\",\"#e74c3c\"),\n                                       c(player_1,\"Even\",player_2))) +\n  labs(\n    title    = \"Category Edge Summary\",\n    subtitle = paste(player_1, \"vs.\", player_2),\n    x        = NULL, y = \"Count\", fill = NULL\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"top\",\n        axis.text.x = element_text(angle = 30, hjust = 1))"
+  },
+  {
+    "objectID": "matchups/team.html",
+    "href": "matchups/team.html",
+    "title": "Team Matchup Report",
+    "section": "",
+    "text": "# All packages used across sports — install any you haven't yet:\n# install.packages(\"nflreadr\")\n# install.packages(\"baseballr\")\n# pak::pak(\"sportsdataverse/hoopR\")\n# pak::pak(\"sportsdataverse/hockeyR\")\n# install.packages(\"dplyr\")\n# install.packages(\"ggplot2\")\n# install.packages(\"tidyr\")\n\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(tidyr)"
+  },
+  {
+    "objectID": "matchups/team.html#your-settings-change-these-before-rendering",
+    "href": "matchups/team.html#your-settings-change-these-before-rendering",
+    "title": "Team Matchup Report",
+    "section": "⚙️ Your Settings — Change These Before Rendering",
+    "text": "⚙️ Your Settings — Change These Before Rendering\n\n# ============================================================\n#  FILL IN YOUR INFO BELOW — this is the only section\n#  you need to change each time you run this report.\n# ============================================================\n\n# Which sport?\n# Choose ONE of: \"NBA\"  |  \"NCAA\"  |  \"NFL\"  |  \"NHL\"  |  \"MLB\"\nmy_sport &lt;- \"NBA\"\n\n# Team 1 name or abbreviation (same format as the grade reports for this sport)\n# NBA/NCAA: use location name  e.g. \"Boston\", \"Duke\"\n# NFL: abbreviation            e.g. \"KC\", \"BUF\"\n# NHL: abbreviation            e.g. \"BOS\", \"EDM\"\n# MLB: abbreviation            e.g. \"NYY\", \"LAD\"\nteam_1 &lt;- \"Boston\"\n\n# Team 2 name or abbreviation\nteam_2 &lt;- \"Golden State\"\n\n# Which season? Same convention as the grade reports for this sport:\n# NBA/NCAA: year season ENDS  (2025-26 = 2026)\n# NFL: year season STARTS     (2024-25 = 2024)\n# NHL: year season STARTS     (2024-25 = 2024)\n# MLB: calendar year          (2024 = 2024)\nseason_year &lt;- 2026\n\n# Season label for display only\nseason_label &lt;- \"2025-26\"\n\n# ============================================================\n#  THAT'S IT — scroll down to render and read your report.\n# ============================================================"
+  },
+  {
+    "objectID": "matchups/team.html#boston-vs.-golden-state-nba-2025-26",
+    "href": "matchups/team.html#boston-vs.-golden-state-nba-2025-26",
+    "title": "Team Matchup Report",
+    "section": "Boston vs. Golden State — NBA | 2025-26",
+    "text": "Boston vs. Golden State — NBA | 2025-26"
+  },
+  {
+    "objectID": "matchups/team.html#head-to-head-stat-comparison",
+    "href": "matchups/team.html#head-to-head-stat-comparison",
+    "title": "Team Matchup Report",
+    "section": "Head-to-Head Stat Comparison",
+    "text": "Head-to-Head Stat Comparison\n\nknitr::kable(comparison_tbl, align = c(\"l\",\"r\",\"r\"))\n\n\n\n\nStatistic\nBoston\nGolden State\n\n\n\n\nRecord\n59-30\n38-46\n\n\nWin %\n66.3%\n45.2%\n\n\nPoints Per Game\n114.2\n114.5\n\n\nPoints Allowed/G\n106.9\n115.2\n\n\nPoint Differential\n+7.3\n-0.7\n\n\nFG%\n4650.6%\n4631.0%\n\n\n3-Point%\n3641.6%\n3545.2%\n\n\nFT%\n7961.8%\n7985.7%\n\n\nRebounds/G\n46.4\n42.2\n\n\nAssists/G\n24.6\n28.8\n\n\nTurnovers/G\n11.5\n15.1"
+  },
+  {
+    "objectID": "matchups/team.html#side-by-side-chart",
+    "href": "matchups/team.html#side-by-side-chart",
+    "title": "Team Matchup Report",
+    "section": "Side-by-Side Chart",
+    "text": "Side-by-Side Chart\n\nggplot(chart_data, aes(x = Stat, y = Value, fill = Team)) +\n  geom_col(position = \"dodge\", width = 0.65) +\n  scale_fill_manual(values = c(\"#3498db\",\"#e74c3c\")) +\n  geom_text(aes(label = sprintf(\"%.1f\", Value)),\n            position = position_dodge(width = 0.65), vjust = -0.4, size = 3.2) +\n  labs(\n    title    = paste(team_1, \"vs.\", team_2, \"— Season Averages\"),\n    subtitle = paste(my_sport, season_label),\n    x        = NULL,\n    y        = \"Value\",\n    fill     = NULL\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"top\",\n        axis.text.x = element_text(angle = 25, hjust = 1))"
+  },
+  {
+    "objectID": "matchups/team.html#scoring-trends-side-by-side",
+    "href": "matchups/team.html#scoring-trends-side-by-side",
+    "title": "Team Matchup Report",
+    "section": "Scoring Trends Side by Side",
+    "text": "Scoring Trends Side by Side\n\npts_label_short &lt;- switch(my_sport, \"MLB\"=\"Runs\",\"NHL\"=\"Goals\",\"Points\")\n\ntrend1 &lt;- d1 %&gt;% mutate(game_num=row_number(), team=team_1)\ntrend2 &lt;- d2 %&gt;% mutate(game_num=row_number(), team=team_2)\n\nbind_rows(trend1, trend2) %&gt;%\n  ggplot(aes(x=game_num, y=pts, color=team)) +\n  geom_smooth(se=FALSE, linewidth=1.2) +\n  geom_point(alpha=0.3, size=1.5) +\n  scale_color_manual(values=c(\"#3498db\",\"#e74c3c\")) +\n  labs(\n    title    = paste(team_1, \"vs.\", team_2, \"—\", pts_label_short, \"Scored (Smoothed Trend)\"),\n    subtitle = paste(my_sport, season_label),\n    x        = \"Game Number\", y = pts_label_short, color = NULL\n  ) +\n  theme_minimal(base_size=13) +\n  theme(legend.position=\"top\")"
+  },
+  {
+    "objectID": "matchups/team.html#advantage-summary",
+    "href": "matchups/team.html#advantage-summary",
+    "title": "Team Matchup Report",
+    "section": "Advantage Summary",
+    "text": "Advantage Summary\n\nadv_df &lt;- data.frame(\n  Category  = c(pts_label, opp_label, diff_label, \"Win %\"),\n  Team_1    = c(s1$pts, s1$opp_pts, s1$pt_diff, s1$win_pct),\n  Team_2    = c(s2$pts, s2$opp_pts, s2$pt_diff, s2$win_pct),\n  Lower_Better = c(FALSE, TRUE, FALSE, FALSE)\n) %&gt;%\n  mutate(\n    Advantage = case_when(\n      !Lower_Better & Team_1 &gt; Team_2 ~ team_1,\n      !Lower_Better & Team_2 &gt; Team_1 ~ team_2,\n      Lower_Better  & Team_1 &lt; Team_2 ~ team_1,\n      Lower_Better  & Team_2 &lt; Team_1 ~ team_2,\n      TRUE ~ \"Even\"\n    )\n  ) %&gt;%\n  select(Category, Advantage)\n\nt1_adv &lt;- sum(adv_df$Advantage == team_1)\nt2_adv &lt;- sum(adv_df$Advantage == team_2)\n\nknitr::kable(adv_df, col.names = c(\"Category\",\"Advantage\"))\n\n\n\n\nCategory\nAdvantage\n\n\n\n\nPoints Per Game\nGolden State\n\n\nPoints Allowed/G\nBoston\n\n\nPoint Differential\nBoston\n\n\nWin %\nBoston\n\n\n\n\n\nAdvantages: Boston wins 3 of 4 categories | Golden State wins 1 of 4 categories"
+  },
+  {
+    "objectID": "mlb/index.html",
+    "href": "mlb/index.html",
+    "title": "MLB",
+    "section": "",
+    "text": "Each report below is a self-contained R/Quarto template — open the .qmd source, change the team/player/season in the settings block at the top, and re-render to generate a new report.\n\nTeam Grade Report — defaults to the New York Yankees, 2024\nPlayer Grade Report — defaults to Aaron Judge, 2024"
+  },
+  {
+    "objectID": "mlb/index.html#season-grade-reports",
+    "href": "mlb/index.html#season-grade-reports",
+    "title": "MLB",
+    "section": "",
+    "text": "Each report below is a self-contained R/Quarto template — open the .qmd source, change the team/player/season in the settings block at the top, and re-render to generate a new report.\n\nTeam Grade Report — defaults to the New York Yankees, 2024\nPlayer Grade Report — defaults to Aaron Judge, 2024"
+  },
+  {
+    "objectID": "mlb/index.html#team-spotlight",
+    "href": "mlb/index.html#team-spotlight",
+    "title": "MLB",
+    "section": "Team Spotlight",
+    "text": "Team Spotlight\n\nNew York Yankees — 2024 Postseason"
+  },
+  {
+    "objectID": "mlb/index.html#data-ingestion",
+    "href": "mlb/index.html#data-ingestion",
+    "title": "MLB",
+    "section": "Data Ingestion",
+    "text": "Data Ingestion\nTeam and player season data is pulled from Baseball Reference and FanGraphs via the baseballr package:\n\npipeline/mlb/01_ingest_team.R\npipeline/mlb/02_ingest_player.R"
+  },
+  {
+    "objectID": "nba/grade-player.html",
+    "href": "nba/grade-player.html",
+    "title": "NBA Player Season Grade Report",
+    "section": "",
+    "text": "library(hoopR)\nlibrary(dplyr)\nlibrary(readr)\nlibrary(ggplot2)\nlibrary(tidyr)"
+  },
+  {
+    "objectID": "nba/grade-player.html#your-settings-change-these-before-rendering",
+    "href": "nba/grade-player.html#your-settings-change-these-before-rendering",
+    "title": "NBA Player Season Grade Report",
+    "section": "⚙️ Your Settings — Change These Before Rendering",
+    "text": "⚙️ Your Settings — Change These Before Rendering\n\n# ============================================================\n#  FILL IN YOUR INFO BELOW — this is the only section\n#  you need to change each time you run this report.\n# ============================================================\n\n# Which NBA player do you want to grade?\n# Use the player's full name exactly as ESPN lists it (First Last).\n# Examples: \"LeBron James\", \"Stephen Curry\", \"Nikola Jokic\"\nmy_player &lt;- \"LeBron James\"\n\n# Which season? Use the year the season ENDS.\n# Example: the 2025-26 NBA season is written as 2026.\nseason_year &lt;- 2026\n\n# Season label shown in the report (for display only)\nseason_label &lt;- \"2025-26\"\n\n# Player position — used to set rebounding and assist benchmarks.\n# Choose ONE of: \"Guard\"  |  \"Wing/Forward\"  |  \"Big/Center\"\nplayer_position &lt;- \"Wing/Forward\"\n\n# ============================================================\n#  THAT'S IT — scroll down to render and read your report.\n# ============================================================"
+  },
+  {
+    "objectID": "nba/grade-player.html#lebron-james-los-angeles-lakers-2025-26",
+    "href": "nba/grade-player.html#lebron-james-los-angeles-lakers-2025-26",
+    "title": "NBA Player Season Grade Report",
+    "section": "LeBron James — Los Angeles Lakers | 2025-26",
+    "text": "LeBron James — Los Angeles Lakers | 2025-26\nPosition: Wing/Forward | Games Graded: 73 | Minutes Per Game: 32.8\nOverall Season Grade: B+"
+  },
+  {
+    "objectID": "nba/grade-player.html#category-grades",
+    "href": "nba/grade-player.html#category-grades",
+    "title": "NBA Player Season Grade Report",
+    "section": "Category Grades",
+    "text": "Category Grades\n\ngrade_colors &lt;- c(\"A\"=\"#2ecc71\",\"B\"=\"#3498db\",\"C\"=\"#f39c12\",\"D\"=\"#e67e22\",\"F\"=\"#e74c3c\")\n\nggplot(grade_df, aes(x = reorder(Category, GPA), y = GPA, fill = Grade_Group)) +\n  geom_col(width = 0.7) +\n  geom_text(aes(label = Grade), hjust = -0.2, fontface = \"bold\", size = 4.5) +\n  scale_fill_manual(values = grade_colors, name = \"Grade\") +\n  scale_y_continuous(limits = c(0, 5.2), breaks = c(0,1,2,3,4)) +\n  coord_flip() +\n  labs(\n    title    = paste(player_name_full, \"— Category Grades\"),\n    subtitle = paste(season_label, \"NBA Season |\", player_position),\n    x        = NULL,\n    y        = \"Grade Points (4.0 scale)\"\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"right\")"
+  },
+  {
+    "objectID": "nba/grade-player.html#scoring-trend",
+    "href": "nba/grade-player.html#scoring-trend",
+    "title": "NBA Player Season Grade Report",
+    "section": "Scoring Trend",
+    "text": "Scoring Trend\n\ntrend_data &lt;- player_data %&gt;%\n  arrange(game_date) %&gt;%\n  mutate(game_num = row_number())\n\nggplot(trend_data, aes(x = game_num, y = pts)) +\n  geom_line(color = \"#3498db\", linewidth = 1) +\n  geom_point(color = \"#3498db\", size = 2) +\n  geom_hline(yintercept = avg$pts, linetype = \"dashed\", color = \"#e74c3c\", linewidth = 0.8) +\n  annotate(\"text\", x = max(trend_data$game_num), y = avg$pts + 1,\n           label = paste(\"Avg:\", sprintf(\"%.1f\", avg$pts)), color = \"#e74c3c\", hjust = 1, size = 3.5) +\n  labs(\n    title    = paste(player_name_full, \"— Points Per Game\"),\n    subtitle = \"Red dashed line = season average\",\n    x        = \"Game Number\",\n    y        = \"Points\"\n  ) +\n  theme_minimal(base_size = 13)"
+  },
+  {
+    "objectID": "nba/grade-player.html#game-by-game-stats-points-rebounds-assists",
+    "href": "nba/grade-player.html#game-by-game-stats-points-rebounds-assists",
+    "title": "NBA Player Season Grade Report",
+    "section": "Game-by-Game Stats: Points, Rebounds, Assists",
+    "text": "Game-by-Game Stats: Points, Rebounds, Assists\n\npra_long &lt;- trend_data %&gt;%\n  select(game_num, pts, reb, ast) %&gt;%\n  pivot_longer(cols = c(pts, reb, ast), names_to = \"Stat\", values_to = \"Value\") %&gt;%\n  mutate(Stat = recode(Stat, pts=\"Points\", reb=\"Rebounds\", ast=\"Assists\"))\n\nggplot(pra_long, aes(x = game_num, y = Value, color = Stat)) +\n  geom_line(linewidth = 0.9) +\n  geom_point(size = 1.8) +\n  scale_color_manual(values = c(\"Points\"=\"#3498db\",\"Rebounds\"=\"#2ecc71\",\"Assists\"=\"#e67e22\")) +\n  labs(\n    title    = paste(player_name_full, \"— Points / Rebounds / Assists by Game\"),\n    x        = \"Game Number\",\n    y        = \"Count\",\n    color    = NULL\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"top\")"
+  },
+  {
+    "objectID": "nba/grade-player.html#shooting-splits",
+    "href": "nba/grade-player.html#shooting-splits",
+    "title": "NBA Player Season Grade Report",
+    "section": "Shooting Splits",
+    "text": "Shooting Splits\n\nshooting_df &lt;- data.frame(\n  Shot_Type = c(\"Field Goals\", \"Three-Pointers\", \"Free Throws\"),\n  Pct       = c(avg$fg_pct, avg$three_pct, avg$ft_pct),\n  Benchmark = c(47, 36, 78)\n)\n\nshooting_long &lt;- shooting_df %&gt;%\n  pivot_longer(cols = c(Pct, Benchmark), names_to = \"Type\", values_to = \"Value\") %&gt;%\n  mutate(Type = recode(Type, Pct = player_name_full, Benchmark = \"NBA Average\"))\n\nggplot(shooting_long, aes(x = Shot_Type, y = Value, fill = Type)) +\n  geom_col(position = \"dodge\", width = 0.6) +\n  scale_fill_manual(values = c(\"#3498db\",\"#bdc3c7\")) +\n  geom_text(aes(label = sprintf(\"%.1f%%\", Value)),\n            position = position_dodge(width = 0.6), vjust = -0.4, size = 3.5) +\n  labs(\n    title    = paste(player_name_full, \"— Shooting Splits vs. NBA Average\"),\n    x        = NULL,\n    y        = \"Percentage\",\n    fill     = NULL\n  ) +\n  ylim(0, 105) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"top\")"
+  },
+  {
+    "objectID": "nba/grade-player.html#key-stats-summary",
+    "href": "nba/grade-player.html#key-stats-summary",
+    "title": "NBA Player Season Grade Report",
+    "section": "Key Stats Summary",
+    "text": "Key Stats Summary\n\nsummary_tbl &lt;- data.frame(\n  Statistic = c(\"Points Per Game\",\"Rebounds Per Game\",\"Assists Per Game\",\n                \"Steals Per Game\",\"Blocks Per Game\",\"Turnovers Per Game\",\n                \"Field Goal %\",\"Three-Point %\",\"Free Throw %\",\"Efficiency Index\"),\n  Value     = c(\n    sprintf(\"%.1f\", avg$pts),\n    sprintf(\"%.1f\", avg$reb),\n    sprintf(\"%.1f\", avg$ast),\n    sprintf(\"%.1f\", avg$stl),\n    sprintf(\"%.1f\", avg$blk),\n    sprintf(\"%.1f\", avg$tov),\n    sprintf(\"%.1f%%\", avg$fg_pct),\n    sprintf(\"%.1f%%\", avg$three_pct),\n    sprintf(\"%.1f%%\", avg$ft_pct),\n    sprintf(\"%.1f\",   avg$efficiency)\n  )\n)\n\nknitr::kable(summary_tbl, align = c(\"l\",\"r\"), col.names = c(\"Statistic\",\"Season Avg\"))\n\n\n\n\nStatistic\nSeason Avg\n\n\n\n\nPoints Per Game\n20.6\n\n\nRebounds Per Game\n6.0\n\n\nAssists Per Game\n7.0\n\n\nSteals Per Game\n1.2\n\n\nBlocks Per Game\n0.5\n\n\nTurnovers Per Game\n3.0\n\n\nField Goal %\n50.3%\n\n\nThree-Point %\n31.6%\n\n\nFree Throw %\n73.6%\n\n\nEfficiency Index\n24.7"
+  },
+  {
+    "objectID": "nba/grade-player.html#how-the-grade-is-calculated",
+    "href": "nba/grade-player.html#how-the-grade-is-calculated",
+    "title": "NBA Player Season Grade Report",
+    "section": "How the Grade Is Calculated",
+    "text": "How the Grade Is Calculated\nEach category is graded against NBA starter-level averages from the 2024-25 season and converted to a 4.0 scale. Scoring carries the most weight (22%), followed by field goal percentage (12%), rebounding (15%), and assists (13%). Rebounding and assist benchmarks shift automatically based on the position set at the top of the file — a center is held to a higher rebounding standard than a guard.\nThe Efficiency Index adds together points, rebounds, assists, steals, and blocks, then subtracts turnovers and missed field goals — a simple measure of overall contribution per game.\nThe shooting splits chart compares the player’s percentages directly against the NBA average so you can see at a glance where they over- or under-perform."
+  },
+  {
+    "objectID": "nba/grade-team.html",
+    "href": "nba/grade-team.html",
+    "title": "NBA Team Season Grade Report",
+    "section": "",
+    "text": "library(hoopR)\nlibrary(dplyr)\nlibrary(readr)\nlibrary(ggplot2)\nlibrary(tidyr)"
+  },
+  {
+    "objectID": "nba/grade-team.html#your-settings-change-these-before-rendering",
+    "href": "nba/grade-team.html#your-settings-change-these-before-rendering",
+    "title": "NBA Team Season Grade Report",
+    "section": "⚙️ Your Settings — Change These Before Rendering",
+    "text": "⚙️ Your Settings — Change These Before Rendering\n\n# ============================================================\n#  FILL IN YOUR INFO BELOW — this is the only section\n#  you need to change each time you run this report.\n# ============================================================\n\n# Which NBA team do you want to grade?\n# Use the team's common name exactly as ESPN lists it.\n# Examples: \"Lakers\", \"Celtics\", \"Warriors\", \"Knicks\", \"Heat\"\nmy_team &lt;- \"Lakers\"\n\n# Which season? Use the year the season ENDS.\n# Example: the 2025-26 NBA season is written as 2026.\nseason_year &lt;- 2026\n\n# Season label shown in the report (for display only)\nseason_label &lt;- \"2025-26\"\n\n# ============================================================\n#  THAT'S IT — scroll down to render and read your report.\n# ============================================================"
+  },
+  {
+    "objectID": "nba/grade-team.html#los-angeles-lakers-2025-26-season-report",
+    "href": "nba/grade-team.html#los-angeles-lakers-2025-26-season-report",
+    "title": "NBA Team Season Grade Report",
+    "section": "Los Angeles Lakers — 2025-26 Season Report",
+    "text": "Los Angeles Lakers — 2025-26 Season Report\nRecord: 57-35 (62.0% win rate) | Point Differential: +1.0 per game | Games Graded: 92\nOverall Season Grade: B+"
+  },
+  {
+    "objectID": "nba/grade-team.html#category-grades",
+    "href": "nba/grade-team.html#category-grades",
+    "title": "NBA Team Season Grade Report",
+    "section": "Category Grades",
+    "text": "Category Grades\n\ngrade_colors &lt;- c(\"A\"=\"#2ecc71\",\"B\"=\"#3498db\",\"C\"=\"#f39c12\",\"D\"=\"#e67e22\",\"F\"=\"#e74c3c\")\n\nggplot(grade_df, aes(x = reorder(Category, GPA), y = GPA, fill = Grade_Group)) +\n  geom_col(width = 0.7) +\n  geom_text(aes(label = Grade), hjust = -0.2, fontface = \"bold\", size = 4.5) +\n  scale_fill_manual(values = grade_colors, name = \"Grade\") +\n  scale_y_continuous(limits = c(0, 5.2), breaks = c(0,1,2,3,4)) +\n  coord_flip() +\n  labs(\n    title    = paste(team_name_full, \"— Category Grades\"),\n    subtitle = paste(season_label, \"NBA Season\"),\n    x        = NULL,\n    y        = \"Grade Points (4.0 scale)\"\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"right\")"
+  },
+  {
+    "objectID": "nba/grade-team.html#scoring-trend",
+    "href": "nba/grade-team.html#scoring-trend",
+    "title": "NBA Team Season Grade Report",
+    "section": "Scoring Trend",
+    "text": "Scoring Trend\n\ntrend_data &lt;- team_data %&gt;%\n  mutate(\n    game_date  = as.Date(game_date),\n    team_score = as.numeric(team_score),\n    opp_score  = as.numeric(opponent_team_score),\n    result     = ifelse(team_winner == TRUE, \"Win\", \"Loss\")\n  ) %&gt;%\n  arrange(game_date) %&gt;%\n  mutate(game_num = row_number())\n\nggplot(trend_data, aes(x = game_num)) +\n  geom_line(aes(y = team_score), color = \"#2ecc71\", linewidth = 1) +\n  geom_line(aes(y = opp_score),  color = \"#e74c3c\", linewidth = 1, linetype = \"dashed\") +\n  geom_point(aes(y = team_score, color = result), size = 2) +\n  scale_color_manual(values = c(\"Win\"=\"#2ecc71\",\"Loss\"=\"#e74c3c\"), name = \"Result\") +\n  geom_hline(yintercept = avg$pts, linetype = \"dotted\", color = \"#2ecc71\", linewidth = 0.7) +\n  labs(\n    title    = paste(team_name_full, \"— Scoring by Game\"),\n    subtitle = \"Green = team score  |  Red dashed = opponent score  |  Dotted = season average\",\n    x        = \"Game Number\",\n    y        = \"Points\"\n  ) +\n  theme_minimal(base_size = 13)"
+  },
+  {
+    "objectID": "nba/grade-team.html#win-loss-rolling-record",
+    "href": "nba/grade-team.html#win-loss-rolling-record",
+    "title": "NBA Team Season Grade Report",
+    "section": "Win / Loss Rolling Record",
+    "text": "Win / Loss Rolling Record\n\ntrend_data &lt;- trend_data %&gt;%\n  mutate(win_flag = ifelse(result == \"Win\", 1, 0),\n         cumulative_wins   = cumsum(win_flag),\n         cumulative_losses = cumsum(1 - win_flag))\n\ntrend_long &lt;- trend_data %&gt;%\n  select(game_num, cumulative_wins, cumulative_losses) %&gt;%\n  pivot_longer(cols = c(cumulative_wins, cumulative_losses),\n               names_to = \"Type\", values_to = \"Count\") %&gt;%\n  mutate(Type = recode(Type, cumulative_wins=\"Wins\", cumulative_losses=\"Losses\"))\n\nggplot(trend_long, aes(x = game_num, y = Count, color = Type)) +\n  geom_line(linewidth = 1.1) +\n  scale_color_manual(values = c(\"Wins\"=\"#2ecc71\",\"Losses\"=\"#e74c3c\")) +\n  labs(\n    title    = paste(team_name_full, \"— Cumulative Win/Loss Record\"),\n    x        = \"Game Number\",\n    y        = \"Games\",\n    color    = NULL\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"top\")"
+  },
+  {
+    "objectID": "nba/grade-team.html#key-stats-summary",
+    "href": "nba/grade-team.html#key-stats-summary",
+    "title": "NBA Team Season Grade Report",
+    "section": "Key Stats Summary",
+    "text": "Key Stats Summary\n\nsummary_tbl &lt;- data.frame(\n  Statistic = c(\"Points Per Game\",\"Opp. Points Per Game\",\"Point Differential\",\n                \"Field Goal %\",\"Three-Point %\",\"Free Throw %\",\n                \"Rebounds Per Game\",\"Assists Per Game\",\n                \"Steals Per Game\",\"Blocks Per Game\",\"Turnovers Per Game\"),\n  Value     = c(\n    sprintf(\"%.1f\",   avg$pts),\n    sprintf(\"%.1f\",   avg$opp_pts),\n    sprintf(\"%+.1f\",  avg$pt_diff),\n    sprintf(\"%.1f%%\", avg$fg_pct),\n    sprintf(\"%.1f%%\", avg$three_pct),\n    sprintf(\"%.1f%%\", avg$ft_pct),\n    sprintf(\"%.1f\",   avg$reb),\n    sprintf(\"%.1f\",   avg$ast),\n    sprintf(\"%.1f\",   avg$stl),\n    sprintf(\"%.1f\",   avg$blk),\n    sprintf(\"%.1f\",   avg$tov)\n  )\n)\n\nknitr::kable(summary_tbl, align = c(\"l\",\"r\"), col.names = c(\"Statistic\",\"Season Avg\"))\n\n\n\n\nStatistic\nSeason Avg\n\n\n\n\nPoints Per Game\n114.8\n\n\nOpp. Points Per Game\n113.8\n\n\nPoint Differential\n+1.0\n\n\nField Goal %\n5000.0%\n\n\nThree-Point %\n3633.7%\n\n\nFree Throw %\n7596.7%\n\n\nRebounds Per Game\n40.8\n\n\nAssists Per Game\n25.7\n\n\nSteals Per Game\n8.4\n\n\nBlocks Per Game\n4.4\n\n\nTurnovers Per Game\n14.1"
+  },
+  {
+    "objectID": "nba/grade-team.html#how-the-grade-is-calculated",
+    "href": "nba/grade-team.html#how-the-grade-is-calculated",
+    "title": "NBA Team Season Grade Report",
+    "section": "How the Grade Is Calculated",
+    "text": "How the Grade Is Calculated\nEach category is graded against NBA league averages from the 2024-25 season and converted to a 4.0 scale. Scoring and defense each carry 15% of the overall grade. Field goal percentage accounts for 12%, while win percentage, ball security, rebounding, and assists each account for 10%.\nThe grade scale is: A+ (elite) · A / A- (excellent) · B range (above average) · C range (league average) · D range (below average) · F (well below average)."
+  },
+  {
+    "objectID": "nba/index.html",
+    "href": "nba/index.html",
+    "title": "NBA Teams",
+    "section": "",
+    "text": "See NBA Stats & Win % →\n\nSeason Grade Reports\nSelf-contained R/Quarto templates — open the .qmd source, change the team/player/season in the settings block at the top, and re-render to generate a new report.\n\n  Team Grade Report\n  Player Grade Report\n\n\nEastern Conference · Atlantic\n\n\n  \n    BOS\n    Boston Celtics\n    Atlantic\n  \n\n  \n    BKN\n    Brooklyn Nets\n    Atlantic\n  \n\n  \n    NYK\n    New York Knicks\n    Atlantic\n  \n\n  \n    PHI\n    Philadelphia 76ers\n    Atlantic\n  \n\n  \n    TOR\n    Toronto Raptors\n    Atlantic\n  \n\n\n\nEastern Conference · Central\n\n\n  \n    CHI\n    Chicago Bulls\n    Central\n  \n\n  \n    CLE\n    Cleveland Cavaliers\n    Central\n  \n\n  \n    DET\n    Detroit Pistons\n    Central\n  \n\n  \n    IND\n    Indiana Pacers\n    Central\n  \n\n  \n    MIL\n    Milwaukee Bucks\n    Central\n  \n\n\n\nEastern Conference · Southeast\n\n\n  \n    ATL\n    Atlanta Hawks\n    Southeast\n  \n\n  \n    CHA\n    Charlotte Hornets\n    Southeast\n  \n\n  \n    MIA\n    Miami Heat\n    Southeast\n  \n\n  \n    ORL\n    Orlando Magic\n    Southeast\n  \n\n  \n    WAS\n    Washington Wizards\n    Southeast\n  \n\n\n\nWestern Conference · Northwest\n\n\n  \n    DEN\n    Denver Nuggets\n    Northwest\n  \n\n  \n    MIN\n    Minnesota Timberwolves\n    Northwest\n  \n\n  \n    OKC\n    Oklahoma City Thunder\n    Northwest\n  \n\n  \n    POR\n    Portland Trail Blazers\n    Northwest\n  \n\n  \n    UTA\n    Utah Jazz\n    Northwest\n  \n\n\n\nWestern Conference · Pacific\n\n\n  \n    GSW\n    Golden State Warriors\n    Pacific\n  \n\n  \n    LAC\n    LA Clippers\n    Pacific\n  \n\n  \n    LAL\n    Los Angeles Lakers\n    Pacific\n  \n\n  \n    PHX\n    Phoenix Suns\n    Pacific\n  \n\n  \n    SAC\n    Sacramento Kings\n    Pacific\n  \n\n\n\nWestern Conference · Southwest\n\n\n  \n    DAL\n    Dallas Mavericks\n    Southwest\n  \n\n  \n    HOU\n    Houston Rockets\n    Southwest\n  \n\n  \n    MEM\n    Memphis Grizzlies\n    Southwest\n  \n\n  \n    NOP\n    New Orleans Pelicans\n    Southwest\n  \n\n  \n    SAS\n    San Antonio Spurs\n    Southwest\n  \n\n\n\nNo teams match your search."
+  },
+  {
+    "objectID": "ncaa/grade-player.html",
+    "href": "ncaa/grade-player.html",
+    "title": "NCAA Player Season Grade Report",
+    "section": "",
+    "text": "library(hoopR)\nlibrary(dplyr)\nlibrary(readr)\nlibrary(ggplot2)\nlibrary(tidyr)"
+  },
+  {
+    "objectID": "ncaa/grade-player.html#your-settings-change-these-before-rendering",
+    "href": "ncaa/grade-player.html#your-settings-change-these-before-rendering",
+    "title": "NCAA Player Season Grade Report",
+    "section": "⚙️ Your Settings — Change These Before Rendering",
+    "text": "⚙️ Your Settings — Change These Before Rendering\n\n# ============================================================\n#  FILL IN YOUR INFO BELOW — this is the only section\n#  you need to change each time you run this report.\n# ============================================================\n\n# Which player do you want to grade?\n# Use the player's full name exactly as ESPN lists it (First Last).\n# Examples: \"Cooper Flagg\", \"Zach Edey\", \"Hunter Dickinson\"\nmy_player &lt;- \"Cooper Flagg\"\n\n# Which season? Use the year the season ENDS.\n# Example: the 2024-25 season is written as 2025.\nseason_year &lt;- 2025\n\n# Season label shown in the report (for display only)\nseason_label &lt;- \"2024-25\"\n\n# Player position — used to set rebounding and assist benchmarks.\n# Choose ONE of: \"Guard\"  |  \"Wing/Forward\"  |  \"Big/Center\"\nplayer_position &lt;- \"Wing/Forward\"\n\n# ============================================================\n#  THAT'S IT — scroll down to render and read your report.\n# ============================================================"
+  },
+  {
+    "objectID": "ncaa/grade-player.html#cooper-flagg-duke-blue-devils-2024-25",
+    "href": "ncaa/grade-player.html#cooper-flagg-duke-blue-devils-2024-25",
+    "title": "NCAA Player Season Grade Report",
+    "section": "Cooper Flagg — Duke Blue Devils | 2024-25",
+    "text": "Cooper Flagg — Duke Blue Devils | 2024-25\nPosition: Wing/Forward | Games Graded: 37 | Minutes Per Game: 30.6\nOverall Season Grade: A-"
+  },
+  {
+    "objectID": "ncaa/grade-player.html#category-grades",
+    "href": "ncaa/grade-player.html#category-grades",
+    "title": "NCAA Player Season Grade Report",
+    "section": "Category Grades",
+    "text": "Category Grades\n\ngrade_colors &lt;- c(\"A\"=\"#2ecc71\",\"B\"=\"#3498db\",\"C\"=\"#f39c12\",\"D\"=\"#e67e22\",\"F\"=\"#e74c3c\")\n\nggplot(grade_df, aes(x = reorder(Category, GPA), y = GPA, fill = Grade_Group)) +\n  geom_col(width = 0.7) +\n  geom_text(aes(label = Grade), hjust = -0.2, fontface = \"bold\", size = 4.5) +\n  scale_fill_manual(values = grade_colors, name = \"Grade\") +\n  scale_y_continuous(limits = c(0, 5.2), breaks = c(0,1,2,3,4)) +\n  coord_flip() +\n  labs(\n    title    = paste(player_name_full, \"— Category Grades\"),\n    subtitle = paste(season_label, \"NCAA Season |\", player_position),\n    x        = NULL,\n    y        = \"Grade Points (4.0 scale)\"\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"right\")"
+  },
+  {
+    "objectID": "ncaa/grade-player.html#scoring-trend",
+    "href": "ncaa/grade-player.html#scoring-trend",
+    "title": "NCAA Player Season Grade Report",
+    "section": "Scoring Trend",
+    "text": "Scoring Trend\n\ntrend_data &lt;- player_data %&gt;%\n  arrange(game_date) %&gt;%\n  mutate(game_num = row_number())\n\nggplot(trend_data, aes(x = game_num, y = pts)) +\n  geom_line(color = \"#3498db\", linewidth = 1) +\n  geom_point(color = \"#3498db\", size = 2.5) +\n  geom_hline(yintercept = avg$pts, linetype = \"dashed\", color = \"#e74c3c\", linewidth = 0.8) +\n  annotate(\"text\", x = max(trend_data$game_num), y = avg$pts + 0.8,\n           label = paste(\"Avg:\", sprintf(\"%.1f\", avg$pts)), color = \"#e74c3c\", hjust = 1, size = 3.5) +\n  labs(\n    title    = paste(player_name_full, \"— Points Per Game\"),\n    subtitle = \"Red dashed line = season average\",\n    x        = \"Game Number\",\n    y        = \"Points\"\n  ) +\n  theme_minimal(base_size = 13)"
+  },
+  {
+    "objectID": "ncaa/grade-player.html#game-by-game-stats-points-rebounds-assists",
+    "href": "ncaa/grade-player.html#game-by-game-stats-points-rebounds-assists",
+    "title": "NCAA Player Season Grade Report",
+    "section": "Game-by-Game Stats: Points, Rebounds, Assists",
+    "text": "Game-by-Game Stats: Points, Rebounds, Assists\n\npra_long &lt;- trend_data %&gt;%\n  select(game_num, pts, reb, ast) %&gt;%\n  pivot_longer(cols = c(pts, reb, ast), names_to = \"Stat\", values_to = \"Value\") %&gt;%\n  mutate(Stat = recode(Stat, pts=\"Points\", reb=\"Rebounds\", ast=\"Assists\"))\n\nggplot(pra_long, aes(x = game_num, y = Value, color = Stat)) +\n  geom_line(linewidth = 0.9) +\n  geom_point(size = 2) +\n  scale_color_manual(values = c(\"Points\"=\"#3498db\",\"Rebounds\"=\"#2ecc71\",\"Assists\"=\"#e67e22\")) +\n  labs(\n    title    = paste(player_name_full, \"— Points / Rebounds / Assists by Game\"),\n    x        = \"Game Number\",\n    y        = \"Count\",\n    color    = NULL\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"top\")"
+  },
+  {
+    "objectID": "ncaa/grade-player.html#key-stats-summary",
+    "href": "ncaa/grade-player.html#key-stats-summary",
+    "title": "NCAA Player Season Grade Report",
+    "section": "Key Stats Summary",
+    "text": "Key Stats Summary\n\nsummary_tbl &lt;- data.frame(\n  Statistic = c(\"Points Per Game\",\"Rebounds Per Game\",\"Assists Per Game\",\n                \"Steals Per Game\",\"Blocks Per Game\",\"Turnovers Per Game\",\n                \"Field Goal %\",\"Three-Point %\",\"Free Throw %\",\"Efficiency Index\"),\n  Value     = c(\n    sprintf(\"%.1f\", avg$pts),\n    sprintf(\"%.1f\", avg$reb),\n    sprintf(\"%.1f\", avg$ast),\n    sprintf(\"%.1f\", avg$stl),\n    sprintf(\"%.1f\", avg$blk),\n    sprintf(\"%.1f\", avg$tov),\n    sprintf(\"%.1f%%\", avg$fg_pct),\n    sprintf(\"%.1f%%\", avg$three_pct),\n    sprintf(\"%.1f%%\", avg$ft_pct),\n    sprintf(\"%.1f\",  avg$efficiency)\n  )\n)\n\nknitr::kable(summary_tbl, align = c(\"l\",\"r\"), col.names = c(\"Statistic\",\"Season Avg\"))\n\n\n\n\nStatistic\nSeason Avg\n\n\n\n\nPoints Per Game\n19.2\n\n\nRebounds Per Game\n7.5\n\n\nAssists Per Game\n4.2\n\n\nSteals Per Game\n1.4\n\n\nBlocks Per Game\n1.4\n\n\nTurnovers Per Game\n2.1\n\n\nField Goal %\n48.0%\n\n\nThree-Point %\n41.6%\n\n\nFree Throw %\n84.6%\n\n\nEfficiency Index\n24.5"
+  },
+  {
+    "objectID": "ncaa/grade-player.html#how-the-grade-is-calculated",
+    "href": "ncaa/grade-player.html#how-the-grade-is-calculated",
+    "title": "NCAA Player Season Grade Report",
+    "section": "How the Grade Is Calculated",
+    "text": "How the Grade Is Calculated\nEach category is graded against NCAA Division I starter averages and converted to a 4.0 scale. Scoring carries the most weight (22%), followed by field goal percentage (12%), rebounding (15%), and assists (13%). Rebounding and assist benchmarks adjust automatically based on the position you set at the top of the file.\nThe Efficiency Index adds together points, rebounds, assists, steals, and blocks, then subtracts turnovers and missed field goals — a simple measure of overall contribution per game."
+  },
+  {
+    "objectID": "ncaa/grade-team.html",
+    "href": "ncaa/grade-team.html",
+    "title": "NCAA Team Season Grade Report",
+    "section": "",
+    "text": "library(hoopR)\nlibrary(dplyr)\nlibrary(readr)\nlibrary(ggplot2)\nlibrary(tidyr)"
+  },
+  {
+    "objectID": "ncaa/grade-team.html#your-settings-change-these-before-rendering",
+    "href": "ncaa/grade-team.html#your-settings-change-these-before-rendering",
+    "title": "NCAA Team Season Grade Report",
+    "section": "⚙️ Your Settings — Change These Before Rendering",
+    "text": "⚙️ Your Settings — Change These Before Rendering\n\n# ============================================================\n#  FILL IN YOUR INFO BELOW — this is the only section\n#  you need to change each time you run this report.\n# ============================================================\n\n# Which team do you want to grade?\n# Use the school's common name exactly as ESPN lists it.\n# Examples: \"Duke\", \"Kansas\", \"Houston\", \"Gonzaga\", \"Alabama State\"\nmy_team &lt;- \"Alabama State\"\n\n# Which season? Use the year the season ENDS.\n# Example: the 2025-26 season is written as 2026.\nseason_year &lt;- 2026\n\n# Season label shown in the report (for display only)\nseason_label &lt;- \"2025-26\"\n\n# ============================================================\n#  THAT'S IT — scroll down to render and read your report.\n# ============================================================"
+  },
+  {
+    "objectID": "ncaa/grade-team.html#alabama-state-hornets-2025-26-season-report",
+    "href": "ncaa/grade-team.html#alabama-state-hornets-2025-26-season-report",
+    "title": "NCAA Team Season Grade Report",
+    "section": "Alabama State Hornets — 2025-26 Season Report",
+    "text": "Alabama State Hornets — 2025-26 Season Report\nRecord: 10-22 (31.2% win rate) | Games Graded: 32\nOverall Season Grade: B-"
+  },
+  {
+    "objectID": "ncaa/grade-team.html#category-grades",
+    "href": "ncaa/grade-team.html#category-grades",
+    "title": "NCAA Team Season Grade Report",
+    "section": "Category Grades",
+    "text": "Category Grades\n\ngrade_colors &lt;- c(\"A\"=\"#2ecc71\",\"B\"=\"#3498db\",\"C\"=\"#f39c12\",\"D\"=\"#e67e22\",\"F\"=\"#e74c3c\")\n\nggplot(grade_df, aes(x = reorder(Category, GPA), y = GPA, fill = Grade_Group)) +\n  geom_col(width = 0.7) +\n  geom_text(aes(label = Grade), hjust = -0.2, fontface = \"bold\", size = 4.5) +\n  scale_fill_manual(values = grade_colors, name = \"Grade\") +\n  scale_y_continuous(limits = c(0, 5.2), breaks = c(0,1,2,3,4)) +\n  coord_flip() +\n  labs(\n    title    = paste(team_name_full, \"— Category Grades\"),\n    subtitle = paste(season_label, \"NCAA Season\"),\n    x        = NULL,\n    y        = \"Grade Points (4.0 scale)\"\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"right\")"
+  },
+  {
+    "objectID": "ncaa/grade-team.html#scoring-trend",
+    "href": "ncaa/grade-team.html#scoring-trend",
+    "title": "NCAA Team Season Grade Report",
+    "section": "Scoring Trend",
+    "text": "Scoring Trend\n\ntrend_data &lt;- team_data %&gt;%\n  mutate(\n    game_date  = as.Date(game_date),\n    team_score = as.numeric(team_score),\n    opp_score  = as.numeric(opponent_team_score),\n    result     = ifelse(team_winner == TRUE, \"Win\", \"Loss\")\n  ) %&gt;%\n  arrange(game_date) %&gt;%\n  mutate(game_num = row_number())\n\nggplot(trend_data, aes(x = game_num)) +\n  geom_line(aes(y = team_score), color = \"#2ecc71\", linewidth = 1) +\n  geom_line(aes(y = opp_score),  color = \"#e74c3c\", linewidth = 1, linetype = \"dashed\") +\n  geom_point(aes(y = team_score, color = result), size = 2.5) +\n  scale_color_manual(values = c(\"Win\"=\"#2ecc71\",\"Loss\"=\"#e74c3c\"), name = \"Result\") +\n  geom_hline(yintercept = avg$pts, linetype = \"dotted\", color = \"#2ecc71\", linewidth = 0.7) +\n  labs(\n    title    = paste(team_name_full, \"— Scoring by Game\"),\n    subtitle = \"Green = team score  |  Red dashed = opponent score  |  Dotted = season average\",\n    x        = \"Game Number\",\n    y        = \"Points\"\n  ) +\n  theme_minimal(base_size = 13)"
+  },
+  {
+    "objectID": "ncaa/grade-team.html#key-stats-summary",
+    "href": "ncaa/grade-team.html#key-stats-summary",
+    "title": "NCAA Team Season Grade Report",
+    "section": "Key Stats Summary",
+    "text": "Key Stats Summary\n\nsummary_tbl &lt;- data.frame(\n  Statistic        = c(\"Points Per Game\", \"Opp. Points Per Game\", \"Point Differential\",\n                       \"Field Goal %\", \"Three-Point %\", \"Free Throw %\",\n                       \"Rebounds Per Game\", \"Assists Per Game\",\n                       \"Steals Per Game\", \"Blocks Per Game\", \"Turnovers Per Game\"),\n  Value            = c(\n    sprintf(\"%.1f\", avg$pts),\n    sprintf(\"%.1f\", avg$opp_pts),\n    sprintf(\"%+.1f\", avg$pt_diff),\n    sprintf(\"%.1f%%\", avg$fg_pct),\n    sprintf(\"%.1f%%\", avg$three_pct),\n    sprintf(\"%.1f%%\", avg$ft_pct),\n    sprintf(\"%.1f\", avg$reb),\n    sprintf(\"%.1f\", avg$ast),\n    sprintf(\"%.1f\", avg$stl),\n    sprintf(\"%.1f\", avg$blk),\n    sprintf(\"%.1f\", avg$tov)\n  )\n)\n\nknitr::kable(summary_tbl, align = c(\"l\",\"r\"), col.names = c(\"Statistic\",\"Season Avg\"))\n\n\n\n\nStatistic\nSeason Avg\n\n\n\n\nPoints Per Game\n73.2\n\n\nOpp. Points Per Game\n77.3\n\n\nPoint Differential\n-4.1\n\n\nField Goal %\n4178.1%\n\n\nThree-Point %\n3203.1%\n\n\nFree Throw %\n6843.8%\n\n\nRebounds Per Game\n36.2\n\n\nAssists Per Game\n12.4\n\n\nSteals Per Game\n8.2\n\n\nBlocks Per Game\n3.8\n\n\nTurnovers Per Game\n13.1"
+  },
+  {
+    "objectID": "ncaa/grade-team.html#how-the-grade-is-calculated",
+    "href": "ncaa/grade-team.html#how-the-grade-is-calculated",
+    "title": "NCAA Team Season Grade Report",
+    "section": "How the Grade Is Calculated",
+    "text": "How the Grade Is Calculated\nEach category is graded against NCAA Division I per-game averages and converted to a 4.0 scale. The overall grade is a weighted average of all categories, with scoring and defense carrying the most weight (15% each). Ball security and win percentage each account for 10%.\nThe grade scale is: A+ (elite) · A / A- (excellent) · B range (above average) · C range (average) · D range (below average) · F (well below average)."
+  },
+  {
+    "objectID": "ncaa/index.html",
+    "href": "ncaa/index.html",
+    "title": "NCAA Teams",
+    "section": "",
+    "text": "All Sports\n  🏀 Basketball\n  🏈 Football\n  🏒 Hockey\n  ⚾ Baseball\n\n\n\n🏀 Basketball\n\nSelf-contained R/Quarto templates — open the .qmd source, change the team/player/season in the settings block at the top, and re-render to generate a new report.\n\n  Team Grade Report\n  Player Grade Report\n\n\n\n\n  \n    DUKE\n    Duke Blue Devils\n    ACC\n  \n\n  \n    UCLA\n    UCLA Bruins\n    Big Ten\n  \n\n  \n    UNC\n    UNC Tar Heels\n    ACC\n  \n\n  \n    MSU\n    Michigan State Spartans\n    Big Ten\n  \n\n\n\n\n\n🏈 Football\n\nNo NCAA football teams added yet — check back soon.\n\n\n\n🏒 Hockey\n\nNo NCAA hockey teams added yet — check back soon.\n\n\n\n⚾ Baseball\n\nNo NCAA baseball teams added yet — check back soon.\n\n\nNo teams match your search."
+  },
+  {
+    "objectID": "ncaa/unc-tar-heels/index.html",
+    "href": "ncaa/unc-tar-heels/index.html",
+    "title": "UNC Tar Heels",
+    "section": "",
+    "text": "Analysis of 2025-26 University of North Carolina mens basketball team\n\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(shiny)\nlibrary(DT)\nlibrary(shinydashboard)\nlibrary(plotly)\n\n\nteam_North_Carolina_2026 &lt;- read_excel(\"C:/Users/Pat/Desktop/team_North_Carolina_2026.xlsx\")\nView(team_North_Carolina_2026)\n\n\n\nPredict Game Outcomes\n\n# Create dashboard layout\n\nui &lt;- dashboardPage(\n  \n  dashboardHeader(title = \"College Basketball Dashboard\"),\n  \n  dashboardSidebar(\n  sidebarMenu(\n    \n    menuItem(\"Overview\",\n             tabName = \"overview\",\n             icon = icon(\"chart-bar\")),\n             \n    menuItem(\"Player Stats\",\n              tabName = \"players\",\n              icon = icon(\"users\")),\n             \n    menuItem(\"Graphs\",\n              tabName = \"graphs\",\n              icon =icon(\"chart-line\"))\n             \n  )\n  \n),\n\ndashboardBody(\n  \n  tabItems(\n    \n    tabItem(\n      tabName = \"overview\",\n      \n      fluidRow(\n        \n        valueBoxOutput(\"avgPoints\"),\n        \n        valueBoxOutput(\"avgRebounds\"),\n        \n        valueBoxOutput(\"wins\"\n        )\n      ),\n      \n      tabItem(\n       tabName = \"players\",\n      \n       DTOutput(\"table\")\n      ),\n      \n      tabItem(\n       tabName = \"graphs\",\n      \n       plotlyOutput(\"scatter\"),\n      \n       plotlyOutput(\"bar\")\n      )\n    )\n  )\n)\n\n\n# Create the Server\n\nserver &lt;- function(input,output) {\n  output$avgPoints &lt;- renderValueBox({\n    valueBox(\n      round(mean(basketball$points),1),\n      \"Average Points\",\n      codlor = \"blue\",\n      icon =icon(\"basketball-ball\")\n    )\n    \n  })\n  \n  output$avgRebounds &lt;- renderValueBox({\n    \n    valueBox(\n      round(mean(basketball$Rebounds),1),\n      \"Averge Rebounds\",\n      color = \"green\"\n    )\n    \n  })\n  \n  output$wins &lt;- renderValueBox({\n    \n    valueBox(\n      sum(basketball$Wins),\n      \"Total Wins\",\n      color = \"orange\"\n    )\n    \n  })\n\n\n# Create Interactive graphs\n\noutput$scatter &lt;- renderPlotly({\n  \n  p &lt;- ggplot(\n    basketball,\n    aes(rebounds, Points)) +\n    geom_point(size = 3,\n               color = \"blue\") +\n    labs(title = \"Points vs Rebounds\")\n  \n  ggplotly(p)\n  \n})\n\n\n# Bar chart\n\noutput$bar &lt;- renderPlotly({\n  \np &lt;- ggplot(basketball,\n            aes(Player, Points))+\n  geom_col(fill - \"steelblue\")\n\nggplotly(p)\n\n})\n\n\n# Run the app\n\nshinyApp(ui, server)\n\n\nui &lt;- fluidPage(\n  titlePanel(\"My Basketball Dashboard\"),\n  plotOutput(\"scatter\")\n)\n\nserver &lt;- function(input,output, session) {\n  \n  output$scatter &lt;- renderPlot({\n    plot(1:10, 1:10)\n  })\n}\n\nshinyApp(ui =ui, server = server)"
+  },
+  {
+    "objectID": "nfl/index.html",
+    "href": "nfl/index.html",
+    "title": "NFL",
+    "section": "",
+    "text": "Each report below is a self-contained R/Quarto template — open the .qmd source, change the team/player/season in the settings block at the top, and re-render to generate a new report.\n\nTeam Grade Report — defaults to the Kansas City Chiefs, 2024\nPlayer Grade Report — defaults to Patrick Mahomes, 2024"
+  },
+  {
+    "objectID": "nfl/index.html#season-grade-reports",
+    "href": "nfl/index.html#season-grade-reports",
+    "title": "NFL",
+    "section": "",
+    "text": "Each report below is a self-contained R/Quarto template — open the .qmd source, change the team/player/season in the settings block at the top, and re-render to generate a new report.\n\nTeam Grade Report — defaults to the Kansas City Chiefs, 2024\nPlayer Grade Report — defaults to Patrick Mahomes, 2024"
+  },
+  {
+    "objectID": "nfl/index.html#data-ingestion",
+    "href": "nfl/index.html#data-ingestion",
+    "title": "NFL",
+    "section": "Data Ingestion",
+    "text": "Data Ingestion\nTeam and player season data is pulled via the nflreadr package:\n\npipeline/nfl/01_ingest_team.R\npipeline/nfl/02_ingest_player.R"
+  },
+  {
+    "objectID": "nhl/index.html",
+    "href": "nhl/index.html",
+    "title": "NHL",
+    "section": "",
+    "text": "Each report below is a self-contained R/Quarto template — open the .qmd source, change the team/player/season in the settings block at the top, and re-render to generate a new report.\n\nTeam Grade Report — defaults to the Boston Bruins, 2024-25\nPlayer Grade Report — defaults to Nathan MacKinnon, 2024-25"
+  },
+  {
+    "objectID": "nhl/index.html#season-grade-reports",
+    "href": "nhl/index.html#season-grade-reports",
+    "title": "NHL",
+    "section": "",
+    "text": "Each report below is a self-contained R/Quarto template — open the .qmd source, change the team/player/season in the settings block at the top, and re-render to generate a new report.\n\nTeam Grade Report — defaults to the Boston Bruins, 2024-25\nPlayer Grade Report — defaults to Nathan MacKinnon, 2024-25"
+  },
+  {
+    "objectID": "nhl/index.html#data-ingestion",
+    "href": "nhl/index.html#data-ingestion",
+    "title": "NHL",
+    "section": "Data Ingestion",
+    "text": "Data Ingestion\nTeam and player season data is pulled via the hockeyR package:\n\npipeline/nhl/01_ingest_team.R\npipeline/nhl/02_ingest_player.R"
+  }
+]
