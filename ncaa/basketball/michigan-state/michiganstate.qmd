@@ -8,7 +8,7 @@ execute:
 
 ![](https://a.espncdn.com/i/teamlogos/ncaa/500/127.png){width="120px" fig-align="center"}
 
-![Michigan State vs. Michigan men's basketball, in-game action. Photo by Michael Barera, CC BY-SA 4.0.](https://upload.wikimedia.org/wikipedia/commons/4/4e/Michigan_State_vs._Michigan_men%27s_basketball_2013_13_%28in-game_action%29.jpg){width="400px" fig-align="center"}
+![Michigan State's Adreian Payne dunks during practice aboard the USS Carl Vinson, Nov. 10, 2011. U.S. Navy photo by MC2 James R. Evans, public domain.](https://upload.wikimedia.org/wikipedia/commons/4/4c/US_Navy_111110-N-DR144-711_Michigan_State_University_basketball_player_Adreian_Payne_dunks_during_a_practice_in_the_basketball_arena_on_the_flight.jpg){width="400px" fig-align="center"}
 
 ```{r}
 library(tidyverse)
@@ -194,8 +194,6 @@ Both predictor variables(field goal percentage and turnovers have a positive coe
 The `win_model` (field goal percentage only) gives a predicted probability of winning for every game. Turning that probability into a yes/no prediction (using a 0.5 cutoff) lets us check the model against what actually happened, using a confusion matrix.
 
 ```{r}
-library(pROC)
-
 msu_basketball <- msu_basketball |>
   mutate(
     predicted_prob = predict(win_model, type = "response"),
@@ -245,12 +243,27 @@ The table above lists every game the model got wrong — where the predicted win
 Sensitivity and specificity both depend on picking 0.5 as the cutoff. The ROC curve shows how that trade-off shifts across every possible cutoff, and the AUC (area under the curve) summarizes overall discriminative power in a single number — 0.5 means no better than a coin flip, 1.0 means perfect separation between wins and losses.
 
 ```{r}
-roc_obj <- roc(msu_basketball$team_winner, msu_basketball$predicted_prob)
+thresholds <- seq(0, 1, by = 0.01)
+roc_points <- map_dfr(thresholds, function(t) {
+  pred <- msu_basketball$predicted_prob > t
+  tibble(
+    threshold = t,
+    tpr = sum(pred & msu_basketball$team_winner) / sum(msu_basketball$team_winner),
+    fpr = sum(pred & !msu_basketball$team_winner) / sum(!msu_basketball$team_winner)
+  )
+})
 
-auc(roc_obj)
+ggplot(roc_points, aes(x = fpr, y = tpr)) +
+  geom_line(color = "blue", linewidth = 1) +
+  geom_abline(linetype = "dashed", color = "grey50") +
+  labs(title = "ROC Curve - Win Prediction by Field Goal Percentage",
+       x = "False Positive Rate (1 - Specificity)", y = "True Positive Rate (Sensitivity)") +
+  theme_minimal()
 
-plot(roc_obj, main = "ROC Curve - Win Prediction by Field Goal Percentage",
-     col = "blue", lwd = 2)
+wins <- msu_basketball$predicted_prob[msu_basketball$team_winner]
+losses <- msu_basketball$predicted_prob[!msu_basketball$team_winner]
+auc <- mean(outer(wins, losses, ">")) + 0.5 * mean(outer(wins, losses, "=="))
+cat("AUC:", auc, "\n")
 ```
 
 ### Interpretation

@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Pat Rankin">
+
+<title>boston celtics logistic regression – Classroom to Court</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../https://a.espncdn.com/i/teamlogos/ncaa/500/150.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-91c30b1e8846851a3ebc6fb1aaab9013.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../../site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="../../site_libs/plotly-binding-4.12.0/plotly.js"></script>
+
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+
+<link href="../../site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="../../site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+
+<link href="../../site_libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+
+<script src="../../site_libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Classroom to Court</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../ncaa/index.html"> 
+<span class="menu-text">NCAA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../nba/index.html"> 
+<span class="menu-text">NBA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../mlb/index.html"> 
+<span class="menu-text">MLB</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../nfl/index.html"> 
+<span class="menu-text">NFL</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../nhl/index.html"> 
+<span class="menu-text">NHL</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../matchups.html"> 
+<span class="menu-text">Matchups</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link active" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#adding-variables.-one-of-the-key-strenghts-of-logistic-regression-is-the-ability-to-include-multiple-predictor-variables-in-the-model.-by-considering-multiple-predictors-simulatenously-logistic-regressions-allows-us-to-explore-how-each-variable-contributes-to-the-likelihood-of-an-outcomewinning" id="toc-adding-variables.-one-of-the-key-strenghts-of-logistic-regression-is-the-ability-to-include-multiple-predictor-variables-in-the-model.-by-considering-multiple-predictors-simulatenously-logistic-regressions-allows-us-to-explore-how-each-variable-contributes-to-the-likelihood-of-an-outcomewinning" class="nav-link" data-scroll-target="#adding-variables.-one-of-the-key-strenghts-of-logistic-regression-is-the-ability-to-include-multiple-predictor-variables-in-the-model.-by-considering-multiple-predictors-simulatenously-logistic-regressions-allows-us-to-explore-how-each-variable-contributes-to-the-likelihood-of-an-outcomewinning">Adding variables. One of the key strenghts of logistic regression is the ability to include multiple predictor variables in the model. By considering multiple predictors simulatenously logistic regressions allows us to explore how each variable contributes to the likelihood of an outcome(winning)</a></li>
+  <li><a href="#visualizing-the-multi-predictor-model" id="toc-visualizing-the-multi-predictor-model" class="nav-link" data-scroll-target="#visualizing-the-multi-predictor-model">Visualizing the multi-predictor model</a></li>
+  <li><a href="#point-margin-regression" id="toc-point-margin-regression" class="nav-link" data-scroll-target="#point-margin-regression">Point margin regression</a></li>
+  <li><a href="#correlation-heatmap-of-predictors" id="toc-correlation-heatmap-of-predictors" class="nav-link" data-scroll-target="#correlation-heatmap-of-predictors">Correlation heatmap of predictors</a></li>
+  <li><a href="#home-vs.-away-win-rate" id="toc-home-vs.-away-win-rate" class="nav-link" data-scroll-target="#home-vs.-away-win-rate">Home vs.&nbsp;away win rate</a></li>
+  <li><a href="#model-discrimination-auc" id="toc-model-discrimination-auc" class="nav-link" data-scroll-target="#model-discrimination-auc">Model discrimination: AUC</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">boston celtics logistic regression</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Pat Rankin </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readxl' was built under R version 4.5.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readr' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'purrr' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lubridate' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'plotly' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'plotly'
+
+The following object is masked from 'package:ggplot2':
+
+    last_plot
+
+The following object is masked from 'package:stats':
+
+    filter
+
+The following object is masked from 'package:graphics':
+
+    layout</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtExtras)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'gtExtras' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: gt</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'gt' was built under R version 4.5.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'broom' was built under R version 4.5.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>clog <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"C:/Users/Pat/Desktop/website2/pipeline/nba/data/team_stats/nba_team_Celtics_2026.xlsx"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(clog)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<section id="i-want-to-determine-if-field-goal-percentage-has-an-influence-on-whether-the-team-wins-or-not.-this-is-using-a-single-numeric-predictor" class="level4">
+<h4 class="anchored" data-anchor-id="i-want-to-determine-if-field-goal-percentage-has-an-influence-on-whether-the-team-wins-or-not.-this-is-using-a-single-numeric-predictor">I want to determine if field goal percentage has an influence on whether the team wins or not. This is using a single numeric predictor</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(clog)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "game_id"                           "season"                           
+ [3] "season_type"                       "game_date"                        
+ [5] "game_date_time"                    "team_id"                          
+ [7] "team_uid"                          "team_slug"                        
+ [9] "team_location"                     "team_name"                        
+[11] "team_abbreviation"                 "team_display_name"                
+[13] "team_short_display_name"           "team_color"                       
+[15] "team_alternate_color"              "team_logo"                        
+[17] "team_home_away"                    "team_score"                       
+[19] "team_winner"                       "assists"                          
+[21] "blocks"                            "defensive_rebounds"               
+[23] "fast_break_points"                 "field_goal_pct"                   
+[25] "field_goals_made"                  "field_goals_attempted"            
+[27] "flagrant_fouls"                    "fouls"                            
+[29] "free_throw_pct"                    "free_throws_made"                 
+[31] "free_throws_attempted"             "largest_lead"                     
+[33] "lead_changes"                      "lead_percentage"                  
+[35] "offensive_rebounds"                "points_in_paint"                  
+[37] "steals"                            "team_turnovers"                   
+[39] "technical_fouls"                   "three_point_field_goal_pct"       
+[41] "three_point_field_goals_made"      "three_point_field_goals_attempted"
+[43] "total_rebounds"                    "total_technical_fouls"            
+[45] "total_turnovers"                   "turnover_points"                  
+[47] "turnovers"                         "opponent_team_id"                 
+[49] "opponent_team_uid"                 "opponent_team_slug"               
+[51] "opponent_team_location"            "opponent_team_name"               
+[53] "opponent_team_abbreviation"        "opponent_team_display_name"       
+[55] "opponent_team_short_display_name"  "opponent_team_color"              
+[57] "opponent_team_alternate_color"     "opponent_team_logo"               
+[59] "opponent_team_score"              </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(clog)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [89 × 59] (S3: tbl_df/tbl/data.frame)
+ $ game_id                          : num [1:89] 4.02e+08 4.02e+08 4.02e+08 4.02e+08 4.02e+08 ...
+ $ season                           : num [1:89] 2026 2026 2026 2026 2026 ...
+ $ season_type                      : num [1:89] 3 3 3 3 3 3 3 2 2 2 ...
+ $ game_date                        : POSIXct[1:89], format: "2026-05-02" "2026-04-30" ...
+ $ game_date_time                   : POSIXct[1:89], format: "2026-05-02 16:30:00" "2026-04-30 17:00:00" ...
+ $ team_id                          : num [1:89] 2 2 2 2 2 2 2 2 2 2 ...
+ $ team_uid                         : chr [1:89] "s:40~l:46~t:2" "s:40~l:46~t:2" "s:40~l:46~t:2" "s:40~l:46~t:2" ...
+ $ team_slug                        : chr [1:89] "boston-celtics" "boston-celtics" "boston-celtics" "boston-celtics" ...
+ $ team_location                    : chr [1:89] "Boston" "Boston" "Boston" "Boston" ...
+ $ team_name                        : chr [1:89] "Celtics" "Celtics" "Celtics" "Celtics" ...
+ $ team_abbreviation                : chr [1:89] "BOS" "BOS" "BOS" "BOS" ...
+ $ team_display_name                : chr [1:89] "Boston Celtics" "Boston Celtics" "Boston Celtics" "Boston Celtics" ...
+ $ team_short_display_name          : chr [1:89] "Celtics" "Celtics" "Celtics" "Celtics" ...
+ $ team_color                       : num [1:89] 8348 8348 8348 8348 8348 ...
+ $ team_alternate_color             : chr [1:89] "ffffff" "ffffff" "ffffff" "ffffff" ...
+ $ team_logo                        : chr [1:89] "https://a.espncdn.com/i/teamlogos/nba/500/bos.png" "https://a.espncdn.com/i/teamlogos/nba/500/bos.png" "https://a.espncdn.com/i/teamlogos/nba/500/bos.png" "https://a.espncdn.com/i/teamlogos/nba/500/bos.png" ...
+ $ team_home_away                   : chr [1:89] "home" "away" "home" "away" ...
+ $ team_score                       : num [1:89] 100 93 97 128 108 97 123 113 144 106 ...
+ $ team_winner                      : logi [1:89] FALSE FALSE FALSE TRUE TRUE FALSE ...
+ $ assists                          : num [1:89] 19 18 25 28 21 24 31 24 35 23 ...
+ $ blocks                           : num [1:89] 7 3 0 5 11 4 3 6 5 1 ...
+ $ defensive_rebounds               : num [1:89] 34 38 34 37 30 32 38 38 35 29 ...
+ $ fast_break_points                : num [1:89] 11 14 9 5 5 11 20 18 26 12 ...
+ $ field_goal_pct                   : num [1:89] 40 42 40 48 44 39 50 41 54 45 ...
+ $ field_goals_made                 : num [1:89] 37 36 36 42 36 35 45 36 52 38 ...
+ $ field_goals_attempted            : num [1:89] 93 86 89 87 81 89 90 87 96 84 ...
+ $ flagrant_fouls                   : num [1:89] 0 0 0 0 0 0 0 0 0 0 ...
+ $ fouls                            : num [1:89] 23 18 17 21 19 17 21 23 26 16 ...
+ $ free_throw_pct                   : num [1:89] 81 56 61 71 94 78 77 100 73 88 ...
+ $ free_throws_made                 : num [1:89] 13 9 14 20 16 14 17 22 11 14 ...
+ $ free_throws_attempted            : num [1:89] 16 16 23 28 17 18 22 22 15 16 ...
+ $ largest_lead                     : num [1:89] 1 5 13 32 10 13 35 16 41 7 ...
+ $ lead_changes                     : chr [1:89] "2" "8" "4" "4" ...
+ $ lead_percentage                  : chr [1:89] "1" "8" "56" "96" ...
+ $ offensive_rebounds               : num [1:89] 10 8 15 14 15 18 5 8 9 13 ...
+ $ points_in_paint                  : num [1:89] 40 42 40 32 26 38 42 32 40 32 ...
+ $ steals                           : num [1:89] 4 7 6 5 6 3 7 10 9 4 ...
+ $ team_turnovers                   : num [1:89] 0 0 0 1 0 2 2 0 1 1 ...
+ $ technical_fouls                  : num [1:89] 0 1 0 1 0 1 0 0 0 0 ...
+ $ three_point_field_goal_pct       : num [1:89] 27 29 28 45 43 26 36 38 49 37 ...
+ $ three_point_field_goals_made     : num [1:89] 13 12 11 24 20 13 16 19 29 16 ...
+ $ three_point_field_goals_attempted: num [1:89] 49 41 39 53 47 50 44 50 59 43 ...
+ $ total_rebounds                   : num [1:89] 44 46 49 51 45 50 43 46 44 42 ...
+ $ total_technical_fouls            : num [1:89] 0 1 0 1 0 1 0 0 0 0 ...
+ $ total_turnovers                  : num [1:89] 5 13 12 13 17 13 10 17 14 11 ...
+ $ turnover_points                  : num [1:89] 7 17 12 15 21 15 3 11 17 14 ...
+ $ turnovers                        : num [1:89] 5 13 12 12 17 11 8 17 13 10 ...
+ $ opponent_team_id                 : num [1:89] 20 20 20 20 20 20 20 19 3 18 ...
+ $ opponent_team_uid                : chr [1:89] "s:40~l:46~t:20" "s:40~l:46~t:20" "s:40~l:46~t:20" "s:40~l:46~t:20" ...
+ $ opponent_team_slug               : chr [1:89] "philadelphia-76ers" "philadelphia-76ers" "philadelphia-76ers" "philadelphia-76ers" ...
+ $ opponent_team_location           : chr [1:89] "Philadelphia" "Philadelphia" "Philadelphia" "Philadelphia" ...
+ $ opponent_team_name               : chr [1:89] "76ers" "76ers" "76ers" "76ers" ...
+ $ opponent_team_abbreviation       : chr [1:89] "PHI" "PHI" "PHI" "PHI" ...
+ $ opponent_team_display_name       : chr [1:89] "Philadelphia 76ers" "Philadelphia 76ers" "Philadelphia 76ers" "Philadelphia 76ers" ...
+ $ opponent_team_short_display_name : chr [1:89] "76ers" "76ers" "76ers" "76ers" ...
+ $ opponent_team_color              : chr [1:89] "1d428a" "1d428a" "1d428a" "1d428a" ...
+ $ opponent_team_alternate_color    : chr [1:89] "e01234" "e01234" "e01234" "e01234" ...
+ $ opponent_team_logo               : chr [1:89] "https://a.espncdn.com/i/teamlogos/nba/500/phi.png" "https://a.espncdn.com/i/teamlogos/nba/500/phi.png" "https://a.espncdn.com/i/teamlogos/nba/500/phi.png" "https://a.espncdn.com/i/teamlogos/nba/500/phi.png" ...
+ $ opponent_team_score              : num [1:89] 109 106 113 96 100 111 91 108 118 112 ...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(team_winner <span class="sc">~</span> field_goal_pct, <span class="at">data =</span> clog, <span class="at">family =</span> binomial)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = team_winner ~ field_goal_pct, family = binomial, 
+    data = clog)
+
+Coefficients:
+                Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)    -17.24339    4.08972  -4.216 2.48e-05 ***
+field_goal_pct   0.39891    0.09243   4.316 1.59e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 113.756  on 88  degrees of freedom
+Residual deviance:  75.398  on 87  degrees of freedom
+AIC: 79.398
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data for the curve</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>fgpct_range <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">field_goal_pct =</span> <span class="fu">seq</span>(<span class="fu">min</span>(clog<span class="sc">$</span>field_goal_pct, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">max</span>(clog<span class="sc">$</span>field_goal_pct, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">length.out =</span> <span class="dv">500</span>))</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>fgpct_range<span class="sc">$</span>prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> fgpct_range, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create interactive plot</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">data =</span> fgpct_range,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="sc">~</span>field_goal_pct,</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="sc">~</span>prob,</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"scatter"</span>,</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">mode =</span> <span class="st">"lines"</span>,</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="st">"Probability curve"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Probability of winning by field goal percentage level"</span>,</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Field goal percentage"</span>),</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Probability of winning"</span>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-a09ba6a719447aedeb43" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-a09ba6a719447aedeb43">{"x":{"visdat":{"7d006f0f4e22":["function () ","plotlyVisDat"]},"cur_data":"7d006f0f4e22","attrs":{"7d006f0f4e22":{"x":{},"y":{},"mode":"lines","name":"Probability curve","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Probability of winning by field goal percentage level","xaxis":{"domain":[0,1],"automargin":true,"title":"Field goal percentage"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Probability of winning"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[35,35.064128256513023,35.128256513026052,35.192384769539075,35.256513026052104,35.320641282565127,35.384769539078157,35.448897795591179,35.513026052104209,35.577154308617231,35.641282565130261,35.705410821643284,35.769539078156313,35.833667334669336,35.897795591182366,35.961923847695388,36.026052104208418,36.09018036072144,36.15430861723447,36.218436873747493,36.282565130260522,36.346693386773545,36.410821643286575,36.474949899799597,36.539078156312627,36.603206412825649,36.667334669338679,36.731462925851702,36.795591182364731,36.859719438877754,36.923847695390783,36.987975951903806,37.052104208416836,37.116232464929858,37.180360721442888,37.244488977955911,37.30861723446894,37.372745490981963,37.436873747494992,37.501002004008015,37.565130260521045,37.629258517034067,37.693386773547097,37.757515030060119,37.821643286573149,37.885771543086172,37.949899799599201,38.014028056112224,38.078156312625254,38.142284569138276,38.206412825651299,38.270541082164328,38.334669338677358,38.398797595190381,38.462925851703403,38.527054108216433,38.591182364729455,38.655310621242485,38.719438877755508,38.783567134268537,38.84769539078156,38.91182364729459,38.975951903807612,39.040080160320642,39.104208416833664,39.168336673346694,39.232464929859717,39.296593186372746,39.360721442885769,39.424849699398798,39.488977955911821,39.553106212424851,39.617234468937873,39.681362725450903,39.745490981963925,39.809619238476955,39.873747494989978,39.937875751503007,40.00200400801603,40.06613226452906,40.130260521042082,40.194388777555112,40.258517034068134,40.322645290581164,40.386773547094187,40.450901803607216,40.515030060120239,40.579158316633269,40.643286573146291,40.707414829659321,40.771543086172343,40.835671342685373,40.899799599198396,40.963927855711425,41.028056112224448,41.092184368737477,41.1563126252505,41.220440881763523,41.284569138276552,41.348697394789582,41.412825651302605,41.476953907815627,41.541082164328657,41.605210420841686,41.669338677354709,41.733466933867732,41.797595190380761,41.861723446893791,41.925851703406813,41.989979959919836,42.054108216432866,42.118236472945888,42.182364729458918,42.24649298597194,42.31062124248497,42.374749498997993,42.438877755511022,42.503006012024045,42.567134268537075,42.631262525050097,42.695390781563127,42.759519038076149,42.823647294589179,42.887775551102202,42.951903807615231,43.016032064128254,43.080160320641284,43.144288577154306,43.208416833667336,43.272545090180358,43.336673346693388,43.400801603206411,43.46492985971944,43.529058116232463,43.593186372745492,43.657314629258515,43.721442885771545,43.785571142284567,43.849699398797597,43.913827655310619,43.977955911823649,44.042084168336672,44.106212424849701,44.170340681362724,44.234468937875747,44.298597194388776,44.362725450901806,44.426853707414828,44.490981963927851,44.555110220440881,44.61923847695391,44.683366733466933,44.747494989979955,44.811623246492985,44.875751503006015,44.939879759519037,45.00400801603206,45.06813627254509,45.132264529058119,45.196392785571142,45.260521042084164,45.324649298597194,45.388777555110224,45.452905811623246,45.517034068136269,45.581162324649299,45.645290581162328,45.709418837675351,45.773547094188373,45.837675350701403,45.901803607214426,45.965931863727455,46.030060120240478,46.094188376753507,46.15831663326653,46.22244488977956,46.286573146292582,46.350701402805612,46.414829659318634,46.478957915831664,46.543086172344687,46.607214428857716,46.671342685370739,46.735470941883769,46.799599198396791,46.863727454909821,46.927855711422843,46.991983967935873,47.056112224448896,47.120240480961925,47.184368737474948,47.248496993987978,47.312625250501,47.37675350701403,47.440881763527052,47.505010020040075,47.569138276553105,47.633266533066134,47.697394789579157,47.761523046092179,47.825651302605209,47.889779559118239,47.953907815631261,48.018036072144284,48.082164328657313,48.146292585170343,48.210420841683366,48.274549098196388,48.338677354709418,48.402805611222448,48.46693386773547,48.531062124248493,48.595190380761522,48.659318637274552,48.723446893787575,48.787575150300597,48.851703406813627,48.915831663326657,48.979959919839679,49.044088176352702,49.108216432865731,49.172344689378754,49.236472945891784,49.300601202404806,49.364729458917836,49.428857715430858,49.492985971943888,49.557114228456911,49.62124248496994,49.685370741482963,49.749498997995993,49.813627254509015,49.877755511022045,49.941883767535067,50.006012024048097,50.07014028056112,50.134268537074149,50.198396793587172,50.262525050100201,50.326653306613224,50.390781563126254,50.454909819639276,50.519038076152306,50.583166332665328,50.647294589178358,50.711422845691381,50.775551102204403,50.839679358717433,50.903807615230463,50.967935871743485,51.032064128256508,51.096192384769537,51.160320641282567,51.22444889779559,51.288577154308612,51.352705410821642,51.416833667334672,51.480961923847694,51.545090180360717,51.609218436873746,51.673346693386776,51.737474949899799,51.801603206412821,51.865731462925851,51.92985971943888,51.993987975951903,52.058116232464926,52.122244488977955,52.186372745490985,52.250501002004007,52.31462925851703,52.37875751503006,52.442885771543089,52.507014028056112,52.571142284569135,52.635270541082164,52.699398797595194,52.763527054108216,52.827655310621239,52.891783567134269,52.955911823647298,53.020040080160321,53.084168336673343,53.148296593186373,53.212424849699396,53.276553106212418,53.340681362725448,53.404809619238478,53.4689378757515,53.533066132264523,53.597194388777552,53.661322645290582,53.725450901803605,53.789579158316627,53.853707414829657,53.917835671342687,53.981963927855709,54.046092184368732,54.110220440881761,54.174348697394791,54.238476953907814,54.302605210420836,54.366733466933866,54.430861723446895,54.494989979959918,54.559118236472941,54.62324649298597,54.687374749499,54.751503006012022,54.815631262525045,54.879759519038075,54.943887775551104,55.008016032064127,55.072144288577149,55.136272545090179,55.200400801603209,55.264529058116231,55.328657314629254,55.392785571142284,55.456913827655313,55.521042084168336,55.585170340681358,55.649298597194388,55.713426853707418,55.77755511022044,55.841683366733463,55.905811623246493,55.969939879759522,56.034068136272545,56.098196392785567,56.162324649298597,56.226452905811627,56.290581162324649,56.354709418837672,56.418837675350701,56.482965931863724,56.547094188376747,56.611222444889776,56.675350701402806,56.739478957915829,56.803607214428851,56.867735470941881,56.93186372745491,56.995991983967933,57.060120240480956,57.124248496993985,57.188376753507015,57.252505010020037,57.31663326653306,57.38076152304609,57.444889779559119,57.509018036072142,57.573146292585164,57.637274549098194,57.701402805611224,57.765531062124246,57.829659318637269,57.893787575150299,57.957915831663328,58.022044088176351,58.086172344689373,58.150300601202403,58.214428857715433,58.278557114228455,58.342685370741478,58.406813627254508,58.470941883767537,58.53507014028056,58.599198396793582,58.663326653306612,58.727454909819642,58.791583166332664,58.855711422845687,58.919839679358716,58.983967935871746,59.048096192384769,59.112224448897791,59.176352705410821,59.240480961923851,59.304609218436873,59.368737474949896,59.432865731462925,59.496993987975955,59.561122244488978,59.625250501002,59.68937875751503,59.753507014028052,59.817635270541075,59.881763527054105,59.945891783567134,60.010020040080157,60.074148296593179,60.138276553106209,60.202404809619239,60.266533066132261,60.330661322645284,60.394789579158314,60.458917835671343,60.523046092184366,60.587174348697388,60.651302605210418,60.715430861723448,60.77955911823647,60.843687374749493,60.907815631262523,60.971943887775552,61.036072144288575,61.100200400801597,61.164328657314627,61.228456913827657,61.292585170340679,61.356713426853702,61.420841683366731,61.484969939879761,61.549098196392784,61.613226452905806,61.677354709418836,61.741482965931866,61.805611222444888,61.869739478957911,61.93386773547094,61.99799599198397,62.062124248496993,62.126252505010015,62.190380761523045,62.254509018036075,62.318637274549097,62.38276553106212,62.446893787575149,62.511022044088179,62.575150300601202,62.639278557114224,62.703406813627254,62.767535070140283,62.831663326653306,62.895791583166329,62.959919839679358,63.024048096192381,63.088176352705403,63.152304609218433,63.216432865731463,63.280561122244485,63.344689378757508,63.408817635270537,63.472945891783567,63.53707414829659,63.601202404809612,63.665330661322642,63.729458917835672,63.793587174348694,63.857715430861717,63.921843687374746,63.985971943887776,64.050100200400806,64.114228456913821,64.178356713426851,64.242484969939881,64.306613226452896,64.370741482965926,64.434869739478955,64.498997995991985,64.563126252505015,64.62725450901803,64.69138276553106,64.755511022044089,64.819639278557105,64.883767535070135,64.947895791583164,65.012024048096194,65.076152304609224,65.140280561122239,65.204408817635269,65.268537074148298,65.332665330661314,65.396793587174344,65.460921843687373,65.525050100200403,65.589178356713433,65.653306613226448,65.717434869739478,65.781563126252507,65.845691382765523,65.909819639278552,65.973947895791582,66.038076152304612,66.102204408817641,66.166332665330657,66.230460921843687,66.294589178356716,66.358717434869732,66.422845691382761,66.486973947895791,66.551102204408807,66.615230460921836,66.679358717434866,66.743486973947896,66.807615230460925,66.871743486973941,66.93587174348697,67],"y":[0.036206079474785699,0.037109408813636814,0.038034386499555081,0.038981486511075865,0.039951190946075514,0.040943990043503076,0.041960382197922391,0.043000873966416879,0.044065980067400506,0.045156223370854134,0.046272134879501874,0.047414253700415424,0.048583127006528629,0.049779309987521621,0.051003365789526189,0.052255865443081514,0.05353738777876306,0.054848519329886603,0.056189854221681941,0.057561994046312272,0.058965547723110308,0.060401131343382264,0.061869367999129829,0.063370887595022213,0.064906326642951068,0.066476328038484481,0.068081540818540717,0.069722619899589652,0.071400225795695341,0.073115024315704685,0.07486768623889864,0.076658886968414303,0.078489306161764291,0.080359627337776976,0.082270537459304779,0.084222726491045202,0.086216886931856543,0.088253713320950056,0.090333901717380358,0.092458149152270283,0.094627153053249174,0.096841610640604814,0.099102218294702046,0.10140967089425083,0.1037646611250686,0.10616787875901486,0.10862000990285652,0.11112173621685975,0.11367373410299199,0.11627667386267221,0.11893121882410154,0.12163802443927293,0.12439773735085452,0.12721099442923975,0.13007842178014276,0.13300063372323237,0.13597823174240167,0.1390118034083925,0.14210192127459972,0.14524914174702336,0.14845400392944721,0.15171702844507812,0.15503871623599116,0.15841954734190108,0.1618599796598936,0.16536044768692643,0.16892136124703938,0.17254310420538821,0.17622603317134802,0.17997047619311238,0.18377673144634912,0.18764506591964775,0.19157571409962848,0.19556887665875797,0.19962471914903784,0.20374337070490434,0.20792492275879132,0.21216942777296771,0.21647689799135755,0.22084730421519741,0.22528057460646894,0.22977659352316102,0.23433520039048802,0.23895618861227516,0.24363930452676014,0.24838424641114462,0.25319066353919828,0.25805815529628612,0.26298627035614169,0.26797450592370492,0.27302230704827135,0.27812906601117515,0.28329412179207697,0.28851675961787793,0.2937962105981039,0.29913165145047238,0.30452220432014809,0.30996693669603903,0.31546486142718855,0.32101493684214255,0.32661606697385032,0.33226710189238817,0.33796683814748202,0.34371401932245632,0.34950733670091022,0.35534543004704477,0.36122688850016133,0.36715025158348158,0.3731140103270304,0.37911660850387413,0.38515644397860099,0.39123187016650462,0.39734119760147629,0.40348269561016981,0.40965459408961186,0.41585508538492461,0.42208232626347925,0.42833443998133314,0.43460951843742102,0.44090562441058179,0.44722079387413405,0.45355303838234351,0.45990034752284892,0.46626069142873305,0.47263202334372778,0.47901228223373793,0.4853993954376859,0.4917912813504578,0.49818585213064132,0.50458101642554176,0.51097468210596697,0.51736475900316181,0.5237491616403035,0.53012581195095454,0.53649264197699464,0.54284759653856474,0.54918863586877575,0.55551373820603833,0.56182090233710091,0.5681081500841022,0.57437352872921199,0.5806151133707067,0.58683100920466569,0.59301935372678649,0.59917831884918893,0.60530611292746039,0.6114009826935678,0.61746121509069585,0.62348513900648406,0.62947112690153695,0.63541759633054617,0.64132301135380432,0.64718588383728726,0.65300477463995499,0.65877829468734461,0.66450510593093992,0.67018392219323131,0.67581350989878053,0.68139268869198866,0.68692033194265567,0.6923953671407822,0.69781677618237481,0.70318359554839094,0.70849491637922168,0.71374988444741105,0.71894770003157338,0.72408761769469254,0.72916894597022808,0.73419104695962156,0.73915333584498388,0.74405528032086943,0.74889639994920909,0.75367626544151478,0.7583944978726096,0.76305076783015235,0.76764479450429235,0.77217634472177921,0.77664523192889834,0.78105131512752535,0.78539449776861303,0.78967472660734117,0.79389199052410497,0.79804631931543812,0.80213778245888145,0.80616648785568845,0.81013258055517401,0.81403624146436382,0.81787768604649247,0.82165716301175007,0.82537495300354746,0.82903136728340365,0.83262674641744316,0.83616145896729255,0.83963590018805534,0.84305049073585625,0.84640567538730938,0.84970192177309245,0.85293971912767452,0.85611957705707242,0.85924202432637242,0.86230760766860481,0.86531689061640515,0.86827045235776978,0.87116888661707148,0.87401280056235242,0.87680281373981694,0.87953955703629183,0.88222367167032434,0.88485580821246768,0.88743662563519532,0.88996679039279181,0.89244697553146102,0.89487785982981161,0.89726012696978097,0.89959446473800064,0.90188156425750388,0.90412211924962749,0.90631682532588742,0.90846637930954799,0.9105714785865493,0.91263282048541194,0.91465110168568375,0.91662701765446364,0.91856126211048961,0.92045452651525239,0.92230749959056268,0.92412086686197947,0.92589531022747529,0.92763150755070989,0.92933013227825345,0.93099185308009835,0.9326173335127822,0.93420723170444309,0.93576220006111266,0.93728288499356949,0.93876992666404657,0.94022395875211628,0.94164560823905985,0.9430354952100406,0.94439423267340361,0.94572242639643955,0.94702067475694274,0.94828956860992275,0.94952969116882491,0.95074161790063361,0.95192591643424118,0.95308314648148429,0.95421385977025197,0.95531859998909696,0.95639790274278624,0.95745229551824584,0.95848229766037019,0.95948842035717885,0.96047116663382259,0.961431031354954,0.96236850123499229,0.96328405485582813,0.96417816269153567,0.9650512871396616,0.96590388255868775,0.96673639531127542,0.9675492638129104,0.96834291858558841,0.96911778231619006,0.96987426991921277,0.97061278860353473,0.97133373794291045,0.97203750994989546,0.97272448915292509,0.97339505267627624,0.97404957032265493,0.97468840465816775,0.97531191109944115,0.97592043800266892,0.97651432675437622,0.9770939118637002,0.97765952105599641,0.97821147536759123,0.97875008924151008,0.97927567062401755,0.97978852106182013,0.98028893579978427,0.98077720387903489,0.9812536082353065,0.98171842579742552,0.98217192758581062,0.98261437881088576,0.98304603897130405,0.98346716195189121,0.98387799612121996,0.98427878442873529,0.98466976450135313,0.98505116873946375,0.9854232244122737,0.9857861537524254,0.98614017404983967,0.98648549774472849,0.98682233251973228,0.98715088139113671,0.98747134279913118,0.98778391069707183,0.98808877463971778,0.98838611987041003,0.98867612740716893,0.98895897412768441,0.98923483285318048,0.98950387243113569,0.98976625781684258,0.9900221501537958,0.99027170685289534,0.99051508167045665,0.99075242478502168,0.99098388287296446,0.99120959918288787,0.99142971360881049,0.99164436276214163,0.99185368004244734,0.99205779570700814,0.99225683693917244,0.99245092791551071,0.99264018987177516,0.9928247411676725,0.99300469735045649,0.99318017121734903,0.99335127287679847,0.99351810980858657,0.9936807869227916,0.99383940661762138,0.99399406883612673,0.99414487112180783,0.99429190867312434,0.99443527439692536,0.99457505896080955,0.99471135084443052,0.99484423638976105,0.9949737998503303,0.99510012343944809,0.99522328737743138,0.99534336993784656,0.99546044749278373,0.99557459455717667,0.99568588383218393,0.99579438624764638,0.9959001710036357,0.99600330561110939,0.99610385593168649,0.99620188621656081,0.9962974591445638,0.9963906358593958,0.99648147600603665,0.99657003776635333,0.99665637789391781,0.99674055174805021,0.99682261332710198,0.996902615300993,0.99698060904301644,0.99705664466092736,0.9971307710273265,0.99720303580935499,0.99727348549771189,0.99734216543501053,0.99740911984348435,0.99747439185205633,0.99753802352278598,0.99760005587670553,0.99766052891905765,0.99771948166394853,0.99777695215842699,0.9978329775060033,0.99788759388961767,0.99794083659407196,0.99799274002793492,0.99804333774493248,0.99809266246483475,0.99814074609384962,0.99818761974453507,0.99823331375523938,0.99827785770908073,0.99832128045247504,0.99836361011322383,0.99840487411817036,0.99844509921043434,0.99848431146623462,0.99852253631130894,0.99855979853693999,0.99859612231559713,0.99863153121620085,0.99866604821902116,0.99869969573021566,0.9987324955960174,0.99876446911657957,0.99879563705948549,0.99882601967293094,0.99885563669858768,0.99888450738415346,0.99891265049559841,0.99894008432911263,0.99896682672276327,0.99899289506786759,0.99901830632008826,0.99904307701025785,0.99906722325493913,0.99909076076672676,0.99911370486429674,0.99913607048220998,0.99915787218047514,0.999179124153877,0.99919984024107578,0.99922003393348313,0.99923971838391901,0.99925890641505621,0.99927761052765718,0.99929584290860696,0.99931361543874897,0.99933093970052689,0.99934782698543789,0.99936428830130264,0.99938033437935381,0.99939597568115135,0.99941122240532543,0.99942608449415238,0.99944057163996858,0.99945469329142467,0.99946845865958467,0.99948187672387456,0.99949495623788276,0.99950770573501591,0.99952013353401559,0.99953224774433691,0.99954405627139331,0.99955556682167213,0.99956678690772116,0.99957772385301258,0.99958838479668488,0.9995987766981671,0.99960890634168775,0.9996187803406712,0.99962840514202445,0.99963778703031758,0.99964693213185896,0.99965584641866911,0.99966453571235592,0.99967300568789219,0.99968126187729944,0.99968930967323932,0.99969715433251549,0.999704800979488,0.99971225460940172,0.99971952009163223,0.99972660217285036,0.99973350548010687,0.99974023452384075,0.99974679370081221,0.99975318729696117,0.9997594194901952,0.99976549435310735,0.99977141585562579,0.99977718786759684,0.99978281416130366,0.99978829841392147,0.99979364420991146,0.99979885504335397,0.99980393432022474,0.99980888536061163,0.99981371140087838,0.99981841559577145,0.99982300102047639,0.99982747067262068,0.9998318274742275,0.99983607427361954,0.99984021384727595,0.99984424890164159,0.99984818207489179,0.99985201593865169,0.99985575299967389,0.9998593957014722,0.99986294642591578,0.99986640749478217,0.99986978117127157,0.99987306966148393,0.99987627511585697,0.99987939963057026,0.99988244524891212,0.99988541396261332,0.99988830771314652,0.99989112839299354,0.99989387784688044,0.99989655787298148,0.99989917022409291,0.99990171660877714,0.99990419869247826,0.99990661809860937,0.99990897640961218,0.99991127516799083,0.99991351587731847,0.99991570000321972,0.99991782897432746,0.99991990418321597,0.99992192698731031,0.99992389870977316],"mode":"lines","name":"Probability curve","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="adding-variables.-one-of-the-key-strenghts-of-logistic-regression-is-the-ability-to-include-multiple-predictor-variables-in-the-model.-by-considering-multiple-predictors-simulatenously-logistic-regressions-allows-us-to-explore-how-each-variable-contributes-to-the-likelihood-of-an-outcomewinning" class="level3">
+<h3 class="anchored" data-anchor-id="adding-variables.-one-of-the-key-strenghts-of-logistic-regression-is-the-ability-to-include-multiple-predictor-variables-in-the-model.-by-considering-multiple-predictors-simulatenously-logistic-regressions-allows-us-to-explore-how-each-variable-contributes-to-the-likelihood-of-an-outcomewinning">Adding variables. One of the key strenghts of logistic regression is the ability to include multiple predictor variables in the model. By considering multiple predictors simulatenously logistic regressions allows us to explore how each variable contributes to the likelihood of an outcome(winning)</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(team_winner <span class="sc">~</span> field_goal_pct <span class="sc">+</span> three_point_field_goal_pct <span class="sc">+</span> free_throw_pct <span class="sc">+</span> total_rebounds <span class="sc">+</span> assists <span class="sc">+</span> steals, <span class="at">data =</span> clog, <span class="at">family =</span> binomial)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = team_winner ~ field_goal_pct + three_point_field_goal_pct + 
+    free_throw_pct + total_rebounds + assists + steals, family = binomial, 
+    data = clog)
+
+Coefficients:
+                            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                -66.75584   17.82999  -3.744 0.000181 ***
+field_goal_pct               0.52381    0.16420   3.190 0.001422 ** 
+three_point_field_goal_pct   0.25185    0.10535   2.391 0.016824 *  
+free_throw_pct               0.08925    0.04781   1.867 0.061926 .  
+total_rebounds               0.43072    0.13830   3.114 0.001843 ** 
+assists                      0.21246    0.13910   1.527 0.126679    
+steals                       0.50312    0.26147   1.924 0.054328 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 113.76  on 88  degrees of freedom
+Residual deviance:  34.78  on 82  degrees of freedom
+AIC: 48.78
+
+Number of Fisher Scoring iterations: 8</code></pre>
+</div>
+</div>
+<section id="interpretation" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation">Interpretation</h4>
+<p><strong>Interpretation of <code>model1</code>:</strong></p>
+<ul>
+<li><p><code>field_goal_pct</code> (p = 0.0014), <code>three_point_field_goal_pct</code> (p = 0.017), and <code>total_rebounds</code> (p = 0.0018) are all solidly significant.</p></li>
+<li><p><code>free_throw_pct</code> (p = 0.062) and <code>steals</code> (p = 0.054) are right on the edge of conventional significance.</p></li>
+<li><p><code>assists</code> (p = 0.127) isn’t significant here.</p></li>
+<li><p><strong>AIC = 48.78</strong> — essentially tied with the stepwise-selected <code>step_model</code> in the doc (AIC 48.24), which makes sense: this is that same model minus <code>fast_break_points</code>, and since <code>fast_break_points</code> wasn’t significant on its own (p = 0.145), dropping it costs almost nothing. Residual deviance only ticked up slightly (32.24 → 34.78) for one fewer parameter.</p></li>
+</ul>
+<p>Bottom line: shooting efficiency (FG%, 3P%, FT%) plus rebounding, assists, and steals is the sweet spot for this dataset — that’s the point where added variables stop being “extra” and start being “noise.”</p>
+</section>
+</section>
+<section id="visualizing-the-multi-predictor-model" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-the-multi-predictor-model">Visualizing the multi-predictor model</h3>
+<section id="with-one-predictor-a-single-probability-curve-works.-with-several-predictors-two-charts-tell-the-story-better-an-odds-ratio-plot-showing-each-variables-effect-and-confidence-and-a-predicted-probability-plot-showing-how-well-the-model-actually-separates-wins-from-losses." class="level4">
+<h4 class="anchored" data-anchor-id="with-one-predictor-a-single-probability-curve-works.-with-several-predictors-two-charts-tell-the-story-better-an-odds-ratio-plot-showing-each-variables-effect-and-confidence-and-a-predicted-probability-plot-showing-how-well-the-model-actually-separates-wins-from-losses.">With one predictor, a single probability curve works. With several predictors, two charts tell the story better: an odds-ratio plot showing each variable’s effect and confidence, and a predicted-probability plot showing how well the model actually separates wins from losses.</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>coef_df <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model1, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">"(Intercept)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_df, <span class="fu">aes</span>(<span class="at">x =</span> estimate, <span class="at">y =</span> <span class="fu">reorder</span>(term, estimate))) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"#1D428A"</span>) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"#1D428A"</span>, <span class="at">orientation =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Odds ratio (log scale)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Effect of each predictor on odds of a Celtics win"</span>) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cellticslogisticregression_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>clog<span class="sc">$</span>predicted_prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(clog, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(game_id, predicted_prob), <span class="at">y =</span> predicted_prob, <span class="at">color =</span> team_winner)) <span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"#1D428A"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"#C8102E"</span>),</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Win"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Loss"</span>)) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Game (ordered by predicted win probability)"</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Predicted probability of winning"</span>,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Actual outcome"</span>,</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Predicted win probability vs. actual outcome"</span>) <span class="sc">+</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cellticslogisticregression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-1" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation-1">Interpretation</h4>
+<p><strong>On the odds-ratio chart:</strong> Shooting a high field goal percentage and out-rebounding opponents are the two things most reliably tied to a Celtics win — when the Celtics do well in those two areas, it lines up with winning very consistently across the season’s games. Steals and free throw shooting also lean toward “more of this helps you win,” but the data’s less certain about exactly how much they matter — there’s more game-to-game noise in that relationship. Assists are the shakiest of the bunch — the data can’t confidently say assists move the needle on winning at all, it’s possible they don’t matter much once you already know the team’s shooting and rebounding.</p>
+<p><strong>On the win-probability chart:</strong> Basically, if you feed a game’s stats (shooting, rebounding, assists, steals) into this model, it does a really good job of guessing who won just from the box score — it got it right on 80 out of 89 games. The games it “guesses wrong” are mostly close, back-and-forth games where the stats were close to a toss-up anyway — which makes sense, since a game the model is unsure about is often one that actually came down to the wire.</p>
+</section>
+</section>
+<section id="point-margin-regression" class="level3">
+<h3 class="anchored" data-anchor-id="point-margin-regression">Point margin regression</h3>
+<section id="team_winner-is-binary-winlose-which-throws-away-information-about-how-much-a-team-won-or-lost-by.-using-point_margin-team-score-minus-opponent-score-as-a-continuous-outcome-with-linear-regression-instead-of-logistic-regression-uses-that-information-and-tells-us-how-much-each-stat-moves-the-scoreboard-not-just-the-odds-of-winning." class="level4">
+<h4 class="anchored" data-anchor-id="team_winner-is-binary-winlose-which-throws-away-information-about-how-much-a-team-won-or-lost-by.-using-point_margin-team-score-minus-opponent-score-as-a-continuous-outcome-with-linear-regression-instead-of-logistic-regression-uses-that-information-and-tells-us-how-much-each-stat-moves-the-scoreboard-not-just-the-odds-of-winning."><code>team_winner</code> is binary (win/lose), which throws away information about <em>how much</em> a team won or lost by. Using <code>point_margin</code> (team score minus opponent score) as a continuous outcome with linear regression instead of logistic regression uses that information and tells us how much each stat moves the scoreboard, not just the odds of winning.</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>clog<span class="sc">$</span>point_margin <span class="ot">&lt;-</span> clog<span class="sc">$</span>team_score <span class="sc">-</span> clog<span class="sc">$</span>opponent_team_score</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>margin_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(point_margin <span class="sc">~</span> field_goal_pct <span class="sc">+</span> three_point_field_goal_pct <span class="sc">+</span> free_throw_pct <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                      total_rebounds <span class="sc">+</span> assists <span class="sc">+</span> steals,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> clog)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(margin_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = point_margin ~ field_goal_pct + three_point_field_goal_pct + 
+    free_throw_pct + total_rebounds + assists + steals, data = clog)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-21.541  -5.402  -0.261   5.155  21.370 
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                -151.5070    14.5067 -10.444  &lt; 2e-16 ***
+field_goal_pct                1.2825     0.2398   5.348 7.85e-07 ***
+three_point_field_goal_pct    0.3599     0.1705   2.111 0.037792 *  
+free_throw_pct                0.1013     0.0888   1.141 0.257238    
+total_rebounds                1.2089     0.1659   7.287 1.77e-10 ***
+assists                       0.5234     0.2406   2.176 0.032471 *  
+steals                        1.2921     0.3721   3.472 0.000826 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8.362 on 82 degrees of freedom
+Multiple R-squared:  0.722, Adjusted R-squared:  0.7016 
+F-statistic: 35.49 on 6 and 82 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(clog, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">predict</span>(margin_model), <span class="at">y =</span> point_margin)) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"#1D428A"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Predicted point margin"</span>, <span class="at">y =</span> <span class="st">"Actual point margin"</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Predicted vs. actual point margin"</span>) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cellticslogisticregression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-2" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation-2">Interpretation</h4>
+<p>This model explains 72% of the variance in scoring margin (R² = 0.722) — a strong fit for a 6-predictor box score model. Every predictor has a sensible positive sign (more shooting efficiency, rebounds, assists, or steals -&gt; bigger margin of victory), and <code>field_goal_pct</code>, <code>total_rebounds</code>, and <code>steals</code> are the most significant (p &lt; 0.001). Notably, <code>assists</code> (p = 0.032) and <code>three_point_field_goal_pct</code> (p = 0.038) are clearly significant here even though they were only marginal or non-significant in the win/loss model — a continuous outcome like point margin is more sensitive than a binary win/lose split, so it can detect real effects that a coin-flip-style outcome washes out. <code>free_throw_pct</code> is still not significant (p = 0.257), consistent with every earlier model. The scatter plot shows points tracking the dashed 1:1 line closely, with the widest scatter in blowout games — the model is very good at ranking games by scoring margin but, like any model, is less precise on the most extreme outcomes.</p>
+</section>
+</section>
+<section id="correlation-heatmap-of-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-heatmap-of-predictors">Correlation heatmap of predictors</h3>
+<section id="the-vif-check-earlier-flagged-total_rebounds-and-steals-as-moderately-collinear-but-a-full-correlation-heatmap-shows-the-complete-picture-across-every-predictor-at-once." class="level4">
+<h4 class="anchored" data-anchor-id="the-vif-check-earlier-flagged-total_rebounds-and-steals-as-moderately-collinear-but-a-full-correlation-heatmap-shows-the-complete-picture-across-every-predictor-at-once.">The VIF check earlier flagged <code>total_rebounds</code> and <code>steals</code> as moderately collinear, but a full correlation heatmap shows the complete picture across every predictor at once.</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cor_vars <span class="ot">&lt;-</span> clog[, <span class="fu">c</span>(<span class="st">"field_goal_pct"</span>, <span class="st">"three_point_field_goal_pct"</span>, <span class="st">"free_throw_pct"</span>,</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"total_rebounds"</span>, <span class="st">"assists"</span>, <span class="st">"steals"</span>, <span class="st">"total_turnovers"</span>)]</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>cor_mat <span class="ot">&lt;-</span> <span class="fu">cor</span>(cor_vars)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>cor_long <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.table</span>(cor_mat))</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cor_long) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"var1"</span>, <span class="st">"var2"</span>, <span class="st">"correlation"</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cor_long, <span class="fu">aes</span>(<span class="at">x =</span> var1, <span class="at">y =</span> var2, <span class="at">fill =</span> correlation)) <span class="sc">+</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(correlation, <span class="dv">2</span>)), <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"#C8102E"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"#1D428A"</span>, <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Correlation"</span>, <span class="at">title =</span> <span class="st">"Correlation among box score predictors"</span>) <span class="sc">+</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cellticslogisticregression_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-3" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation-3">Interpretation</h4>
+<p>The strongest relationship by far is <code>field_goal_pct</code> with <code>three_point_field_goal_pct</code> (r = 0.71) — a game where the Celtics shoot well overall tends to be one where their 3-point shooting is also strong, which makes sense since made 3s count toward overall FG%. <code>assists</code> correlates moderately with both <code>field_goal_pct</code> (r = 0.62) and <code>three_point_field_goal_pct</code> (r = 0.62) — assisted shots tend to come from better-quality, more open looks, so games with more ball movement tend to also be more efficient shooting games. This means the models above aren’t cleanly separating “the effect of shooting” from “the effect of assists” — part of what looks like an assists effect may really be riding along with shooting efficiency. The only other notable relationship is <code>total_rebounds</code> and <code>steals</code> (r = -0.38), a mild trade-off possibly reflecting different playing styles (rebounding-heavy lineups vs.&nbsp;perimeter-steal-focused lineups). Nothing here is severe enough to break the models, but it’s worth remembering when interpreting any single coefficient in isolation.</p>
+</section>
+</section>
+<section id="home-vs.-away-win-rate" class="level3">
+<h3 class="anchored" data-anchor-id="home-vs.-away-win-rate">Home vs.&nbsp;away win rate</h3>
+<section id="a-classic-sports-analytics-question-this-dataset-can-answer-directly-do-the-celtics-win-more-often-at-home-than-on-the-road" class="level4">
+<h4 class="anchored" data-anchor-id="a-classic-sports-analytics-question-this-dataset-can-answer-directly-do-the-celtics-win-more-often-at-home-than-on-the-road">A classic sports-analytics question this dataset can answer directly: do the Celtics win more often at home than on the road?</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(clog<span class="sc">$</span>team_home_away, clog<span class="sc">$</span>team_winner)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+       FALSE TRUE
+  away    16   28
+  home    14   31</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(clog<span class="sc">$</span>team_home_away, clog<span class="sc">$</span>team_winner), <span class="at">margin =</span> <span class="dv">1</span>), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      
+       FALSE  TRUE
+  away 0.364 0.636
+  home 0.311 0.689</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(clog<span class="sc">$</span>team_home_away, clog<span class="sc">$</span>team_winner))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  table(clog$team_home_away, clog$team_winner)
+X-squared = 0.089905, df = 1, p-value = 0.7643</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation-4" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation-4">Interpretation</h4>
+<p>Home win rate (68.9%) is a bit higher than away win rate (63.6%), but the chi-squared test gives p = 0.76 — nowhere near significant. With only 89 games split across two groups, this sample doesn’t have the power to confirm a home-court effect even if a modest one exists; the gap seen here is consistent with random noise.</p>
+</section>
+</section>
+<section id="model-discrimination-auc" class="level3">
+<h3 class="anchored" data-anchor-id="model-discrimination-auc">Model discrimination: AUC</h3>
+<section id="beyond-the-visual-predicted-probability-chart-auc-area-under-the-roc-curve-gives-a-single-number-for-how-well-model1-tells-wins-and-losses-apart." class="level4">
+<h4 class="anchored" data-anchor-id="beyond-the-visual-predicted-probability-chart-auc-area-under-the-roc-curve-gives-a-single-number-for-how-well-model1-tells-wins-and-losses-apart.">Beyond the visual predicted-probability chart, AUC (area under the ROC curve) gives a single number for how well <code>model1</code> tells wins and losses apart.</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">fitted</span>(model1)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>actual <span class="ot">&lt;-</span> clog<span class="sc">$</span>team_winner</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>wins <span class="ot">&lt;-</span> preds[actual <span class="sc">==</span> <span class="cn">TRUE</span>]</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>losses <span class="ot">&lt;-</span> preds[actual <span class="sc">==</span> <span class="cn">FALSE</span>]</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>auc_manual <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">outer</span>(wins, losses, <span class="st">"&gt;"</span>)) <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">mean</span>(<span class="fu">outer</span>(wins, losses, <span class="st">"=="</span>))</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"AUC:"</span>, auc_manual, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AUC: 0.9734463 </code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation-5" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation-5">Interpretation</h4>
+<p>AUC = 0.973. In plain terms: if you picked one win and one loss at random from the season, the model would correctly rank the win as more likely to win 97% of the time — excellent discrimination for a 6-predictor box score model, and consistent with the near-perfect separation seen in the predicted-probability chart above.</p>
+<ul>
+<li><p><strong>Shooting efficiency and rebounding</strong> are the most reliable, statistically confident drivers of Celtics wins and scoring margin — consistent across the logistic model, the point-margin regression, and the odds-ratio chart.</p></li>
+<li><p><strong>Assists and steals</strong> matter, but more subtly — they only became clearly significant once we used point margin instead of binary win/loss, and the correlation heatmap showed part of their apparent effect overlaps with shooting efficiency rather than being fully independent.</p></li>
+<li><p><strong>Free throw percentage</strong> never reached significance in any model — a stat that looks meaningful on its face but the data doesn’t back up as a real driver here.</p></li>
+<li><p><strong>Home court and raw turnovers</strong> turned out to be dead ends — worth knowing what <em>doesn’t</em> matter, not just what does.</p></li>
+<li><p>The model’s predictions track reality closely (AUC 0.973, R² 0.72), and where it struggles — close, low-margin games — is exactly where you’d expect any model to struggle.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/patrick-rankin\.github\.io\/newwebsite\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Classroom to Court · Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
