@@ -1,0 +1,215 @@
+---
+title: "boston celtics logistic regression"
+author: "Pat Rankin"
+editor: visual
+execute:
+  message: false
+---
+
+```{r}
+
+library(readxl)
+library(tidyverse)
+library(plotly)
+library(gtExtras)
+library(broom)
+
+
+clog <- read_excel("C:/Users/Pat/Desktop/website2/pipeline/nba/data/team_stats/nba_team_Celtics_2026.xlsx")
+View(clog)
+```
+
+### Logistic Regression
+
+#### I want to determine if field goal percentage has an influence on whether the team wins or not. This is using a single numeric predictor
+
+```{r}
+
+names(clog)
+str(clog)
+
+model <- glm(team_winner ~ field_goal_pct, data = clog, family = binomial)
+summary(model)
+
+# Generate data for the curve
+
+fgpct_range <- data.frame(
+  field_goal_pct = seq(min(clog$field_goal_pct, na.rm = TRUE),
+                       max(clog$field_goal_pct, na.rm = TRUE),
+                       length.out = 500))
+
+fgpct_range$prob <- predict(model, newdata = fgpct_range, type = "response")
+
+# Create interactive plot
+
+plot_ly(data = fgpct_range,
+        x = ~field_goal_pct,
+        y = ~prob,
+        type = "scatter",
+        mode = "lines",
+        name = "Probability curve") |>
+  layout(
+    title = "Probability of winning by field goal percentage level",
+    xaxis = list(title = "Field goal percentage"),
+    yaxis = list(title = "Probability of winning")
+  )
+```
+
+### Adding variables. One of the key strenghts of logistic regression is the ability to include multiple predictor variables in the model. By considering multiple predictors simulatenously logistic regressions allows us to explore how each variable contributes to the likelihood of an outcome(winning)
+
+```{r}
+model1 <- glm(team_winner ~ field_goal_pct + three_point_field_goal_pct + free_throw_pct + total_rebounds + assists + steals, data = clog, family = binomial)
+
+summary(model1)
+```
+
+#### Interpretation
+
+**Interpretation of `model1`:**
+
+-   `field_goal_pct` (p = 0.0014), `three_point_field_goal_pct` (p = 0.017), and `total_rebounds` (p = 0.0018) are all solidly significant.
+
+-   `free_throw_pct` (p = 0.062) and `steals` (p = 0.054) are right on the edge of conventional significance.
+
+-   `assists` (p = 0.127) isn't significant here.
+
+-   **AIC = 48.78** — essentially tied with the stepwise-selected `step_model` in the doc (AIC 48.24), which makes sense: this is that same model minus `fast_break_points`, and since `fast_break_points` wasn't significant on its own (p = 0.145), dropping it costs almost nothing. Residual deviance only ticked up slightly (32.24 → 34.78) for one fewer parameter.
+
+Bottom line: shooting efficiency (FG%, 3P%, FT%) plus rebounding, assists, and steals is the sweet spot for this dataset — that's the point where added variables stop being "extra" and start being "noise."
+
+### Visualizing the multi-predictor model
+
+#### With one predictor, a single probability curve works. With several predictors, two charts tell the story better: an odds-ratio plot showing each variable's effect and confidence, and a predicted-probability plot showing how well the model actually separates wins from losses.
+
+```{r}
+
+library(broom)
+
+coef_df <- tidy(model1, conf.int = TRUE, exponentiate = TRUE) |>
+  filter(term != "(Intercept)")
+
+ggplot(coef_df, aes(x = estimate, y = reorder(term, estimate))) +
+  geom_point(size = 3, color = "#1D428A") +
+  geom_errorbar(aes(xmin = conf.low, xmax = conf.high), width = 0.2, color = "#1D428A", orientation = "y") +
+  geom_vline(xintercept = 1, linetype = "dashed", color = "grey40") +
+  scale_x_log10() +
+  labs(x = "Odds ratio (log scale)", y = NULL,
+       title = "Effect of each predictor on odds of a Celtics win") +
+  theme_minimal()
+```
+
+```{r}
+
+clog$predicted_prob <- predict(model1, type = "response")
+
+ggplot(clog, aes(x = reorder(game_id, predicted_prob), y = predicted_prob, color = team_winner)) +
+  geom_point(size = 3) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "grey40") +
+  scale_color_manual(values = c(`TRUE` = "#1D428A", `FALSE` = "#C8102E"),
+                      labels = c(`TRUE` = "Win", `FALSE` = "Loss")) +
+  labs(x = "Game (ordered by predicted win probability)",
+       y = "Predicted probability of winning",
+       color = "Actual outcome",
+       title = "Predicted win probability vs. actual outcome") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+```
+
+#### Interpretation
+
+**On the odds-ratio chart:** Shooting a high field goal percentage and out-rebounding opponents are the two things most reliably tied to a Celtics win — when the Celtics do well in those two areas, it lines up with winning very consistently across the season's games. Steals and free throw shooting also lean toward "more of this helps you win," but the data's less certain about exactly how much they matter — there's more game-to-game noise in that relationship. Assists are the shakiest of the bunch — the data can't confidently say assists move the needle on winning at all, it's possible they don't matter much once you already know the team's shooting and rebounding.
+
+**On the win-probability chart:** Basically, if you feed a game's stats (shooting, rebounding, assists, steals) into this model, it does a really good job of guessing who won just from the box score — it got it right on 80 out of 89 games. The games it "guesses wrong" are mostly close, back-and-forth games where the stats were close to a toss-up anyway — which makes sense, since a game the model is unsure about is often one that actually came down to the wire.
+
+### Point margin regression
+
+#### `team_winner` is binary (win/lose), which throws away information about *how much* a team won or lost by. Using `point_margin` (team score minus opponent score) as a continuous outcome with linear regression instead of logistic regression uses that information and tells us how much each stat moves the scoreboard, not just the odds of winning.
+
+```{r}
+
+clog$point_margin <- clog$team_score - clog$opponent_team_score
+
+margin_model <- lm(point_margin ~ field_goal_pct + three_point_field_goal_pct + free_throw_pct +
+                      total_rebounds + assists + steals,
+                    data = clog)
+summary(margin_model)
+
+ggplot(clog, aes(x = predict(margin_model), y = point_margin)) +
+  geom_point(size = 3, color = "#1D428A", alpha = 0.7) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey40") +
+  labs(x = "Predicted point margin", y = "Actual point margin",
+       title = "Predicted vs. actual point margin") +
+  theme_minimal()
+```
+
+#### Interpretation
+
+This model explains 72% of the variance in scoring margin (R² = 0.722) — a strong fit for a 6-predictor box score model. Every predictor has a sensible positive sign (more shooting efficiency, rebounds, assists, or steals -\> bigger margin of victory), and `field_goal_pct`, `total_rebounds`, and `steals` are the most significant (p \< 0.001). Notably, `assists` (p = 0.032) and `three_point_field_goal_pct` (p = 0.038) are clearly significant here even though they were only marginal or non-significant in the win/loss model — a continuous outcome like point margin is more sensitive than a binary win/lose split, so it can detect real effects that a coin-flip-style outcome washes out. `free_throw_pct` is still not significant (p = 0.257), consistent with every earlier model. The scatter plot shows points tracking the dashed 1:1 line closely, with the widest scatter in blowout games — the model is very good at ranking games by scoring margin but, like any model, is less precise on the most extreme outcomes.
+
+### Correlation heatmap of predictors
+
+#### The VIF check earlier flagged `total_rebounds` and `steals` as moderately collinear, but a full correlation heatmap shows the complete picture across every predictor at once.
+
+```{r}
+
+cor_vars <- clog[, c("field_goal_pct", "three_point_field_goal_pct", "free_throw_pct",
+                      "total_rebounds", "assists", "steals", "total_turnovers")]
+cor_mat <- cor(cor_vars)
+cor_long <- as.data.frame(as.table(cor_mat))
+names(cor_long) <- c("var1", "var2", "correlation")
+
+ggplot(cor_long, aes(x = var1, y = var2, fill = correlation)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = round(correlation, 2)), size = 3.5) +
+  scale_fill_gradient2(low = "#C8102E", mid = "white", high = "#1D428A", midpoint = 0, limits = c(-1, 1)) +
+  labs(x = NULL, y = NULL, fill = "Correlation", title = "Correlation among box score predictors") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+#### Interpretation
+
+The strongest relationship by far is `field_goal_pct` with `three_point_field_goal_pct` (r = 0.71) — a game where the Celtics shoot well overall tends to be one where their 3-point shooting is also strong, which makes sense since made 3s count toward overall FG%. `assists` correlates moderately with both `field_goal_pct` (r = 0.62) and `three_point_field_goal_pct` (r = 0.62) — assisted shots tend to come from better-quality, more open looks, so games with more ball movement tend to also be more efficient shooting games. This means the models above aren't cleanly separating "the effect of shooting" from "the effect of assists" — part of what looks like an assists effect may really be riding along with shooting efficiency. The only other notable relationship is `total_rebounds` and `steals` (r = -0.38), a mild trade-off possibly reflecting different playing styles (rebounding-heavy lineups vs. perimeter-steal-focused lineups). Nothing here is severe enough to break the models, but it's worth remembering when interpreting any single coefficient in isolation.
+
+### Home vs. away win rate
+
+#### A classic sports-analytics question this dataset can answer directly: do the Celtics win more often at home than on the road?
+
+```{r}
+
+table(clog$team_home_away, clog$team_winner)
+round(prop.table(table(clog$team_home_away, clog$team_winner), margin = 1), 3)
+chisq.test(table(clog$team_home_away, clog$team_winner))
+```
+
+#### Interpretation
+
+Home win rate (68.9%) is a bit higher than away win rate (63.6%), but the chi-squared test gives p = 0.76 — nowhere near significant. With only 89 games split across two groups, this sample doesn't have the power to confirm a home-court effect even if a modest one exists; the gap seen here is consistent with random noise.
+
+### Model discrimination: AUC
+
+#### Beyond the visual predicted-probability chart, AUC (area under the ROC curve) gives a single number for how well `model1` tells wins and losses apart.
+
+```{r}
+
+preds <- fitted(model1)
+actual <- clog$team_winner
+wins <- preds[actual == TRUE]
+losses <- preds[actual == FALSE]
+auc_manual <- mean(outer(wins, losses, ">")) + 0.5 * mean(outer(wins, losses, "=="))
+cat("AUC:", auc_manual, "\n")
+```
+
+#### Interpretation
+
+AUC = 0.973. In plain terms: if you picked one win and one loss at random from the season, the model would correctly rank the win as more likely to win 97% of the time — excellent discrimination for a 6-predictor box score model, and consistent with the near-perfect separation seen in the predicted-probability chart above.
+
+-   **Shooting efficiency and rebounding** are the most reliable, statistically confident drivers of Celtics wins and scoring margin — consistent across the logistic model, the point-margin regression, and the odds-ratio chart.
+
+-   **Assists and steals** matter, but more subtly — they only became clearly significant once we used point margin instead of binary win/loss, and the correlation heatmap showed part of their apparent effect overlaps with shooting efficiency rather than being fully independent.
+
+-   **Free throw percentage** never reached significance in any model — a stat that looks meaningful on its face but the data doesn't back up as a real driver here.
+
+-   **Home court and raw turnovers** turned out to be dead ends — worth knowing what *doesn't* matter, not just what does.
+
+-   The model's predictions track reality closely (AUC 0.973, R² 0.72), and where it struggles — close, low-margin games — is exactly where you'd expect any model to struggle.

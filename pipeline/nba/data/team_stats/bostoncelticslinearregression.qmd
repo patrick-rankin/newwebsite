@@ -1,0 +1,237 @@
+---
+title: "Boston celtics linear regression"
+editor: visual
+warning = FALSE
+messages = FALSE
+---
+
+```{r}
+install.packages("corrgram")
+library(corrgram)
+library(corrplot)
+library(tidyverse)
+library(readxl)
+library(gtExtras)
+
+nba_team_Celtics_2026 <- read_excel("team_stats/nba_team_Celtics_2026.xlsx")
+View(nba_team_Celtics_2026)
+```
+
+### Numeric correlation for linear regression
+
+```{r}
+# returns only numeric columns
+num.cols <- sapply(nba_team_Celtics_2026,is.numeric)
+
+# filter numerical columns for correlation
+cor.data <- cor(nba_team_Celtics_2026[,num.cols])
+print(cor.data)
+```
+
+```{r}
+library(corrplot)
+
+numeric_cols <- c("team_score", "assists", "blocks", "defensive_rebounds",
+  "fast_break_points", "field_goal_pct", "field_goals_made",
+  "field_goals_attempted", "free_throw_pct", "free_throws_made",
+  "free_throws_attempted", "largest_lead", "offensive_rebounds",
+  "points_in_paint", "steals", "team_turnovers", "three_point_field_goal_pct",
+  "three_point_field_goals_made", "three_point_field_goals_attempted",
+  "total_rebounds", "turnovers", "opponent_team_score")
+
+cor.data <- cor(nba_team_Celtics_2026[, numeric_cols], use = "complete.obs")
+
+# clear any stale/ghosted plot first
+while (dev.cur() > 1) dev.off()
+
+corrplot(cor.data, method = "color",
+         type = "upper",       # drop the redundant mirrored half
+         tl.col = "black",
+         tl.cex = 0.7,         # shrink label text so long names fit
+         tl.srt = 45,          # angle labels instead of vertical stacking
+         mar = c(0, 0, 1, 0))
+```
+
+### Interpretation
+
+How would I interpret this plot
+
+Reading a `corrplot(method="color")` heatmap:
+
+**The basics**
+
+-   Each cell = correlation between the row variable and column variable, ranging -1 to +1.
+
+-   **Blue = positive** (as one goes up, the other tends to go up). **Red/brown = negative** (as one goes up, the other tends to go down).
+
+-   **Darker/more saturated = stronger relationship.** Pale/near-white ≈ no linear relationship.
+
+-   The diagonal is always dark blue (=1) — a variable perfectly correlates with itself. Ignore it.
+
+-   With `type="upper"` you only see half the matrix (it's symmetric, so the lower half is redundant).
+
+**Applying it to your basketball data** (using the correlations from your earlier `cor()` output):
+
+-   `team_score` vs `field_goals_made` = **0.88** → strong dark blue. Unsurprising: making more shots wins you more points.
+
+-   `team_score` vs `three_point_field_goal_pct` = **0.73**, vs `assists` = **0.70** → also strong blue. Efficient/team-oriented offense tracks with scoring.
+
+-   `defensive_rebounds` vs `total_rebounds` = **0.76** → strong blue, but this is partly definitional (total rebounds includes defensive rebounds).
+
+-   `free_throws_made` vs `free_throws_attempted` = **0.94** → near-perfect blue. This pair (and similar "made" vs "attempted" pairs) is *tautological*, not insightful — ignore these, they're just measuring the same underlying event twice.
+
+-   `defensive_rebounds` vs `opponent_team_score` = **-0.46** → moderate red/negative. Makes basketball sense: out-rebounding opponents on defense limits their second-chance points.
+
+-   `steals` vs `defensive_rebounds` = **-0.38** → red. Worth investigating but could just reflect play style differences between teams.
+
+**What to actually look for**
+
+1.  Scan for the darkest cells (blue or red) *excluding* the diagonal and the obvious made/attempted pairs — those are your real signal.
+
+2.  Look at the row/column for `team_score` (or whatever your target variable is) specifically — that tells you what predicts winning/scoring.
+
+3.  Treat anything pale as noise, not "no effect" — correlation only captures linear relationships.
+
+4.  Remember correlation ≠ causation — e.g. high assists correlating with score doesn't mean *forcing* more assists causes more points; both could stem from good shot-making.
+
+If you dropped the ID columns (`game_id`, `team_id`, etc.) like I suggested, you shouldn't see any blank/white NA cells anymore — if you still do, those are variables with zero variance or all-NA in your filtered data.
+
+```{r}
+# corrgram
+
+corrgram(nba_team_Celtics_2026)
+```
+
+```{r}
+num.cols <- c("team_score", "assists", "blocks", "defensive_rebounds",
+  "fast_break_points", "field_goal_pct", "field_goals_made",
+  "field_goals_attempted", "flagrant_fouls", "fouls", "free_throw_pct",
+  "free_throws_made", "free_throws_attempted", "largest_lead",
+  "offensive_rebounds", "points_in_paint", "steals", "team_turnovers",
+  "technical_fouls", "three_point_field_goal_pct",
+  "three_point_field_goals_made", "three_point_field_goals_attempted",
+  "total_rebounds", "total_technical_fouls", "total_turnovers",
+  "turnover_points", "turnovers", "opponent_team_score")
+
+cor.data <- cor(nba_team_Celtics_2026[, num.cols], use = "complete.obs")
+
+library(corrplot)
+while (dev.cur() > 1) dev.off()
+corrplot(cor.data, method = "color", type = "upper",
+         tl.col = "black", tl.cex = 0.7, tl.srt = 45, mar = c(0,0,1,0))
+```
+
+### Interpretation
+
+Here's how to read that matrix, using the Celtics data you pasted as the working example.
+
+**Structure of the table**
+
+-   Every row and column is a variable; each cell is the **Pearson correlation** between that row/column pair, from **-1 to +1**.
+
+-   It's symmetric — the cell at `(team_score, assists)` equals the cell at `(assists, team_score)` — so you only need to scan half of it.
+
+-   The diagonal is always `1.0` (a variable perfectly correlates with itself) — skip it.
+
+-   `0` = no linear relationship. `+1`/`-1` = perfect positive/negative relationship. Anything below \~0.3 in magnitude is usually too weak to act on.
+
+**What predicts `team_score` (row 6) — the strongest signals:**
+
+| **Variable** | **r** | **Read** |
+|:---|:---|:---|
+| `field_goals_made` | 0.879 | Strongest driver — obviously, makes = points |
+| `field_goal_pct` | 0.864 | Shooting efficiency tracks scoring closely |
+| `three_point_field_goal_pct` | 0.731 | 3pt shooting efficiency matters a lot |
+| `assists` | 0.701 | Ball movement → scoring |
+| `three_point_field_goals_made` | 0.696 |  |
+| `largest_lead` | 0.680 | Games they score more in, they tend to blow out (or vice versa) |
+| `fast_break_points` | 0.444 | Moderate — transition offense helps but isn't dominant |
+| `points_in_paint` | 0.362 | Moderate |
+
+**Near-zero — don't bother interpreting these:**\
+`free_throw_pct` (0.046), `offensive_rebounds` (-0.075), `total_rebounds` (-0.072) — essentially no linear relationship with scoring in this data.
+
+**Negative and worth a second look:**
+
+-   `turnovers` vs `team_score` = **-0.268** — sensible, fewer giveaways, more points.
+
+-   `defensive_rebounds` vs `opponent_team_score` = **-0.456**, `total_rebounds` vs `opponent_team_score` = **-0.520** — boxing out limits opponent scoring, as expected.
+
+-   `steals` vs `defensive_rebounds` = **-0.381** — teams/games with more steals tend to have fewer defensive boards, possibly a style-of-play tradeoff (gambling for steals vs. staying home to box out).
+
+**Ignore these — they're tautological, not insight:**
+
+-   `free_throws_made` vs `free_throws_attempted` = 0.942
+
+-   `three_point_field_goal_pct` vs `three_point_field_goals_made` = 0.798
+
+-   `defensive_rebounds` vs `total_rebounds` = 0.763
+
+-   Any "made" vs "attempted" or "X_pct" vs "X_made" pair — these are mathematically related by definition, so a high correlation tells you nothing new.
+
+**Caveats to keep in mind:**
+
+1.  This is one team's games in one season — sample size is likely \~2 dozen to \~82 rows, so treat weaker correlations (anything under \~0.3–0.4) as noise, not real effects.
+
+2.  Correlation ≠ causation — e.g., `assists` correlating with `team_score` doesn't prove passing *causes* scoring; both likely stem from playing well overall.
+
+3.  Watch for the "made/attempted/pct" family of variables — they're not independent and can crowd out more meaningful patterns visually if left in the matrix.
+
+If your goal is to find what actually *drives* wins/scoring, focus on the non-tautological variables with \|r\| \> 0.4 relative to `team_score` and `opponent_team_score` — that's `field_goals_made`, `field_goal_pct`, `three_point_field_goal_pct`, `assists`, `largest_lead`, `defensive_rebounds`/`total_rebounds` (via opponent scoring), and `turnovers`.
+
+```{r}
+celtics_num <- nba_team_Celtics_2026[, has_variance]
+celtics_num <- celtics_num[, !names(celtics_num) %in% c("game_id", "opponent_team_id")]
+```
+
+```{r}
+nba_team_Celtics_2026 <- read_excel("C:/Users/Pat/Desktop/website2/pipeline/nba/data/team_stats/nba_team_Celtics_2026.xlsx")
+```
+
+```{r}
+library(corrgram)
+
+# keep only numeric columns with actual variance
+has_variance <- sapply(nba_team_Celtics_2026, function(col) {
+  is.numeric(col) && sd(col, na.rm = TRUE) > 0
+})
+
+celtics_num <- nba_team_Celtics_2026[, has_variance]
+
+# optional: also drop ID columns that technically vary but aren't real stats
+celtics_num <- celtics_num[, !names(celtics_num) %in% c("game_id", "opponent_team_id")]
+
+# confirm no NAs remain
+sum(is.na(celtics_num))   # should print 0
+
+corrgram(celtics_num, order = TRUE,
+         lower.panel = panel.shade,
+         upper.panel = panel.pie,
+         text.panel = panel.txt)
+```
+
+```{r}
+png("celtics_corrgram.png", width = 1800, height = 1800, res = 180)
+corrgram(celtics_num, order = TRUE,
+         lower.panel = panel.shade,
+         upper.panel = panel.pie,
+         text.panel = panel.txt)
+dev.off()
+```
+
+### Logistic Regression Model
+
+Does field goal percentage(predictor variable) have any influece on whether the team wins or not
+
+```{r}
+
+library(plotly)
+
+nba_team_Celtics_2026 <- read_excel("nba_team_Celtics_2026.xlsx")
+View(nba_team_Celtics_2026)
+names(nba_team_Celtics_2026)
+```
+
+```{r}
+model <- glm()
+```

@@ -47,7 +47,7 @@ my_team <- 'Celtics'
 # This is the folder where the CSV file will be saved.
 # It will be created automatically if it doesn't already exist.
 # Use a FULL path with forward slashes, e.g. "C:/Users/you/Documents/nba_data"
-output_folder <- "pipeline/nba/data/team_stats"
+output_folder <- "C:/Users/Pat/Desktop/website2/pipeline/nba/data/team_stats"
 
 
 ###############################################################################
@@ -125,3 +125,4 @@ cat("Games found:", nrow(team_games), "\n")
 #
 # The blog post .qmd files can read this CSV as their starting point.
 ###############################################################################
+

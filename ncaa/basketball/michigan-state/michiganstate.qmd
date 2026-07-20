@@ -180,7 +180,7 @@ Both predictor variables(field goal percentage and turnovers have a positive coe
     ### This code shows the relationship between field goal percentage and team winning in this dataset
 
     ```{r}
-    msu_basketball |> 
+    msu_basketball |>
       ggplot(aes(field_goal_pct, turnovers))+
       geom_smooth(method = lm) +
       theme_minimal() +
@@ -188,3 +188,71 @@ Both predictor variables(field goal percentage and turnovers have a positive coe
            x = "Field goal percentage",
            y = "turnovers")
     ```
+
+### Sensitivity, specificity, and AUC. How good is this model at actually predicting wins, not just explaining them?
+
+The `win_model` (field goal percentage only) gives a predicted probability of winning for every game. Turning that probability into a yes/no prediction (using a 0.5 cutoff) lets us check the model against what actually happened, using a confusion matrix.
+
+```{r}
+library(pROC)
+
+msu_basketball <- msu_basketball |>
+  mutate(
+    predicted_prob = predict(win_model, type = "response"),
+    predicted_win = predicted_prob > 0.5
+  )
+
+conf_matrix <- table(
+  actual = msu_basketball$team_winner,
+  predicted = msu_basketball$predicted_win
+)
+
+conf_matrix
+```
+
+```{r}
+TN <- conf_matrix["FALSE", "FALSE"]
+FP <- conf_matrix["FALSE", "TRUE"]
+FN <- conf_matrix["TRUE", "FALSE"]
+TP <- conf_matrix["TRUE", "TRUE"]
+
+sensitivity <- TP / (TP + FN)
+specificity <- TN / (TN + FP)
+accuracy <- (TP + TN) / (TP + TN + FP + FN)
+
+tibble(
+  metric = c("Sensitivity (true win rate)", "Specificity (true loss rate)", "Accuracy"),
+  value = c(sensitivity, specificity, accuracy)
+)
+```
+
+### Interpretation
+
+Sensitivity tells us: of the games Michigan State actually won, what fraction did the model correctly call a win? Specificity tells us the mirror image: of the games they actually lost, what fraction did the model correctly call a loss. Both are computed at the default 0.5 probability cutoff — a game is predicted "win" if the model's estimated win probability exceeds 50%.
+
+A model that's high on both means field goal percentage alone is doing a good job separating wins from losses, not just showing a statistically significant trend. If one number is noticeably lower than the other, that points to which type of game (upset wins on poor shooting, or losses despite good shooting) the model struggles with.
+
+```{r}
+msu_basketball |>
+  filter(team_winner != predicted_win) |>
+  select(field_goal_pct, turnovers, team_winner, predicted_prob, predicted_win)
+```
+
+The table above lists every game the model got wrong — where the predicted win/loss (based on FG% alone) didn't match what actually happened. These are the games where field goal percentage alone wasn't the whole story; worth cross-checking against turnovers, opponent strength, or other box score factors for those specific games.
+
+### ROC curve and AUC
+
+Sensitivity and specificity both depend on picking 0.5 as the cutoff. The ROC curve shows how that trade-off shifts across every possible cutoff, and the AUC (area under the curve) summarizes overall discriminative power in a single number — 0.5 means no better than a coin flip, 1.0 means perfect separation between wins and losses.
+
+```{r}
+roc_obj <- roc(msu_basketball$team_winner, msu_basketball$predicted_prob)
+
+auc(roc_obj)
+
+plot(roc_obj, main = "ROC Curve - Win Prediction by Field Goal Percentage",
+     col = "blue", lwd = 2)
+```
+
+### Interpretation
+
+An AUC well above 0.5 confirms that field goal percentage genuinely discriminates between wins and losses across the board, not just at the 0.5 cutoff used above — consistent with the strong, significant coefficient already found in `win_model`. This is a useful complement to the p-value and odds ratio: those tell you the relationship is real, while sensitivity, specificity, and AUC tell you how useful the model actually is for predicting a specific game's outcome.

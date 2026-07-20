@@ -8,7 +8,7 @@ project:
 
 website:
   title: "Classroom to Court"
-  site-url: https://patrick-rankin.github.io/sports.github.io/
+  site-url: https://patrick-rankin.github.io/newwebsite/
   favicon: "https://a.espncdn.com/i/teamlogos/ncaa/500/150.png"
   navbar:
     background: "#0a1628"
