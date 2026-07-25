@@ -15,6 +15,7 @@ library(dplyr)
 library(readr)
 library(ggplot2)
 library(tidyr)
+library(gganimate)
 ```
 
 ## ⚙️ Your Settings — Change These Before Rendering
@@ -298,6 +299,30 @@ ggplot(pra_long, aes(x = game_num, y = Value, color = Stat)) +
   ) +
   theme_minimal(base_size = 13) +
   theme(legend.position = "top")
+```
+
+### Animated Version
+
+```{r}
+#| label: pra-chart-animated
+
+pra_anim <- ggplot(pra_long, aes(x = game_num, y = Value, color = Stat)) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2) +
+  scale_color_manual(values = c("Points"="#3498db","Rebounds"="#2ecc71","Assists"="#e67e22")) +
+  labs(
+    title    = paste(player_name_full, "— Points / Rebounds / Assists Through Game {frame_along}"),
+    x        = "Game Number",
+    y        = "Count",
+    color    = NULL
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "top") +
+  transition_reveal(game_num)
+
+animate(pra_anim, nframes = min(games_played, 60), fps = 6,
+        width = 800, height = 500, units = "px", res = 96,
+        renderer = gifski_renderer())
 ```
 
 ## Key Stats Summary

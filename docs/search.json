@@ -1677,7 +1677,7 @@
     "href": "ncaa/basketball/byu-cougars/aj-dybantsa.html",
     "title": "NCAA Player Season Grade Report",
     "section": "",
-    "text": "library(hoopR)\nlibrary(dplyr)\nlibrary(readr)\nlibrary(ggplot2)\nlibrary(tidyr)"
+    "text": "library(hoopR)\nlibrary(dplyr)\nlibrary(readr)\nlibrary(ggplot2)\nlibrary(tidyr)\nlibrary(gganimate)"
   },
   {
     "objectID": "ncaa/basketball/byu-cougars/aj-dybantsa.html#your-settings-change-these-before-rendering",
@@ -1712,7 +1712,7 @@
     "href": "ncaa/basketball/byu-cougars/aj-dybantsa.html#game-by-game-stats-points-rebounds-assists",
     "title": "NCAA Player Season Grade Report",
     "section": "Game-by-Game Stats: Points, Rebounds, Assists",
-    "text": "Game-by-Game Stats: Points, Rebounds, Assists\n\npra_long &lt;- trend_data %&gt;%\n  select(game_num, pts, reb, ast) %&gt;%\n  pivot_longer(cols = c(pts, reb, ast), names_to = \"Stat\", values_to = \"Value\") %&gt;%\n  mutate(Stat = recode(Stat, pts=\"Points\", reb=\"Rebounds\", ast=\"Assists\"))\n\nggplot(pra_long, aes(x = game_num, y = Value, color = Stat)) +\n  geom_line(linewidth = 0.9) +\n  geom_point(size = 2) +\n  scale_color_manual(values = c(\"Points\"=\"#3498db\",\"Rebounds\"=\"#2ecc71\",\"Assists\"=\"#e67e22\")) +\n  labs(\n    title    = paste(player_name_full, \"— Points / Rebounds / Assists by Game\"),\n    x        = \"Game Number\",\n    y        = \"Count\",\n    color    = NULL\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"top\")"
+    "text": "Game-by-Game Stats: Points, Rebounds, Assists\n\npra_long &lt;- trend_data %&gt;%\n  select(game_num, pts, reb, ast) %&gt;%\n  pivot_longer(cols = c(pts, reb, ast), names_to = \"Stat\", values_to = \"Value\") %&gt;%\n  mutate(Stat = recode(Stat, pts=\"Points\", reb=\"Rebounds\", ast=\"Assists\"))\n\nggplot(pra_long, aes(x = game_num, y = Value, color = Stat)) +\n  geom_line(linewidth = 0.9) +\n  geom_point(size = 2) +\n  scale_color_manual(values = c(\"Points\"=\"#3498db\",\"Rebounds\"=\"#2ecc71\",\"Assists\"=\"#e67e22\")) +\n  labs(\n    title    = paste(player_name_full, \"— Points / Rebounds / Assists by Game\"),\n    x        = \"Game Number\",\n    y        = \"Count\",\n    color    = NULL\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"top\")\n\n\n\n\n\n\n\n\n\nAnimated Version\n\npra_anim &lt;- ggplot(pra_long, aes(x = game_num, y = Value, color = Stat)) +\n  geom_line(linewidth = 0.9) +\n  geom_point(size = 2) +\n  scale_color_manual(values = c(\"Points\"=\"#3498db\",\"Rebounds\"=\"#2ecc71\",\"Assists\"=\"#e67e22\")) +\n  labs(\n    title    = paste(player_name_full, \"— Points / Rebounds / Assists Through Game {frame_along}\"),\n    x        = \"Game Number\",\n    y        = \"Count\",\n    color    = NULL\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"top\") +\n  transition_reveal(game_num)\n\nanimate(pra_anim, nframes = min(games_played, 60), fps = 6,\n        width = 800, height = 500, units = \"px\", res = 96,\n        renderer = gifski_renderer())"
   },
   {
     "objectID": "ncaa/basketball/byu-cougars/aj-dybantsa.html#key-stats-summary",
