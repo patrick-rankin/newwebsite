@@ -207,6 +207,12 @@ grade_df$Grade_Group <- case_when(
 
 **Overall Season Grade: `r overall_grade`**
 
+BYU's freshman forward has been the most efficient high-volume scorer in this
+draft class — a 25.5 points-per-game average on 52.4% shooting from the
+field is an elite combination for any level, let alone a true freshman.
+The grade below reflects that: an A- overall, carried by three A+ marks
+in Scoring, Field Goal %, and Efficiency.
+
 ------------------------------------------------------------------------
 
 ## Category Grades
@@ -232,6 +238,13 @@ ggplot(grade_df, aes(x = reorder(Category, GPA), y = GPA, fill = Grade_Group)) +
   theme(legend.position = "right")
 ```
 
+> **Insight:** The gap between Dybantsa's offensive and defensive grades is
+> the story of this profile. Scoring, Field Goal %, and Efficiency all grade
+> out A+, while Defense (steals + blocks) and Ball Security land at C+ — his
+> per-game defensive stat production and turnover rate are closer to average
+> than elite. None of that is unusual for a high-usage freshman wing, but
+> it's the clearest area to watch as he transitions to a higher level.
+
 ## Scoring Trend
 
 ```{r}
@@ -255,6 +268,13 @@ ggplot(trend_data, aes(x = game_num, y = pts)) +
   ) +
   theme_minimal(base_size = 13)
 ```
+
+> **Insight:** Scoring at this level from a true freshman is rare on its
+> own — doing it this close to the season average, game after game, is what
+> separates a consistent go-to option from a streaky one. Cold stretches
+> below the average line are shallow and brief rather than extended slumps,
+> which is a good early sign for how his role could scale against tougher
+> competition.
 
 ## Game-by-Game Stats: Points, Rebounds, Assists
 
