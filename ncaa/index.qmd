@@ -51,6 +51,12 @@ subtitle: "Browse every college team covered on Classroom to Court — basketbal
     <span class="team-meta">Big Ten</span>
   </a>
 
+  <a class="team-card" data-name="byu cougars" href="basketball/byu-cougars/index.html">
+    <div class="team-badge" style="background:#002E5D; color:#ffffff;">BYU</div>
+    <span class="team-name">BYU Cougars</span>
+    <span class="team-meta">Big 12</span>
+  </a>
+
 </div>
 </section>
 

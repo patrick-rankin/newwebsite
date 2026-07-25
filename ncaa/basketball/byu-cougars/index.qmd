@@ -1,0 +1,10 @@
+---
+title: "BYU Cougars Basketball"
+execute:
+  warning: false
+  message: false
+---
+
+## Featured Reports
+
+- [AJ Dybantsa — Player Season Grade Report](aj-dybantsa.html)
