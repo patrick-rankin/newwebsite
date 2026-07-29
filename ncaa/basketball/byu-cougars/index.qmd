@@ -8,3 +8,4 @@ execute:
 ## Featured Reports
 
 - [AJ Dybantsa — Player Season Grade Report](aj-dybantsa.html)
+- [AJ Dybantsa — Logistic Regression Example](ajdybantsalogisticregression.html)

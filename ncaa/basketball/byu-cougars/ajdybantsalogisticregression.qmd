@@ -1,0 +1,77 @@
+---
+title: "AJ Dybantsa: Logistic Regression Example"
+format:
+  html:
+    code-fold: true
+execute:
+  message: false
+  warning: false
+---
+
+```{r}
+library(readxl)
+library(tidyverse)
+
+```
+
+```{r}
+library(readxl)
+aj <- read_excel("C:/Users/Pat/Desktop/website2/ncaa/basketball/player_AJ_Dybantsa_2026.xlsx")
+
+```
+
+### Create a logistic model using a numeric variable
+
+```{r}
+model <- glm(team_winner~ points, data = aj, family = binomial)
+summary(model)
+```
+
+### Interpretation of results
+
+The point coefficient is negative which indicates that the more AJ Dybansta scores the the likelihood of the team winning decreases. The p value which is 0.825which is high so it is not statistically significant.\
+
+### Lets try a categorical variable as a predictor variable
+
+```{r}
+model1 <- glm(team_winner ~ home_away, data = aj, family = binomial)
+summary(model1)
+```
+
+### Interpretation of results
+
+The home_away coefficient is positive which indicates that whether you are home or away has an infuence on whether you win the game or not and in this case for BYU it is statistically significant due to the low p value. According to the current data from last year, BYU tends to win their home games.
+
+```{r}
+aj |>
+  mutate(result = if_else(team_winner, "win", "loss")) |>
+  ggplot(aes(x = points, y = if_else(team_winner, 0, 0.5), color = result)) +
+  geom_jitter(height = 0.2, width = 0.2, alpha = 0.3, size = 4) +
+  scale_color_manual(values = c("loss" = "darkgreen", "win" = "red")) +
+  labs(
+    title = "Points and Team Wins",
+    x = "Points"
+  ) +
+  scale_y_continuous(breaks = c(0, 0.5), labels = c("Win", "Loss")) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    axis.line.x = element_line(color = "black"),
+    plot.title = element_text(hjust = 0.5),
+    axis.title.y = element_blank()
+  )
+```
+
+### Interpretation of plot
+
+**The numbers behind the plot:**
+
+-   23 wins, 12 losses (BYU wins 66% of AJ's games)
+
+-   Average points in wins: **25.3** \| Average points in losses: **25.9**
+
+-   Points range in wins: 16–43 \| Points range in losses: 13–36
+
+**What that means for the plot:** the win (navy) and loss (orange) dots are essentially scattered across the *same* range of points, with almost no separation — if anything, his scoring is marginally *higher* in losses than wins, though that gap is trivial. On the chart, you should see both colors mixed together at low, medium, and high point totals, with no clean zone where "high points = navy dots" or "low points = orange dots."
+
+**Interpretation:** AJ's own scoring volume doesn't meaningfully predict whether BYU wins the game. He's capable of scoring big (30+) in a loss just as easily as in a win, and can win games on a modest scoring night (16–20 points) too. This isn't a flaw in the plot — it's a real, honest finding: a single player's point total is only one ingredient in a team outcome that also depends on his shooting efficiency, the rest of the roster, and the opponent.
