@@ -1761,7 +1761,7 @@
     "href": "ncaa/basketball/byu-cougars/team-grade.html#byu-cougars-2025-26-season-report",
     "title": "NCAA Team Season Grade Report",
     "section": "BYU Cougars — 2025-26 Season Report",
-    "text": "BYU Cougars — 2025-26 Season Report\nRecord: 23-12 (65.7% win rate) | Games Graded: 35\nOverall Season Grade: A-"
+    "text": "BYU Cougars — 2025-26 Season Report\nRecord: 23-12 (65.7% win rate) | Games Graded: 35\nOverall Season Grade: B+"
   },
   {
     "objectID": "ncaa/basketball/byu-cougars/team-grade.html#category-grades",
@@ -1782,7 +1782,7 @@
     "href": "ncaa/basketball/byu-cougars/team-grade.html#key-stats-summary",
     "title": "NCAA Team Season Grade Report",
     "section": "Key Stats Summary",
-    "text": "Key Stats Summary\n\n\nShow code\nsummary_tbl &lt;- data.frame(\n  Statistic        = c(\"Points Per Game\", \"Opp. Points Per Game\", \"Point Differential\",\n                       \"Field Goal %\", \"Three-Point %\", \"Free Throw %\",\n                       \"Rebounds Per Game\", \"Assists Per Game\",\n                       \"Steals Per Game\", \"Blocks Per Game\", \"Turnovers Per Game\"),\n  Value            = c(\n    sprintf(\"%.1f\", avg$pts),\n    sprintf(\"%.1f\", avg$opp_pts),\n    sprintf(\"%+.1f\", avg$pt_diff),\n    sprintf(\"%.1f%%\", avg$fg_pct),\n    sprintf(\"%.1f%%\", avg$three_pct),\n    sprintf(\"%.1f%%\", avg$ft_pct),\n    sprintf(\"%.1f\", avg$reb),\n    sprintf(\"%.1f\", avg$ast),\n    sprintf(\"%.1f\", avg$stl),\n    sprintf(\"%.1f\", avg$blk),\n    sprintf(\"%.1f\", avg$tov)\n  )\n)\n\nknitr::kable(summary_tbl, align = c(\"l\",\"r\"), col.names = c(\"Statistic\",\"Season Avg\"))\n\n\n\n\n\nStatistic\nSeason Avg\n\n\n\n\nPoints Per Game\n83.5\n\n\nOpp. Points Per Game\n75.4\n\n\nPoint Differential\n+8.1\n\n\nField Goal %\n4757.1%\n\n\nThree-Point %\n3420.0%\n\n\nFree Throw %\n7520.0%\n\n\nRebounds Per Game\n38.1\n\n\nAssists Per Game\n13.3\n\n\nSteals Per Game\n7.2\n\n\nBlocks Per Game\n4.4\n\n\nTurnovers Per Game\n10.7"
+    "text": "Key Stats Summary\n\n\nShow code\nsummary_tbl &lt;- data.frame(\n  Statistic        = c(\"Points Per Game\", \"Opp. Points Per Game\", \"Point Differential\",\n                       \"Field Goal %\", \"Three-Point %\", \"Free Throw %\",\n                       \"Rebounds Per Game\", \"Assists Per Game\",\n                       \"Steals Per Game\", \"Blocks Per Game\", \"Turnovers Per Game\"),\n  Value            = c(\n    sprintf(\"%.1f\", avg$pts),\n    sprintf(\"%.1f\", avg$opp_pts),\n    sprintf(\"%+.1f\", avg$pt_diff),\n    sprintf(\"%.1f%%\", avg$fg_pct),\n    sprintf(\"%.1f%%\", avg$three_pct),\n    sprintf(\"%.1f%%\", avg$ft_pct),\n    sprintf(\"%.1f\", avg$reb),\n    sprintf(\"%.1f\", avg$ast),\n    sprintf(\"%.1f\", avg$stl),\n    sprintf(\"%.1f\", avg$blk),\n    sprintf(\"%.1f\", avg$tov)\n  )\n)\n\nknitr::kable(summary_tbl, align = c(\"l\",\"r\"), col.names = c(\"Statistic\",\"Season Avg\"))\n\n\n\n\n\nStatistic\nSeason Avg\n\n\n\n\nPoints Per Game\n83.5\n\n\nOpp. Points Per Game\n75.4\n\n\nPoint Differential\n+8.1\n\n\nField Goal %\n47.6%\n\n\nThree-Point %\n34.2%\n\n\nFree Throw %\n75.2%\n\n\nRebounds Per Game\n38.1\n\n\nAssists Per Game\n13.3\n\n\nSteals Per Game\n7.2\n\n\nBlocks Per Game\n4.4\n\n\nTurnovers Per Game\n10.7"
   },
   {
     "objectID": "ncaa/basketball/byu-cougars/team-grade.html#how-the-grade-is-calculated",
