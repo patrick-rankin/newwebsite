@@ -18,6 +18,8 @@ execute:
 ![AJ Dybantsa](https://a.espncdn.com/i/headshots/mens-college-basketball/players/full/5142718.png){fig-align="center" width="150"}
 :::
 
+{{< video https://www.youtube.com/watch?v=maqKVp4uD48 >}}
+
 ```{r}
 #| label: packages
 library(hoopR)
