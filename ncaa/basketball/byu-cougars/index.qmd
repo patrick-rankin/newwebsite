@@ -9,3 +9,4 @@ execute:
 
 - [AJ Dybantsa — Player Season Grade Report](aj-dybantsa.html)
 - [AJ Dybantsa — Logistic Regression Example](ajdybantsalogisticregression.html)
+- [BYU Cougars — Team Season Grade Report](team-grade.html)

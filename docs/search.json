@@ -1733,13 +1733,62 @@
     "href": "ncaa/basketball/byu-cougars/index.html",
     "title": "BYU Cougars Basketball",
     "section": "",
-    "text": "AJ Dybantsa — Player Season Grade Report"
+    "text": "AJ Dybantsa — Player Season Grade Report\nAJ Dybantsa — Logistic Regression Example\nBYU Cougars — Team Season Grade Report"
   },
   {
     "objectID": "ncaa/basketball/byu-cougars/index.html#featured-reports",
     "href": "ncaa/basketball/byu-cougars/index.html#featured-reports",
     "title": "BYU Cougars Basketball",
     "section": "",
-    "text": "AJ Dybantsa — Player Season Grade Report"
+    "text": "AJ Dybantsa — Player Season Grade Report\nAJ Dybantsa — Logistic Regression Example\nBYU Cougars — Team Season Grade Report"
+  },
+  {
+    "objectID": "ncaa/basketball/byu-cougars/team-grade.html",
+    "href": "ncaa/basketball/byu-cougars/team-grade.html",
+    "title": "NCAA Team Season Grade Report",
+    "section": "",
+    "text": "BYU Cougars\n\n\n\n\n\n\n\nAJ Dybantsa\nShow code\nlibrary(hoopR)\nlibrary(dplyr)\nlibrary(readr)\nlibrary(ggplot2)\nlibrary(tidyr)"
+  },
+  {
+    "objectID": "ncaa/basketball/byu-cougars/team-grade.html#your-settings-change-these-before-rendering",
+    "href": "ncaa/basketball/byu-cougars/team-grade.html#your-settings-change-these-before-rendering",
+    "title": "NCAA Team Season Grade Report",
+    "section": "⚙️ Your Settings — Change These Before Rendering",
+    "text": "⚙️ Your Settings — Change These Before Rendering\n\n\nShow code\n# ============================================================\n#  FILL IN YOUR INFO BELOW — this is the only section\n#  you need to change each time you run this report.\n# ============================================================\n\n# Which team do you want to grade?\n# Use the school's common name exactly as ESPN lists it.\n# Examples: \"Duke\", \"Kansas\", \"Houston\", \"Gonzaga\", \"Alabama State\"\nmy_team &lt;- \"BYU\"\n\n# Which season? Use the year the season ENDS.\n# Example: the 2025-26 season is written as 2026.\nseason_year &lt;- 2026\n\n# Season label shown in the report (for display only)\nseason_label &lt;- \"2025-26\"\n\n# ============================================================\n#  THAT'S IT — scroll down to render and read your report.\n# ============================================================"
+  },
+  {
+    "objectID": "ncaa/basketball/byu-cougars/team-grade.html#byu-cougars-2025-26-season-report",
+    "href": "ncaa/basketball/byu-cougars/team-grade.html#byu-cougars-2025-26-season-report",
+    "title": "NCAA Team Season Grade Report",
+    "section": "BYU Cougars — 2025-26 Season Report",
+    "text": "BYU Cougars — 2025-26 Season Report\nRecord: 23-12 (65.7% win rate) | Games Graded: 35\nOverall Season Grade: A-"
+  },
+  {
+    "objectID": "ncaa/basketball/byu-cougars/team-grade.html#category-grades",
+    "href": "ncaa/basketball/byu-cougars/team-grade.html#category-grades",
+    "title": "NCAA Team Season Grade Report",
+    "section": "Category Grades",
+    "text": "Category Grades\n\n\nShow code\ngrade_colors &lt;- c(\"A\"=\"#2ecc71\",\"B\"=\"#3498db\",\"C\"=\"#f39c12\",\"D\"=\"#e67e22\",\"F\"=\"#e74c3c\")\n\nggplot(grade_df, aes(x = reorder(Category, GPA), y = GPA, fill = Grade_Group)) +\n  geom_col(width = 0.7) +\n  geom_text(aes(label = Grade), hjust = -0.2, fontface = \"bold\", size = 4.5) +\n  scale_fill_manual(values = grade_colors, name = \"Grade\") +\n  scale_y_continuous(limits = c(0, 5.2), breaks = c(0,1,2,3,4)) +\n  coord_flip() +\n  labs(\n    title    = paste(team_name_full, \"— Category Grades\"),\n    subtitle = paste(season_label, \"NCAA Season\"),\n    x        = NULL,\n    y        = \"Grade Points (4.0 scale)\"\n  ) +\n  theme_minimal(base_size = 13) +\n  theme(legend.position = \"right\")"
+  },
+  {
+    "objectID": "ncaa/basketball/byu-cougars/team-grade.html#scoring-trend",
+    "href": "ncaa/basketball/byu-cougars/team-grade.html#scoring-trend",
+    "title": "NCAA Team Season Grade Report",
+    "section": "Scoring Trend",
+    "text": "Scoring Trend\n\n\nShow code\ntrend_data &lt;- team_data %&gt;%\n  mutate(\n    game_date  = as.Date(game_date),\n    team_score = as.numeric(team_score),\n    opp_score  = as.numeric(opponent_team_score),\n    result     = ifelse(team_winner == TRUE, \"Win\", \"Loss\")\n  ) %&gt;%\n  arrange(game_date) %&gt;%\n  mutate(game_num = row_number())\n\nggplot(trend_data, aes(x = game_num)) +\n  geom_line(aes(y = team_score), color = \"#2ecc71\", linewidth = 1) +\n  geom_line(aes(y = opp_score),  color = \"#e74c3c\", linewidth = 1, linetype = \"dashed\") +\n  geom_point(aes(y = team_score, color = result), size = 2.5) +\n  scale_color_manual(values = c(\"Win\"=\"#2ecc71\",\"Loss\"=\"#e74c3c\"), name = \"Result\") +\n  geom_hline(yintercept = avg$pts, linetype = \"dotted\", color = \"#2ecc71\", linewidth = 0.7) +\n  labs(\n    title    = paste(team_name_full, \"— Scoring by Game\"),\n    subtitle = \"Green = team score  |  Red dashed = opponent score  |  Dotted = season average\",\n    x        = \"Game Number\",\n    y        = \"Points\"\n  ) +\n  theme_minimal(base_size = 13)"
+  },
+  {
+    "objectID": "ncaa/basketball/byu-cougars/team-grade.html#key-stats-summary",
+    "href": "ncaa/basketball/byu-cougars/team-grade.html#key-stats-summary",
+    "title": "NCAA Team Season Grade Report",
+    "section": "Key Stats Summary",
+    "text": "Key Stats Summary\n\n\nShow code\nsummary_tbl &lt;- data.frame(\n  Statistic        = c(\"Points Per Game\", \"Opp. Points Per Game\", \"Point Differential\",\n                       \"Field Goal %\", \"Three-Point %\", \"Free Throw %\",\n                       \"Rebounds Per Game\", \"Assists Per Game\",\n                       \"Steals Per Game\", \"Blocks Per Game\", \"Turnovers Per Game\"),\n  Value            = c(\n    sprintf(\"%.1f\", avg$pts),\n    sprintf(\"%.1f\", avg$opp_pts),\n    sprintf(\"%+.1f\", avg$pt_diff),\n    sprintf(\"%.1f%%\", avg$fg_pct),\n    sprintf(\"%.1f%%\", avg$three_pct),\n    sprintf(\"%.1f%%\", avg$ft_pct),\n    sprintf(\"%.1f\", avg$reb),\n    sprintf(\"%.1f\", avg$ast),\n    sprintf(\"%.1f\", avg$stl),\n    sprintf(\"%.1f\", avg$blk),\n    sprintf(\"%.1f\", avg$tov)\n  )\n)\n\nknitr::kable(summary_tbl, align = c(\"l\",\"r\"), col.names = c(\"Statistic\",\"Season Avg\"))\n\n\n\n\n\nStatistic\nSeason Avg\n\n\n\n\nPoints Per Game\n83.5\n\n\nOpp. Points Per Game\n75.4\n\n\nPoint Differential\n+8.1\n\n\nField Goal %\n4757.1%\n\n\nThree-Point %\n3420.0%\n\n\nFree Throw %\n7520.0%\n\n\nRebounds Per Game\n38.1\n\n\nAssists Per Game\n13.3\n\n\nSteals Per Game\n7.2\n\n\nBlocks Per Game\n4.4\n\n\nTurnovers Per Game\n10.7"
+  },
+  {
+    "objectID": "ncaa/basketball/byu-cougars/team-grade.html#how-the-grade-is-calculated",
+    "href": "ncaa/basketball/byu-cougars/team-grade.html#how-the-grade-is-calculated",
+    "title": "NCAA Team Season Grade Report",
+    "section": "How the Grade Is Calculated",
+    "text": "How the Grade Is Calculated\nEach category is graded against NCAA Division I per-game averages and converted to a 4.0 scale. The overall grade is a weighted average of all categories, with scoring and defense carrying the most weight (15% each). Ball security and win percentage each account for 10%.\nThe grade scale is: A+ (elite) · A / A- (excellent) · B range (above average) · C range (average) · D range (below average) · F (well below average).\n\nInterpretation\nThe story: BYU’s offense is elite — they score at an A+ clip, shoot free throws at an A+ rate, and take great care of the ball (also A+ on turnovers, giving up the ball less than 11 times/game). Shooting efficiency (FG% and 3PT%) and rebounding are solidly above average (B+).\nThe weak spot is defense — a D+ grade. Allowing 75.4 points per game against the D-I benchmark thresholds (A ≤ 62, B ≤ 67, C ≤ 72, D ≤ 77) puts them just barely out of F territory. Assists (13.3/gm, C+) is the other mediocre category — they’re scoring efficiently but not necessarily through ball movement.\nNet effect: a very good offensive team whose defense is dragging the overall grade down from what would otherwise be A-range, landing at an overall 3.23 GPA (B+).\n\n\nShow code\nlibrary(readxl)\nlibrary(tidyverse)\nteam_BYU_2026 &lt;- read_excel(\"C:/Users/Pat/Desktop/website2/pipeline/ncaa/basketball/data/team_stats/team_BYU_2026.xlsx\")\n\n\n\n\nLinear Regression - Simple Model - Is there a linear relationship between 2 variables?\nIs the positive/negative relationship real? What value of y can be given for a particular value in x — for instance, can we predict the team score based on the field goal percentage?\n\n\nShow code\nmodel &lt;- lm(team_score ~ field_goal_pct, data = team_BYU_2026)\nsummary(model)\n\n\n\nCall:\nlm(formula = team_score ~ field_goal_pct, data = team_BYU_2026)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-15.7895  -6.5561  -0.0759   6.1686  16.5364 \n\nCoefficients:\n               Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     17.5297    10.2984   1.702   0.0981 .  \nfield_goal_pct   1.3877     0.2144   6.472 2.42e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 8.383 on 33 degrees of freedom\nMultiple R-squared:  0.5593,    Adjusted R-squared:  0.5459 \nF-statistic: 41.88 on 1 and 33 DF,  p-value: 2.424e-07\n\n\n\n\nInterpretation of results\nThe slope is positive (1.387), which indicates that there is a positive relationship between field goal percentage and team score. The p-value is very low, which indicates statistical significance. Adjusted R-squared is below 0.5.\n\n\nShow code\nteam_BYU_2026 |&gt;\n  ggplot(aes(x = field_goal_pct, y = team_score)) +\n  geom_point(color = \"#0047ba\", size = 2.5, alpha = 0.7) +\n  geom_smooth(method = \"lm\", se = TRUE, color = \"#002e5d\") +\n  labs(\n    title = \"BYU — Field Goal % vs. Points Scored\",\n    subtitle = \"2025-26 season, per game\",\n    x = \"Field Goal %\",\n    y = \"Points Scored\"\n  ) +\n  theme_minimal(base_size = 13)\n\n\n\n\n\n\n\n\n\nRendered separately via generate_animation.R — gganimate’s live PNG device conflicts with knitr’s own graphics device when run inside a chunk, so the GIF is pre-rendered and just embedded here:\n\n\nShow code\nlibrary(gganimate)\n\nteam_BYU_2026 &lt;- team_BYU_2026 |&gt;\n  mutate(game_date = as.Date(game_date)) |&gt;\n  arrange(game_date) |&gt;\n  mutate(game_num = row_number())\n\n# Fit once, on the full season, outside the animation\nfit &lt;- lm(team_score ~ field_goal_pct, data = team_BYU_2026)\nline_df &lt;- data.frame(\n  field_goal_pct = range(team_BYU_2026$field_goal_pct)\n) |&gt;\n  mutate(team_score = predict(fit, newdata = pick(everything())))\n\np &lt;- ggplot(team_BYU_2026, aes(x = field_goal_pct, y = team_score)) +\n  geom_point(color = \"#0047ba\", size = 2.5, alpha = 0.7) +\n  geom_line(data = line_df, aes(x = field_goal_pct, y = team_score),\n            color = \"#002e5d\", linewidth = 1, inherit.aes = FALSE) +\n  labs(\n    title    = \"BYU — Field Goal % vs. Points Scored Through Game {frame_along}\",\n    subtitle = \"2025-26 season, per game\",\n    x        = \"Field Goal %\",\n    y        = \"Points Scored\"\n  ) +\n  theme_minimal(base_size = 13) +\n  transition_reveal(game_num)\n\nanim &lt;- animate(\n  p,\n  nframes  = min(max(team_BYU_2026$game_num), 60),\n  fps      = 6,\n  width    = 900,\n  height   = 650,\n  renderer = gifski_renderer()\n)\n\nanim_save(\"byu_fg_pct_vs_score.gif\", animation = anim)"
   }
 ]
