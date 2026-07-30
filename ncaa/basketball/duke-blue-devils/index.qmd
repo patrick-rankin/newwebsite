@@ -6,8 +6,7 @@ format:
   html:
     toc: true
     toc-title: "On This Page"
-    code-fold: true
-    code-summary: "Show Code"
+    echo: false
 ---
 
 ```{r setup, include=FALSE}
@@ -165,6 +164,58 @@ duke |>
 ```
 
 > **Insight:** Duke consistently recorded more assists than turnovers — a hallmark of disciplined team basketball. Their season assist average of `r avg_ast` APG reflects an unselfish offensive system, while their turnover average of `r avg_to` TOV stayed well-controlled for a high-tempo team.
+
+---
+
+## Shooting Efficiency Over the Season (Animated) {#animated-scatter}
+
+The animation below reveals Duke's field goal % vs. points scored relationship game-by-game across the season, tracing out the same trend line seen in the static scatterplot above.
+
+Rendered separately via [`generate_animation.R`](generate_animation.R) — gganimate's live PNG device conflicts with knitr's own graphics device when run inside a chunk, so the GIF is pre-rendered and just embedded here:
+
+```{r}
+#| label: animated-scatter
+#| eval: false
+
+library(gganimate)
+
+duke_anim <- duke |>
+  arrange(game_date) |>
+  mutate(game_num = row_number())
+
+# Fit once, on the full season, outside the animation
+fit <- lm(team_score ~ field_goal_pct, data = duke_anim)
+line_df <- data.frame(
+  field_goal_pct = range(duke_anim$field_goal_pct)
+) |>
+  mutate(team_score = predict(fit, newdata = pick(everything())))
+
+p <- ggplot(duke_anim, aes(x = field_goal_pct, y = team_score)) +
+  geom_point(color = duke_blue, size = 2.5, alpha = 0.7) +
+  geom_line(data = line_df, aes(x = field_goal_pct, y = team_score),
+            color = "#00274c", linewidth = 1, inherit.aes = FALSE) +
+  labs(
+    title    = "Duke — Field Goal % vs. Points Scored Through Game {frame_along}",
+    subtitle = "2025-26 season, per game",
+    x        = "Field Goal %",
+    y        = "Points Scored"
+  ) +
+  theme_minimal(base_size = 13) +
+  transition_reveal(game_num)
+
+anim <- animate(
+  p,
+  nframes  = min(max(duke_anim$game_num), 60),
+  fps      = 6,
+  width    = 900,
+  height   = 650,
+  renderer = gifski_renderer()
+)
+
+anim_save("duke_fg_pct_vs_score.gif", animation = anim)
+```
+
+![](duke_fg_pct_vs_score.gif)
 
 ---
 
