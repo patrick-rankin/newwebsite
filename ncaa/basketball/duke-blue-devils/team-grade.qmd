@@ -60,9 +60,9 @@ avg <- team_data %>%
   mutate(
     team_score    = as.numeric(team_score),
     opp_score     = as.numeric(opponent_team_score),
-    fg_pct        = as.numeric(field_goal_pct)             * 100,
-    three_pct     = as.numeric(three_point_field_goal_pct) * 100,
-    ft_pct        = as.numeric(free_throw_pct)             * 100,
+    fg_pct        = as.numeric(field_goal_pct),
+    three_pct     = as.numeric(three_point_field_goal_pct),
+    ft_pct        = as.numeric(free_throw_pct),
     total_reb     = as.numeric(total_rebounds),
     ast           = as.numeric(assists),
     stl           = as.numeric(steals),
