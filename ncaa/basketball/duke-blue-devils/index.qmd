@@ -30,6 +30,8 @@ win_color   <- "#00539b"
 loss_color  <- "#c0392b"
 ```
 
+> See also: [Team Season Grade Report](team-grade.html) — category grades, scoring trend, and a logistic regression look at whether field goal % predicts wins.
+
 ## Season Overview
 
 Duke finished the 2025–26 regular season as one of the most dominant teams in college basketball. The Blue Devils showcased elite scoring, efficient shooting, and relentless defense throughout the year. Below is a breakdown of their key performance metrics game by game.
