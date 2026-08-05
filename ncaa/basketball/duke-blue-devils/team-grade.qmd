@@ -358,3 +358,72 @@ plot_ly(data = turnover_range,
 ```
 
 **Bottom line:** for this Duke team, field goal percentage doesn't meaningfully predict whether they win or lose — their few losses look like they came from something other than poor shooting (e.g. a tougher opponent, an off night elsewhere). Turnovers and rebounding carry more predictive signal, though with only 3 losses on the season, every model here is working with very little variation to explain.
+
+------------------------------------------------------------------------
+
+## Interactive Stat Distribution Explorer
+
+Use the dropdown below to see how any of Duke's key stats were distributed across the season — every game becomes one entry in the histogram.
+
+```{r}
+#| label: histogram-explorer-setup
+
+hist_vars <- c(
+  "Points Scored"    = "team_score",
+  "Field Goal %"     = "field_goal_pct",
+  "Three-Point %"    = "three_point_field_goal_pct",
+  "Free Throw %"     = "free_throw_pct",
+  "Total Rebounds"   = "total_rebounds",
+  "Assists"          = "assists",
+  "Turnovers"        = "turnovers",
+  "Steals"           = "steals",
+  "Blocks"           = "blocks"
+)
+```
+
+```{r}
+#| label: histogram-explorer
+
+p <- plot_ly()
+
+for (i in seq_along(hist_vars)) {
+  var   <- hist_vars[[i]]
+  label <- names(hist_vars)[i]
+  p <- p |> add_histogram(
+    x       = team_Duke_2026[[var]],
+    name    = label,
+    marker  = list(color = "#00539b"),
+    visible = (i == 1)
+  )
+}
+
+buttons <- lapply(seq_along(hist_vars), function(i) {
+  visible <- rep(FALSE, length(hist_vars))
+  visible[i] <- TRUE
+  list(
+    method = "update",
+    args   = list(
+      list(visible = visible),
+      list(title = paste("Distribution of", names(hist_vars)[i]),
+           xaxis  = list(title = names(hist_vars)[i]))
+    ),
+    label = names(hist_vars)[i]
+  )
+})
+
+p |> layout(
+  title  = paste("Distribution of", names(hist_vars)[1]),
+  xaxis  = list(title = names(hist_vars)[1]),
+  yaxis  = list(title = "Number of Games"),
+  updatemenus = list(
+    list(
+      type    = "dropdown",
+      active  = 0,
+      x = 1, xanchor = "right", y = 1.15, yanchor = "top",
+      buttons = buttons
+    )
+  )
+)
+```
+
+> Prefer to explore this in R directly? The same variable-selector-and-histogram idea is available as a standalone Shiny app: [`app.R`](../../../pipeline/ncaa/basketball/data/team_stats/app.R). Open it in RStudio and click **Run App** for a version with an adjustable bin-count slider.
