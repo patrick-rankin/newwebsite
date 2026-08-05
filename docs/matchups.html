@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Classroom to Court</title>
+<title>Matchups – Classroom to Court</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,11 +116,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">NHL</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./matchups.html"> 
+    <a class="nav-link active" href="./matchups.html" aria-current="page"> 
 <span class="menu-text">Matchups</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -134,22 +134,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#the-stack" id="toc-the-stack" class="nav-link active" data-scroll-target="#the-stack">The Stack</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
-<p class="subtitle lead">The person behind the numbers</p>
+<h1 class="title">Matchups</h1>
+<p class="subtitle lead">Head-to-head team and player comparisons across every sport</p>
 </div>
 
 
@@ -166,63 +160,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div style="display: flex; align-items: flex-start; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
-  <img src="images/WIN_20260615_07_20_16_Pro.jpg" alt="Author photo" style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%;
-           border: 4px solid #e8a020; box-shadow: 0 4px 18px rgba(10,22,40,0.18);
-           flex-shrink: 0;">
-  <div style="flex: 1; min-width: 220px;">
-    <h2 style="margin-top: 0;" class="anchored">College Basketball Report</h2>
-    <p>
-      This site is a personal data journalism project focused on college and
-      professional basketball. Every post is built from raw game-by-game data —
-      no box-score summaries, no recycled narratives. Just the data, visualized
-      and interpreted.
-    </p>
-    <p>
-      A basketball fan who believes the best stories in sports are hiding in the
-      data. Built this site to share those stories publicly.
-    </p>
-  </div>
-</div>
-<section id="the-stack" class="level2">
-<h2 class="anchored" data-anchor-id="the-stack">The Stack</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Tool</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>R</strong></td>
-<td>Data ingestion, wrangling, and visualization (<code>tidyverse</code>, <code>ggplot2</code>)</td>
-</tr>
-<tr class="even">
-<td><strong>Quarto</strong></td>
-<td>Rendering and publishing</td>
-</tr>
-<tr class="odd">
-<td><strong>GitHub Pages</strong></td>
-<td>Hosting</td>
-</tr>
-<tr class="even">
-<td><strong>ESPN API</strong></td>
-<td>Game-by-game data source</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<blockquote class="blockquote">
-<p>Questions, feedback, or data requests? Reach out on GitHub.</p>
-</blockquote>
+<p>These reports compare two teams or two players side by side — works across NBA, NCAA, NFL, NHL, and MLB. Open the <code>.qmd</code> source, set both sides of the matchup in the settings block at the top, and re-render.</p>
+<ul>
+<li><a href="matchups/team.html">Team Matchup Report</a></li>
+<li><a href="matchups/player.html">Player Matchup Report</a></li>
+</ul>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

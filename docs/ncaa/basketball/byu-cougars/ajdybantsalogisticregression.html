@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Classroom to Court</title>
+<title>AJ Dybantsa: Logistic Regression Example – Classroom to Court</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +20,63 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./https://a.espncdn.com/i/teamlogos/ncaa/500/150.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-91c30b1e8846851a3ebc6fb1aaab9013.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../https://a.espncdn.com/i/teamlogos/ncaa/500/150.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-91c30b1e8846851a3ebc6fb1aaab9013.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -81,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Classroom to Court</span>
     </a>
   </div>
@@ -92,35 +127,35 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./ncaa/index.html"> 
+    <a class="nav-link" href="../../../ncaa/index.html"> 
 <span class="menu-text">NCAA</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./nba/index.html"> 
+    <a class="nav-link" href="../../../nba/index.html"> 
 <span class="menu-text">NBA</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./mlb/index.html"> 
+    <a class="nav-link" href="../../../mlb/index.html"> 
 <span class="menu-text">MLB</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./nfl/index.html"> 
+    <a class="nav-link" href="../../../nfl/index.html"> 
 <span class="menu-text">NFL</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./nhl/index.html"> 
+    <a class="nav-link" href="../../../nhl/index.html"> 
 <span class="menu-text">NHL</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./matchups.html"> 
+    <a class="nav-link" href="../../../matchups.html"> 
 <span class="menu-text">Matchups</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="../../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -139,7 +174,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-stack" id="toc-the-stack" class="nav-link active" data-scroll-target="#the-stack">The Stack</a></li>
+  <li><a href="#create-a-logistic-model-using-a-numeric-variable" id="toc-create-a-logistic-model-using-a-numeric-variable" class="nav-link active" data-scroll-target="#create-a-logistic-model-using-a-numeric-variable">Create a logistic model using a numeric variable</a></li>
+  <li><a href="#interpretation-of-results" id="toc-interpretation-of-results" class="nav-link" data-scroll-target="#interpretation-of-results">Interpretation of results</a></li>
+  <li><a href="#lets-try-a-categorical-variable-as-a-predictor-variable" id="toc-lets-try-a-categorical-variable-as-a-predictor-variable" class="nav-link" data-scroll-target="#lets-try-a-categorical-variable-as-a-predictor-variable">Lets try a categorical variable as a predictor variable</a></li>
+  <li><a href="#interpretation-of-results-1" id="toc-interpretation-of-results-1" class="nav-link" data-scroll-target="#interpretation-of-results-1">Interpretation of results</a></li>
+  <li><a href="#interpretation-of-plot" id="toc-interpretation-of-plot" class="nav-link" data-scroll-target="#interpretation-of-plot">Interpretation of plot</a></li>
   </ul>
 </nav>
     </div>
@@ -148,8 +187,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
-<p class="subtitle lead">The person behind the numbers</p>
+<h1 class="title">AJ Dybantsa: Logistic Regression Example</h1>
 </div>
 
 
@@ -166,60 +204,126 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div style="display: flex; align-items: flex-start; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
-  <img src="images/WIN_20260615_07_20_16_Pro.jpg" alt="Author photo" style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%;
-           border: 4px solid #e8a020; box-shadow: 0 4px 18px rgba(10,22,40,0.18);
-           flex-shrink: 0;">
-  <div style="flex: 1; min-width: 220px;">
-    <h2 style="margin-top: 0;" class="anchored">College Basketball Report</h2>
-    <p>
-      This site is a personal data journalism project focused on college and
-      professional basketball. Every post is built from raw game-by-game data —
-      no box-score summaries, no recycled narratives. Just the data, visualized
-      and interpreted.
-    </p>
-    <p>
-      A basketball fan who believes the best stories in sports are hiding in the
-      data. Built this site to share those stories publicly.
-    </p>
-  </div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
-<section id="the-stack" class="level2">
-<h2 class="anchored" data-anchor-id="the-stack">The Stack</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Tool</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>R</strong></td>
-<td>Data ingestion, wrangling, and visualization (<code>tidyverse</code>, <code>ggplot2</code>)</td>
-</tr>
-<tr class="even">
-<td><strong>Quarto</strong></td>
-<td>Rendering and publishing</td>
-</tr>
-<tr class="odd">
-<td><strong>GitHub Pages</strong></td>
-<td>Hosting</td>
-</tr>
-<tr class="even">
-<td><strong>ESPN API</strong></td>
-<td>Game-by-game data source</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<blockquote class="blockquote">
-<p>Questions, feedback, or data requests? Reach out on GitHub.</p>
-</blockquote>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>aj <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"C:/Users/Pat/Desktop/website2/ncaa/basketball/player_AJ_Dybantsa_2026.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="create-a-logistic-model-using-a-numeric-variable" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-logistic-model-using-a-numeric-variable">Create a logistic model using a numeric variable</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(team_winner<span class="sc">~</span> points, <span class="at">data =</span> aj, <span class="at">family =</span> binomial)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = team_winner ~ points, family = binomial, data = aj)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)  0.92773    1.30922   0.709    0.479
+points      -0.01081    0.04899  -0.221    0.825
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 45.004  on 34  degrees of freedom
+Residual deviance: 44.955  on 33  degrees of freedom
+AIC: 48.955
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation-of-results" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-results">Interpretation of results</h3>
+<p>The point coefficient is negative which indicates that the more AJ Dybansta scores the the likelihood of the team winning decreases. The p value which is 0.825which is high so it is not statistically significant.<br>
+</p>
+</section>
+<section id="lets-try-a-categorical-variable-as-a-predictor-variable" class="level3">
+<h3 class="anchored" data-anchor-id="lets-try-a-categorical-variable-as-a-predictor-variable">Lets try a categorical variable as a predictor variable</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(team_winner <span class="sc">~</span> home_away, <span class="at">data =</span> aj, <span class="at">family =</span> binomial)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = team_winner ~ home_away, family = binomial, data = aj)
+
+Coefficients:
+              Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)    -0.2877     0.5401  -0.533   0.5943  
+home_awayhome   1.7346     0.7749   2.238   0.0252 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 45.004  on 34  degrees of freedom
+Residual deviance: 39.572  on 33  degrees of freedom
+AIC: 43.572
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation-of-results-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-results-1">Interpretation of results</h3>
+<p>The home_away coefficient is positive which indicates that whether you are home or away has an infuence on whether you win the game or not and in this case for BYU it is statistically significant due to the low p value. According to the current data from last year, BYU tends to win their home games.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>aj <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">result =</span> <span class="fu">if_else</span>(team_winner, <span class="st">"win"</span>, <span class="st">"loss"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> points, <span class="at">y =</span> <span class="fu">if_else</span>(team_winner, <span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">color =</span> result)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="fl">0.2</span>, <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"loss"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>, <span class="st">"win"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Points and Team Wins"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Points"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Win"</span>, <span class="st">"Loss"</span>)) <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ajdybantsalogisticregression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-of-plot" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-plot">Interpretation of plot</h3>
+<p><strong>The numbers behind the plot:</strong></p>
+<ul>
+<li><p>23 wins, 12 losses (BYU wins 66% of AJ’s games)</p></li>
+<li><p>Average points in wins: <strong>25.3</strong> | Average points in losses: <strong>25.9</strong></p></li>
+<li><p>Points range in wins: 16–43 | Points range in losses: 13–36</p></li>
+</ul>
+<p><strong>What that means for the plot:</strong> the win (navy) and loss (orange) dots are essentially scattered across the <em>same</em> range of points, with almost no separation — if anything, his scoring is marginally <em>higher</em> in losses than wins, though that gap is trivial. On the chart, you should see both colors mixed together at low, medium, and high point totals, with no clean zone where “high points = navy dots” or “low points = orange dots.”</p>
+<p><strong>Interpretation:</strong> AJ’s own scoring volume doesn’t meaningfully predict whether BYU wins the game. He’s capable of scoring big (30+) in a loss just as easily as in a win, and can win games on a modest scoring night (16–20 points) too. This isn’t a flaw in the plot — it’s a real, honest finding: a single player’s point total is only one ingredient in a team outcome that also depends on his shooting efficiency, the rest of the roster, and the opponent.</p>
 
 
 </section>
