@@ -48,7 +48,7 @@ Stay up to date and connect with the community:
 ```{=html}
 <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0 1.5rem;">
 
-  <a href="https://www.linkedin.com" target="_blank"
+  <a href="https://www.linkedin.com/in/patrick-rankin-7758313b0" target="_blank"
      style="display:flex; align-items:center; gap:0.5rem; background:#0a66c2; color:#fff;
             padding:0.6rem 1.2rem; border-radius:8px; text-decoration:none;
             font-weight:600; font-size:0.92rem; box-shadow:0 2px 8px rgba(10,22,40,0.15);">
@@ -61,7 +61,7 @@ Stay up to date and connect with the community:
                1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227
                24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
     </svg>
-    Follow on LinkedIn
+    Connect on LinkedIn
   </a>
 
 </div>
